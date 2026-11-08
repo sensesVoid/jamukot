@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Local temp
+AudioFile/.download.*
+*.tmp.mp3
+
+# Secrets
+.env
+*.pem
+
+# Editor
+.vscode/
+.idea/

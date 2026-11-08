@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jamukot — Music Player</title>
+<meta name="description" content="Aesthetic web music player hosted on GitHub Pages." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg-orbs">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">JAMUKOT</span>
+    </div>
+    <nav class="topnav">
+      <button class="nav-btn active" data-view="player">Player</button>
+      <button class="nav-btn" data-view="lyrics">Lyrics</button>
+      <button class="nav-btn" data-view="add">Add Track</button>
+      <button class="nav-btn" data-view="settings">Settings</button>
+    </nav>
+  </header>
+
+  <main class="app">
+    <!-- PLAYER VIEW -->
+    <section class="view view-player active" id="view-player">
+      <div class="player-grid">
+        <!-- Left: playlist -->
+        <aside class="panel playlist-panel">
+          <div class="panel-head">
+            <h2>Playlist</h2>
+            <span class="count" id="track-count">0 tracks</span>
+          </div>
+          <div class="search-box">
+            <input type="text" id="search" placeholder="Search tracks…" />
+          </div>
+          <ul class="track-list" id="track-list"></ul>
+        </aside>
+
+        <!-- Center: now playing + vinyl -->
+        <section class="panel nowplaying-panel">
+          <div class="vinyl-wrap">
+            <div class="vinyl" id="vinyl">
+              <div class="vinyl-grooves"></div>
+              <div class="vinyl-label" id="vinyl-label">
+                <img id="cover-img" alt="cover" />
+                <div class="cover-fallback" id="cover-fallback"></div>
+              </div>
+              <div class="vinyl-shine"></div>
+            </div>
+            <div class="tonearm" id="tonearm">
+              <div class="tonearm-base"></div>
+              <div class="tonearm-arm"></div>
+              <div class="tonearm-head"></div>
+            </div>
+          </div>
+          <div class="np-meta">
+            <div class="np-title" id="np-title">Select a track</div>
+            <div class="np-artist" id="np-artist">—</div>
+          </div>
+
+          <div class="progress">
+            <span class="time" id="cur-time">0:00</span>
+            <div class="progress-bar" id="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+              <div class="progress-thumb" id="progress-thumb"></div>
+            </div>
+            <span class="time" id="dur-time">0:00</span>
+          </div>
+
+          <div class="controls">
+            <button class="ctrl-btn" id="btn-shuffle" title="Shuffle">⤮</button>
+            <button class="ctrl-btn" id="btn-prev" title="Previous">⏮</button>
+            <button class="ctrl-btn play-btn" id="btn-play" title="Play/Pause">▶</button>
+            <button class="ctrl-btn" id="btn-next" title="Next">⏭</button>
+            <button class="ctrl-btn" id="btn-repeat" title="Repeat">↻</button>
+          </div>
+
+          <div class="volume-row">
+            <span class="vol-icon">🔊</span>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" />
+          </div>
+        </section>
+
+        <!-- Right: lyrics -->
+        <aside class="panel lyrics-panel" id="lyrics-panel">
+          <div class="panel-head">
+            <h2>Lyrics</h2>
+            <span class="badge" id="lyrics-status">idle</span>
+          </div>
+          <div class="lyrics-scroll" id="lyrics-scroll">
+            <div class="lyrics-empty" id="lyrics-empty">
+              Play a track to load synced lyrics from LRCLIB.
+            </div>
+            <ul class="lyrics-list" id="lyrics-list"></ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- LYRICS VIEW (fullscreen focus) -->
+    <section class="view view-lyrics" id="view-lyrics">
+      <div class="lyrics-focus">
+        <div class="lf-vinyl">
+          <div class="vinyl small" id="vinyl2">
+            <div class="vinyl-grooves"></div>
+            <div class="vinyl-label">
+              <img id="cover-img2" alt="cover" />
+              <div class="cover-fallback" id="cover-fallback2"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lf-meta">
+          <div class="lf-title" id="lf-title">—</div>
+          <div class="lf-artist" id="lf-artist">—</div>
+        </div>
+        <div class="lf-lyrics" id="lf-lyrics"></div>
+      </div>
+    </section>
+
+    <!-- ADD TRACK VIEW -->
+    <section class="view view-add" id="view-add">
+      <div class="add-card">
+        <h2>Add a track from YouTube</h2>
+        <p class="muted">Triggers a GitHub Actions workflow that downloads, compresses to 128kbps MP3, and commits the file to <code>AudioFile/</code>. Requires a GitHub Personal Access Token with <code>repo</code> + <code>workflow</code> scopes (stored only in your browser).</p>
+        <div class="form">
+          <label>YouTube URL
+            <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
+          </label>
+          <label>Title
+            <input type="text" id="add-title" placeholder="Song title" />
+          </label>
+          <label>Artist
+            <input type="text" id="add-artist" placeholder="Artist name" />
+          </label>
+          <button class="primary-btn" id="add-submit">Dispatch workflow</button>
+          <div class="status" id="add-status"></div>
+        </div>
+        <div class="add-help">
+          <h3>Manual alternative</h3>
+          <p>Go to <em>Actions → "Add Track" → Run workflow</em> and fill in the inputs. The workflow commits the new MP3 and updates <code>data/tracks.json</code> automatically; refresh this page after it finishes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS VIEW -->
+    <section class="view view-settings" id="view-settings">
+      <div class="add-card">
+        <h2>Settings</h2>
+        <div class="form">
+          <label>GitHub owner
+            <input type="text" id="set-owner" value="sensesVoid" />
+          </label>
+          <label>GitHub repo
+            <input type="text" id="set-repo" value="jamukot" />
+          </label>
+          <label>Workflow file
+            <input type="text" id="set-workflow" value="add-track.yml" />
+          </label>
+          <label>GitHub PAT (repo + workflow)
+            <input type="password" id="set-token" placeholder="ghp_..." />
+          </label>
+          <button class="primary-btn" id="set-save">Save</button>
+          <div class="status" id="set-status"></div>
+        </div>
+        <p class="muted small">Token is stored in <code>localStorage</code> only. Never commit it.</p>
+      </div>
+    </section>
+  </main>
+
+  <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

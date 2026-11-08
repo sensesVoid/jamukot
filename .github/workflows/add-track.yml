@@ -1,0 +1,48 @@
+name: Add Track
+
+on:
+  workflow_dispatch:
+    inputs:
+      youtube_url:
+        description: "YouTube URL"
+        required: true
+      title:
+        description: "Track title"
+        required: true
+      artist:
+        description: "Artist name"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip yt-dlp
+
+      - name: Download, compress, and register track
+        run: |
+          python scripts/add_track.py "${{ inputs.youtube_url }}" \
+            --title "${{ inputs.title }}" \
+            --artist "${{ inputs.artist }}"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add AudioFile data/tracks.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Add track: ${{ inputs.artist }} - ${{ inputs.title }}"
+          git push
