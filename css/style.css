@@ -212,6 +212,9 @@ body {
 .lf-lyrics .line.past { color: #3a3f60; }
 
 /* Add / settings cards */
+.admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr; } }
+.admin-gate { max-width: 420px; margin: 60px auto; }
 .add-card { max-width: 640px; margin: 0 auto; background: var(--panel); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 28px; backdrop-filter: blur(14px); }
 .add-card h2 { margin: 0 0 8px; font-family: 'Space Grotesk', sans-serif; }
 .add-card h3 { margin: 24px 0 6px; font-size: 14px; }

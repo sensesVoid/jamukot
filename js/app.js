@@ -9,8 +9,8 @@ const state = {
   filtered: [],
   index: -1,
   shuffle: false,
-  repeat: 0, // 0 none, 1 all, 2 one
-  lyrics: [], // {time, text}
+  repeat: 0,
+  lyrics: [],
   lyricIndex: -1,
   lyricsSynced: false,
   lyricOffset: 0,
@@ -99,49 +99,43 @@ function playIndex(idx) {
 }
 
 function updateNowPlaying(t) {
-  $('#np-title').textContent = t.title;
-  $('#np-artist').textContent = t.artist;
-  $('#lf-title').textContent = t.title;
-  $('#lf-artist').textContent = t.artist;
-  $('#dur-time').textContent = fmtTime(t.duration);
-  $('#cur-time').textContent = '0:00';
-  $('#progress-fill').style.width = '0%';
-  $('#progress-thumb').style.left = '0%';
+  const npTitle = $('#np-title'); if (npTitle) npTitle.textContent = t.title;
+  const npArtist = $('#np-artist'); if (npArtist) npArtist.textContent = t.artist;
+  const durTime = $('#dur-time'); if (durTime) durTime.textContent = fmtTime(t.duration);
+  const curTime = $('#cur-time'); if (curTime) curTime.textContent = '0:00';
+  const pf = $('#progress-fill'); if (pf) pf.style.width = '0%';
+  const pt = $('#progress-thumb'); if (pt) pt.style.left = '0%';
 }
 
 /* ---------- Vinyl / cover ---------- */
 function updateVinyl(playing) {
   const v = $('#vinyl');
-  const v2 = $('#vinyl2');
-  if (playing) { v.classList.add('spinning'); v2.classList.add('spinning'); }
-  else { v.classList.remove('spinning'); v2.classList.remove('spinning'); }
+  if (v) { if (playing) v.classList.add('spinning'); else v.classList.remove('spinning'); }
   const arm = $('#tonearm');
-  if (playing) arm.classList.add('playing'); else arm.classList.remove('playing');
+  if (arm) { if (playing) arm.classList.add('playing'); else arm.classList.remove('playing'); }
 }
 
 function initialsOf(t) { return (t.title || '?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
 
 async function fetchCover(t) {
   const img = $('#cover-img');
-  const img2 = $('#cover-img2');
   const fb = $('#cover-fallback');
-  const fb2 = $('#cover-fallback2');
-  img.classList.remove('loaded'); img2.classList.remove('loaded');
+  if (!img || !fb) return;
+  img.classList.remove('loaded');
   fb.textContent = initialsOf(t);
-  fb2.textContent = initialsOf(t);
   const hue = hashStr(t.title + t.artist) % 360;
   const grad = `linear-gradient(135deg, hsl(${hue},70%,55%), hsl(${(hue+60)%360},70%,45%))`;
-  fb.style.background = grad; fb2.style.background = grad;
-  $('#vinyl-label').style.background = grad;
+  fb.style.background = grad;
+  const label = $('#vinyl-label');
+  if (label) label.style.background = grad;
   try {
     const q = encodeURIComponent(`${t.artist} ${t.title}`);
     const res = await fetch(`https://itunes.apple.com/search?term=${q}&media=music&limit=1`);
     const data = await res.json();
     if (data.results && data.results[0] && data.results[0].artworkUrl100) {
       const url = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
-      img.src = url; img2.src = url;
+      img.src = url;
       img.onload = () => img.classList.add('loaded');
-      img2.onload = () => img2.classList.add('loaded');
     }
   } catch (e) { /* keep fallback */ }
 }
@@ -159,7 +153,8 @@ async function fetchLyrics(t) {
   if (offEl) offEl.value = state.lyricOffset;
   const offVal = $('#offset-val');
   if (offVal) offVal.textContent = state.lyricOffset.toFixed(1) + 's';
-  $('#lyrics-status').textContent = 'loading';
+  const statusEl = $('#lyrics-status');
+  if (statusEl) statusEl.textContent = 'loading';
   const noteStart = $('#lyrics-note');
   if (noteStart) noteStart.textContent = '';
   try {
@@ -179,7 +174,7 @@ async function fetchLyrics(t) {
     if (data && data.syncedLyrics) {
       state.lyrics = parseLRC(data.syncedLyrics);
       state.lyricsSynced = true;
-      $('#lyrics-status').textContent = 'synced';
+      if (statusEl) statusEl.textContent = 'synced';
       const note = $('#lyrics-note');
       if (note) {
         const refDur = data.duration || 0;
@@ -193,17 +188,17 @@ async function fetchLyrics(t) {
     } else if (data && data.plainLyrics) {
       state.lyrics = data.plainLyrics.split('\n').map(line => ({ time: 0, text: line }));
       state.lyricsSynced = false;
-      $('#lyrics-status').textContent = 'plain';
+      if (statusEl) statusEl.textContent = 'plain';
       const note = $('#lyrics-note');
       if (note) note.textContent = 'Plain lyrics (not time-synced).';
     } else {
-      $('#lyrics-status').textContent = 'none';
+      if (statusEl) statusEl.textContent = 'none';
       const note = $('#lyrics-note');
       if (note) note.textContent = 'No lyrics found for this track.';
     }
   } catch (e) {
     console.error('lyrics fetch failed', e);
-    $('#lyrics-status').textContent = 'error';
+    if (statusEl) statusEl.textContent = 'error';
   }
   renderLyrics();
 }
@@ -228,25 +223,22 @@ function parseLRC(lrc) {
 
 function renderLyrics() {
   const ul = $('#lyrics-list');
+  if (!ul) return;
   const lf = $('#lf-lyrics');
   ul.innerHTML = '';
-  lf.innerHTML = '';
+  if (lf) lf.innerHTML = '';
   if (!state.lyrics.length) {
-    $('#lyrics-empty').style.display = 'block';
+    const empty = $('#lyrics-empty');
+    if (empty) empty.style.display = 'block';
     return;
   }
-  $('#lyrics-empty').style.display = 'none';
+  const empty = $('#lyrics-empty');
+  if (empty) empty.style.display = 'none';
   state.lyrics.forEach((l, i) => {
     const li = document.createElement('li');
     li.dataset.i = i;
     li.textContent = l.text || '♪';
     ul.appendChild(li);
-
-    const div = document.createElement('div');
-    div.className = 'line';
-    div.dataset.i = i;
-    div.textContent = l.text || '♪';
-    lf.appendChild(div);
   });
 }
 
@@ -263,14 +255,8 @@ function syncLyrics(currentTime) {
     li.classList.toggle('active', i === idx);
     li.classList.toggle('past', i < idx);
   });
-  $$('#lf-lyrics .line').forEach((el, i) => {
-    el.classList.toggle('active', i === idx);
-    el.classList.toggle('past', i < idx);
-  });
   const activeLi = $(`#lyrics-list li[data-i="${idx}"]`);
   if (activeLi) activeLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  const activeLine = $(`#lf-lyrics .line[data-i="${idx}"]`);
-  if (activeLine) activeLine.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 /* ---------- Audio events ---------- */
@@ -278,13 +264,13 @@ audio.addEventListener('timeupdate', () => {
   const cur = audio.currentTime;
   const dur = audio.duration || 0;
   const pct = dur ? (cur / dur) * 100 : 0;
-  $('#cur-time').textContent = fmtTime(cur);
-  $('#progress-fill').style.width = pct + '%';
-  $('#progress-thumb').style.left = pct + '%';
+  const curTime = $('#cur-time'); if (curTime) curTime.textContent = fmtTime(cur);
+  const pf = $('#progress-fill'); if (pf) pf.style.width = pct + '%';
+  const pt = $('#progress-thumb'); if (pt) pt.style.left = pct + '%';
   syncLyrics(cur);
 });
 audio.addEventListener('loadedmetadata', () => {
-  if (audio.duration) $('#dur-time').textContent = fmtTime(audio.duration);
+  if (audio.duration) { const dt = $('#dur-time'); if (dt) dt.textContent = fmtTime(audio.duration); }
 });
 audio.addEventListener('play', () => updateVinyl(true));
 audio.addEventListener('pause', () => updateVinyl(false));
@@ -296,26 +282,32 @@ audio.addEventListener('ended', () => {
 /* Progress seek */
 const progressBar = $('#progress-bar');
 let seeking = false;
-progressBar.addEventListener('mousedown', (e) => { seeking = true; seekTo(e); });
+if (progressBar) {
+  progressBar.addEventListener('mousedown', (e) => { seeking = true; seekTo(e); });
+}
 window.addEventListener('mousemove', (e) => { if (seeking) seekTo(e); });
 window.addEventListener('mouseup', () => { seeking = false; });
 function seekTo(e) {
+  if (!progressBar) return;
   const rect = progressBar.getBoundingClientRect();
   const pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
   if (audio.duration) audio.currentTime = pct * audio.duration;
 }
 
 /* Controls */
-$('#btn-play').addEventListener('click', () => {
-  if (state.index < 0 && state.tracks.length) { playIndex(0); return; }
-  if (audio.paused) audio.play(); else audio.pause();
-});
-$('#btn-play').textContent = '▶';
-audio.addEventListener('play', () => { $('#btn-play').textContent = '⏸'; });
-audio.addEventListener('pause', () => { $('#btn-play').textContent = '▶'; });
+const playBtn = $('#btn-play');
+if (playBtn) {
+  playBtn.addEventListener('click', () => {
+    if (state.index < 0 && state.tracks.length) { playIndex(0); return; }
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+  playBtn.textContent = '▶';
+}
+audio.addEventListener('play', () => { if (playBtn) playBtn.textContent = '⏸'; });
+audio.addEventListener('pause', () => { if (playBtn) playBtn.textContent = '▶'; });
 
-$('#btn-next').addEventListener('click', nextTrack);
-$('#btn-prev').addEventListener('click', prevTrack);
+const nextBtn = $('#btn-next'); if (nextBtn) nextBtn.addEventListener('click', nextTrack);
+const prevBtn = $('#btn-prev'); if (prevBtn) prevBtn.addEventListener('click', prevTrack);
 
 function nextTrack() {
   if (!state.tracks.length) return;
@@ -337,29 +329,32 @@ function prevTrack() {
   playIndex(prev);
 }
 
-$('#btn-shuffle').addEventListener('click', (e) => {
+const shuffleBtn = $('#btn-shuffle');
+if (shuffleBtn) shuffleBtn.addEventListener('click', (e) => {
   state.shuffle = !state.shuffle;
   e.currentTarget.classList.toggle('active', state.shuffle);
 });
-$('#btn-repeat').addEventListener('click', (e) => {
+const repeatBtn = $('#btn-repeat');
+if (repeatBtn) repeatBtn.addEventListener('click', (e) => {
   state.repeat = (state.repeat + 1) % 3;
   e.currentTarget.classList.toggle('active', state.repeat !== 0);
   e.currentTarget.textContent = state.repeat === 2 ? '↻₁' : '↻';
 });
 
-$('#volume').addEventListener('input', (e) => { audio.volume = parseFloat(e.target.value); });
+const volSlider = $('#volume');
+if (volSlider) volSlider.addEventListener('input', (e) => { audio.volume = parseFloat(e.target.value); });
+audio.volume = 0.8;
 
 const offsetSlider = $('#lyric-offset');
 if (offsetSlider) {
   offsetSlider.addEventListener('input', (e) => {
     state.lyricOffset = parseFloat(e.target.value);
-    $('#offset-val').textContent = state.lyricOffset.toFixed(1) + 's';
+    const ov = $('#offset-val'); if (ov) ov.textContent = state.lyricOffset.toFixed(1) + 's';
     if (state.index >= 0) saveOffset(state.tracks[state.index].id, state.lyricOffset);
     state.lyricIndex = -1;
     syncLyrics(audio.currentTime);
   });
 }
-audio.volume = 0.8;
 
 /* ---------- Poll workflow run ---------- */
 async function pollLatestRun(s, statusEl) {
@@ -386,7 +381,7 @@ async function pollLatestRun(s, statusEl) {
             statusEl.textContent = 'Run succeeded! Refresh the page to see the new track.';
             statusEl.className = 'status ok';
           } else {
-            statusEl.textContent = 'Run ' + r.conclusion + '. Open the Actions tab for details (likely YouTube bot protection; add YOUTUBE_COOKIES secret or use the local method).';
+            statusEl.textContent = 'Run ' + r.conclusion + '. Open the Actions tab for details.';
             statusEl.className = 'status err';
           }
           return;
@@ -406,21 +401,23 @@ $$('.nav-btn').forEach(btn => {
     btn.classList.add('active');
     const view = btn.dataset.view;
     $$('.view').forEach(v => v.classList.remove('active'));
-    $(`#view-${view}`).classList.add('active');
+    const target = $(`#view-${view}`);
+    if (target) target.classList.add('active');
   });
 });
 
 /* ---------- Settings ---------- */
 function applySettingsToUI() {
   const s = state.settings;
-  $('#set-owner').value = s.owner || 'sensesVoid';
-  $('#set-repo').value = s.repo || 'jamukot';
-  $('#set-workflow').value = s.workflow || 'add-track.yml';
-  $('#set-token').value = s.token || '';
-  $('#set-worker').value = s.worker || '';
+  const o = $('#set-owner'); if (o) o.value = s.owner || 'sensesVoid';
+  const r = $('#set-repo'); if (r) r.value = s.repo || 'jamukot';
+  const w = $('#set-workflow'); if (w) w.value = s.workflow || 'add-track.yml';
+  const t = $('#set-token'); if (t) t.value = s.token || '';
+  const wk = $('#set-worker'); if (wk) wk.value = s.worker || '';
 }
 applySettingsToUI();
-$('#set-save').addEventListener('click', () => {
+const saveBtn = $('#set-save');
+if (saveBtn) saveBtn.addEventListener('click', () => {
   const s = {
     owner: $('#set-owner').value.trim(),
     repo: $('#set-repo').value.trim(),
@@ -429,19 +426,50 @@ $('#set-save').addEventListener('click', () => {
     worker: $('#set-worker').value.trim(),
   };
   saveSettings(s);
-  $('#set-status').textContent = 'Saved.';
-  $('#set-status').className = 'status ok';
+  const ss = $('#set-status'); if (ss) { ss.textContent = 'Saved.'; ss.className = 'status ok'; }
 });
 
+/* ---------- Admin gate ---------- */
+const ADMIN_PASS = 'iamironman!';
+const adminGate = $('#admin-gate');
+const adminContent = $('#admin-content');
+function unlockAdmin() {
+  const val = $('#admin-pass').value;
+  const st = $('#admin-gate-status');
+  if (val === ADMIN_PASS) {
+    if (adminGate) adminGate.style.display = 'none';
+    if (adminContent) adminContent.style.display = 'block';
+    sessionStorage.setItem('jamukot.admin', '1');
+    if (st) st.textContent = '';
+  } else {
+    if (st) { st.textContent = 'Wrong password.'; st.className = 'status err'; }
+  }
+}
+const unlockBtn = $('#admin-unlock');
+if (unlockBtn) unlockBtn.addEventListener('click', unlockAdmin);
+const passInput = $('#admin-pass');
+if (passInput) passInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlockAdmin(); });
+const lockBtn = $('#admin-lock');
+if (lockBtn) lockBtn.addEventListener('click', () => {
+  if (adminGate) adminGate.style.display = '';
+  if (adminContent) adminContent.style.display = 'none';
+  sessionStorage.removeItem('jamukot.admin');
+  if (passInput) passInput.value = '';
+});
+if (sessionStorage.getItem('jamukot.admin') === '1') {
+  if (adminGate) adminGate.style.display = 'none';
+  if (adminContent) adminContent.style.display = 'block';
+}
+
 /* ---------- Add track ---------- */
-$('#add-submit').addEventListener('click', async () => {
+const addSubmit = $('#add-submit');
+if (addSubmit) addSubmit.addEventListener('click', async () => {
   const url = $('#add-url').value.trim();
   const title = $('#add-title').value.trim();
   const artist = $('#add-artist').value.trim();
   const status = $('#add-status');
   if (!url || !title || !artist) {
-    status.textContent = 'Please fill in all fields.';
-    status.className = 'status err';
+    if (status) { status.textContent = 'Please fill in all fields.'; status.className = 'status err'; }
     return;
   }
   const s = state.settings;
@@ -449,12 +477,10 @@ $('#add-submit').addEventListener('click', async () => {
   const repo = s.repo || 'jamukot';
   const wf = s.workflow || 'add-track.yml';
 
-  // 1-click path: Cloudflare Worker holds the token
   if (s.worker) {
-    const btn = $('#add-submit');
+    const btn = addSubmit;
     btn.disabled = true;
-    status.textContent = 'Dispatching (1 click)...';
-    status.className = 'status';
+    if (status) { status.textContent = 'Dispatching (1 click)...'; status.className = 'status'; }
     try {
       const resp = await fetch(s.worker, {
         method: 'POST',
@@ -463,29 +489,24 @@ $('#add-submit').addEventListener('click', async () => {
       });
       const data = await resp.json().catch(() => ({}));
       if (resp.ok && data.ok) {
-        status.textContent = 'Dispatched! The run will download, compress, and commit. Refresh this page when it finishes (~1 min).';
-        status.className = 'status ok';
+        if (status) { status.textContent = 'Dispatched! The run will download, compress, and commit. Refresh this page when it finishes (~1 min).'; status.className = 'status ok'; }
         $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
         if (s.token) pollLatestRun(s, status);
       } else {
-        status.textContent = 'Worker error: ' + (data.error || resp.status);
-        status.className = 'status err';
+        if (status) { status.textContent = 'Worker error: ' + (data.error || resp.status); status.className = 'status err'; }
       }
     } catch (e) {
-      status.textContent = 'Network error: ' + e.message;
-      status.className = 'status err';
+      if (status) { status.textContent = 'Network error: ' + e.message; status.className = 'status err'; }
     } finally {
       btn.disabled = false;
     }
     return;
   }
 
-  // PAT path: dispatch directly from the browser
   if (s.token) {
-    const btn = $('#add-submit');
+    const btn = addSubmit;
     btn.disabled = true;
-    status.textContent = 'Dispatching...';
-    status.className = 'status';
+    if (status) { status.textContent = 'Dispatching...'; status.className = 'status'; }
     try {
       const resp = await fetch('https://api.github.com/repos/' + owner + '/' + repo + '/actions/workflows/' + wf + '/dispatches', {
         method: 'POST',
@@ -493,41 +514,33 @@ $('#add-submit').addEventListener('click', async () => {
         body: JSON.stringify({ ref: 'main', inputs: { youtube_url: url, title, artist } }),
       });
       if (resp.status === 204) {
-        status.textContent = 'Dispatched! Polling run status...';
-        status.className = 'status ok';
+        if (status) { status.textContent = 'Dispatched! Polling run status...'; status.className = 'status ok'; }
         $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
         pollLatestRun(s, status);
       } else {
         const txt = await resp.text();
-        status.textContent = 'Failed (' + resp.status + '): ' + txt.slice(0,200);
-        status.className = 'status err';
+        if (status) { status.textContent = 'Failed (' + resp.status + '): ' + txt.slice(0,200); status.className = 'status err'; }
       }
     } catch (e) {
-      status.textContent = 'Network error: ' + e.message;
-      status.className = 'status err';
+      if (status) { status.textContent = 'Network error: ' + e.message; status.className = 'status err'; }
     } finally {
       btn.disabled = false;
     }
     return;
   }
 
-  // Fallback: clipboard + open Actions
   const payload = 'youtube_url: ' + url + '\ntitle: ' + title + '\nartist: ' + artist;
   let copied = false;
   try { await navigator.clipboard.writeText(payload); copied = true; } catch (e) { copied = false; }
   const actionsUrl = 'https://github.com/' + owner + '/' + repo + '/actions/workflows/' + wf;
   window.open(actionsUrl, '_blank');
-  if (copied) {
-    status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.';
-    status.className = 'status ok';
-  } else {
-    status.textContent = 'Could not copy automatically. Opened Actions tab. Use these inputs:\n' + payload;
-    status.className = 'status err';
+  if (status) {
+    if (copied) { status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.'; status.className = 'status ok'; }
+    else { status.textContent = 'Could not copy automatically. Opened Actions tab. Use these inputs:\n' + payload; status.className = 'status err'; }
   }
 });
 
 /* ---------- Sync lyrics view (mirror) ---------- */
-// keep lf-lyrics in sync already via renderLyrics
 
 /* ---------- Init ---------- */
 loadTracks();

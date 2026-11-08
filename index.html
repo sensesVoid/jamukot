@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=5" />
+<link rel="stylesheet" href="css/style.css?v=6" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -24,9 +24,7 @@
     </div>
     <nav class="topnav">
       <button class="nav-btn active" data-view="player">Player</button>
-      <button class="nav-btn" data-view="lyrics">Lyrics</button>
-      <button class="nav-btn" data-view="add">Add Track</button>
-      <button class="nav-btn" data-view="settings">Settings</button>
+      <button class="nav-btn" data-view="admin">Admin</button>
     </nav>
   </header>
 
@@ -112,79 +110,71 @@
       </div>
     </section>
 
-    <!-- LYRICS VIEW (fullscreen focus) -->
-    <section class="view view-lyrics" id="view-lyrics">
-      <div class="lyrics-focus">
-        <div class="lf-vinyl">
-          <div class="vinyl small" id="vinyl2">
-            <div class="vinyl-grooves"></div>
-            <div class="vinyl-label">
-              <img id="cover-img2" alt="cover" />
-              <div class="cover-fallback" id="cover-fallback2"></div>
-            </div>
+    <!-- ADMIN VIEW (password-gated) -->
+    <section class="view view-admin" id="view-admin">
+      <div class="admin-gate" id="admin-gate">
+        <div class="add-card">
+          <h2>Admin access</h2>
+          <p class="muted">Enter the admin password to continue.</p>
+          <div class="form">
+            <label>Password
+              <input type="password" id="admin-pass" placeholder="••••••••" />
+            </label>
+            <button class="primary-btn" id="admin-unlock">Unlock</button>
+            <div class="status" id="admin-gate-status"></div>
           </div>
         </div>
-        <div class="lf-meta">
-          <div class="lf-title" id="lf-title">—</div>
-          <div class="lf-artist" id="lf-artist">—</div>
-        </div>
-        <div class="lf-lyrics" id="lf-lyrics"></div>
       </div>
-    </section>
-
-    <!-- ADD TRACK VIEW -->
-    <section class="view view-add" id="view-add">
-      <div class="add-card">
-        <h2>Add a track from YouTube</h2>
-        <p class="muted">Download a YouTube track, compress to 128 kbps MP3, commit to <code>AudioFile/</code>.</p>
-        <div class="form">
-          <label>YouTube URL
-            <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
-          </label>
-          <label>Title
-            <input type="text" id="add-title" placeholder="Song title" />
-          </label>
-          <label>Artist
-            <input type="text" id="add-artist" placeholder="Artist name" />
-          </label>
-          <button class="primary-btn" id="add-submit">Add track</button>
-          <div class="status" id="add-status"></div>
+      <div class="admin-content" id="admin-content" style="display:none;">
+        <div class="admin-grid">
+          <div class="add-card">
+            <h2>Add a track from YouTube</h2>
+            <p class="muted">Download a YouTube track, compress to 128 kbps MP3, commit to <code>AudioFile/</code>.</p>
+            <div class="form">
+              <label>YouTube URL
+                <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
+              </label>
+              <label>Title
+                <input type="text" id="add-title" placeholder="Song title" />
+              </label>
+              <label>Artist
+                <input type="text" id="add-artist" placeholder="Artist name" />
+              </label>
+              <button class="primary-btn" id="add-submit">Add track</button>
+              <div class="status" id="add-status"></div>
+            </div>
+          </div>
+          <div class="add-card">
+            <h2>Settings</h2>
+            <div class="form">
+              <label>GitHub owner
+                <input type="text" id="set-owner" value="sensesVoid" />
+              </label>
+              <label>GitHub repo
+                <input type="text" id="set-repo" value="jamukot" />
+              </label>
+              <label>Workflow file
+                <input type="text" id="set-workflow" value="add-track.yml" />
+              </label>
+              <label>GitHub PAT (repo + workflow) — optional
+                <input type="password" id="set-token" placeholder="ghp_..." />
+              </label>
+              <label>Worker URL (for 1-click add, optional)
+                <input type="url" id="set-worker" placeholder="https://jamukot-dispatch.<you>.workers.dev" />
+              </label>
+              <button class="primary-btn" id="set-save">Save</button>
+              <div class="status" id="set-status"></div>
+            </div>
+            <p class="muted small">Token is stored in <code>localStorage</code> only. Never commit it.</p>
+            <button class="primary-btn" id="admin-lock" style="margin-top:12px;background:rgba(255,255,255,0.1);box-shadow:none;">Lock</button>
+          </div>
         </div>
-
-
-      </div>
-    </section>
-
-    <!-- SETTINGS VIEW -->
-    <section class="view view-settings" id="view-settings">
-      <div class="add-card">
-        <h2>Settings</h2>
-        <div class="form">
-          <label>GitHub owner
-            <input type="text" id="set-owner" value="sensesVoid" />
-          </label>
-          <label>GitHub repo
-            <input type="text" id="set-repo" value="jamukot" />
-          </label>
-          <label>Workflow file
-            <input type="text" id="set-workflow" value="add-track.yml" />
-          </label>
-          <label>GitHub PAT (repo + workflow) — optional
-            <input type="password" id="set-token" placeholder="ghp_..." />
-          </label>
-          <label>Worker URL (for 1-click add, optional)
-            <input type="url" id="set-worker" placeholder="https://jamukot-dispatch.<you>.workers.dev" />
-          </label>
-          <button class="primary-btn" id="set-save">Save</button>
-          <div class="status" id="set-status"></div>
-        </div>
-        <p class="muted small">Token is stored in <code>localStorage</code> only. Never commit it.</p>
       </div>
     </section>
   </main>
 
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=5"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>
