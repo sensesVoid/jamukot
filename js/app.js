@@ -488,7 +488,7 @@ if (addSubmit) addSubmit.addEventListener('click', async () => {
   const repo = s.repo || 'jamukot';
   const wf = s.workflow || 'add-track.yml';
 
-  if (s.worker) {
+  if (s.worker && /^https:\/\//.test(s.worker)) {
     const btn = addSubmit;
     btn.disabled = true;
     if (status) { status.textContent = 'Dispatching (1 click)...'; status.className = 'status'; }
@@ -544,7 +544,7 @@ if (addSubmit) addSubmit.addEventListener('click', async () => {
   let copied = false;
   try { await navigator.clipboard.writeText(payload); copied = true; } catch (e) { copied = false; }
   const actionsUrl = 'https://github.com/' + owner + '/' + repo + '/actions/workflows/' + wf;
-  window.open(actionsUrl, '_blank');
+  window.open(actionsUrl, '_blank', 'noopener,noreferrer');
   if (status) {
     if (copied) { status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.'; status.className = 'status ok'; }
     else { status.textContent = 'Could not copy automatically. Opened Actions tab. Use these inputs:\n' + payload; status.className = 'status err'; }
