@@ -97,6 +97,11 @@
             <h2>Lyrics</h2>
             <span class="badge" id="lyrics-status">idle</span>
           </div>
+          <div class="offset-row">
+            <label>Sync offset: <span id="offset-val">0.0s</span></label>
+            <input type="range" id="lyric-offset" min="-15" max="15" step="0.5" value="0" />
+          </div>
+          <div class="lyrics-note" id="lyrics-note"></div>
           <div class="lyrics-scroll" id="lyrics-scroll">
             <div class="lyrics-empty" id="lyrics-empty">
               Play a track to load synced lyrics from LRCLIB.

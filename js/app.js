@@ -13,11 +13,18 @@ const state = {
   lyrics: [], // {time, text}
   lyricIndex: -1,
   lyricsSynced: false,
+  lyricOffset: 0,
   settings: loadSettings(),
 };
 
 function loadSettings() {
   try { return JSON.parse(localStorage.getItem('jamukot.settings') || '{}'); } catch { return {}; }
+}
+function loadOffset(id) {
+  try { return parseFloat(localStorage.getItem('jamukot.offset.' + id) || '0'); } catch { return 0; }
+}
+function saveOffset(id, v) {
+  localStorage.setItem('jamukot.offset.' + id, String(v));
 }
 function saveSettings(s) { localStorage.setItem('jamukot.settings', JSON.stringify(s)); Object.assign(state.settings, s); }
 
@@ -149,8 +156,15 @@ async function fetchLyrics(t) {
   state.lyrics = [];
   state.lyricIndex = -1;
   state.lyricsSynced = false;
+  state.lyricOffset = loadOffset(t.id);
   renderLyrics();
+  const offEl = $('#lyric-offset');
+  if (offEl) offEl.value = state.lyricOffset;
+  const offVal = $('#offset-val');
+  if (offVal) offVal.textContent = state.lyricOffset.toFixed(1) + 's';
   $('#lyrics-status').textContent = 'loading';
+  const noteStart = $('#lyrics-note');
+  if (noteStart) noteStart.textContent = '';
   try {
     // try exact get
     let data = null;
@@ -171,12 +185,27 @@ async function fetchLyrics(t) {
       state.lyrics = parseLRC(data.syncedLyrics);
       state.lyricsSynced = true;
       $('#lyrics-status').textContent = 'synced';
+      // duration mismatch warning
+      const note = $('#lyrics-note');
+      if (note) {
+        const refDur = data.duration || 0;
+        const audioDur = t.duration || 0;
+        if (refDur && audioDur && Math.abs(refDur - audioDur) > 5) {
+          note.textContent = `Lyrics timing is for a ${refDur.toFixed(0)}s version; your audio is ${audioDur.toFixed(0)}s. Use the Sync offset slider to align.`;
+        } else {
+          note.textContent = '';
+        }
+      }
     } else if (data && data.plainLyrics) {
       state.lyrics = data.plainLyrics.split('\n').map(line => ({ time: 0, text: line }));
       state.lyricsSynced = false;
       $('#lyrics-status').textContent = 'plain';
+      const note = $('#lyrics-note');
+      if (note) note.textContent = 'Plain lyrics (not time-synced).';
     } else {
       $('#lyrics-status').textContent = 'none';
+      const note = $('#lyrics-note');
+      if (note) note.textContent = 'No lyrics found for this track.';
     }
   } catch (e) {
     console.error('lyrics fetch failed', e);
@@ -233,7 +262,7 @@ function syncLyrics(currentTime) {
   // find index
   let idx = -1;
   for (let i = 0; i < state.lyrics.length; i++) {
-    if (state.lyrics[i].time <= currentTime + 0.15) idx = i;
+    if (state.lyrics[i].time + state.lyricOffset <= currentTime + 0.15) idx = i;
     else break;
   }
   if (idx === state.lyricIndex) return;
@@ -331,7 +360,58 @@ $('#btn-repeat').addEventListener('click', (e) => {
 });
 
 $('#volume').addEventListener('input', (e) => { audio.volume = parseFloat(e.target.value); });
+
+const offsetSlider = $('#lyric-offset');
+if (offsetSlider) {
+  offsetSlider.addEventListener('input', (e) => {
+    state.lyricOffset = parseFloat(e.target.value);
+    $('#offset-val').textContent = state.lyricOffset.toFixed(1) + 's';
+    if (state.index >= 0) saveOffset(state.tracks[state.index].id, state.lyricOffset);
+    state.lyricIndex = -1; // force re-sync
+    syncLyrics(audio.currentTime);
+  });
+}
 audio.volume = 0.8;
+
+/* ---------- Poll workflow run ---------- */
+async function pollLatestRun(s, statusEl) {
+  const headers = { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json' };
+  // find the latest run for this workflow
+  let run = null;
+  for (let attempt = 0; attempt < 10 && !run; attempt++) {
+    await new Promise(r => setTimeout(r, 2000));
+    try {
+      const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/workflows/${s.workflow}/runs?per_page=1`, { headers });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.workflow_runs && data.workflow_runs.length) run = data.workflow_runs[0];
+      }
+    } catch {}
+  }
+  if (!run) { statusEl.textContent = 'Dispatched, but could not fetch run status. Check the Actions tab.'; return; }
+  // poll until complete
+  for (let i = 0; i < 60; i++) {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/runs/${run.id}`, { headers });
+      if (res.ok) {
+        const r = await res.json();
+        if (r.status === 'completed') {
+          if (r.conclusion === 'success') {
+            statusEl.textContent = 'Run succeeded! Refresh the page to see the new track.';
+            statusEl.className = 'status ok';
+          } else {
+            statusEl.textContent = `Run ${r.conclusion}. Open the Actions tab for details (likely YouTube bot protection; add YOUTUBE_COOKIES secret or use the local method).`;
+            statusEl.className = 'status err';
+          }
+          return;
+        }
+        statusEl.textContent = `Run status: ${r.status}…`;
+      }
+    } catch {}
+    await new Promise(r => setTimeout(r, 4000));
+  }
+  statusEl.textContent = 'Still running. Check the Actions tab.';
+}
 
 /* ---------- Views ---------- */
 $$('.nav-btn').forEach(btn => {
@@ -398,9 +478,10 @@ $('#add-submit').addEventListener('click', async () => {
       body: JSON.stringify({ ref, inputs: { youtube_url: url, title, artist } }),
     });
     if (resp.status === 204) {
-      status.textContent = 'Workflow dispatched! Check the Actions tab; refresh after it completes.';
+      status.textContent = 'Workflow dispatched. Polling run status…';
       status.className = 'status ok';
       $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
+      pollLatestRun(s, status);
     } else {
       const txt = await resp.text();
       status.textContent = `Failed (${resp.status}): ${txt.slice(0,200)}`;
