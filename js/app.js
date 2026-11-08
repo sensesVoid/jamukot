@@ -48,6 +48,16 @@ async function loadTracks() {
   state.filtered = [...state.tracks];
   renderPlaylist();
   $('#track-count').textContent = `${state.tracks.length} tracks`;
+  updateStorageIndicator();
+}
+
+const STORAGE_LIMIT = 9.5 * 1024 * 1024 * 1024;
+function updateStorageIndicator() {
+  const total = state.tracks.reduce((s, t) => s + (t.size || 0), 0);
+  const pct = Math.min(100, (total / STORAGE_LIMIT) * 100);
+  const fill = $('#storage-fill'); if (fill) fill.style.width = pct + '%';
+  const text = $('#storage-text'); if (text) text.textContent = (total / 1e9).toFixed(2) + ' / 9.5 GB';
+  const bar = $('#storage-indicator'); if (bar) bar.title = state.tracks.length + ' tracks';
 }
 
 /* ---------- Playlist ---------- */

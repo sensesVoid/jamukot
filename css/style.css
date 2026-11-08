@@ -45,6 +45,10 @@ body {
   background: rgba(10,11,20,0.6);
 }
 .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: 2px; }
+.storage-indicator { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.storage-bar { width: 160px; height: 6px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+.storage-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 999px; transition: width .3s ease; }
+.storage-text { font-variant-numeric: tabular-nums; min-width: 90px; text-align: right; }
 .brand-dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 0 14px var(--accent-glow); }
 .brand-name { font-size: 18px; }
 .topnav { display: flex; gap: 6px; }

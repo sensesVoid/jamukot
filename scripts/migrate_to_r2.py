@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Upload all MP3s in AudioFile/ to Cloudflare R2, rewrite tracks.json with R2 URLs."""
 import json, os, subprocess, sys, time
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from urllib.parse import quote
 import boto3
 from botocore.config import Config
@@ -41,7 +42,7 @@ s3 = boto3.client(
     region_name="auto",
 )
 
-mp3s = sorted(f for f in os.listdir(AUDIO_DIR) if f.lower().endswith(".mp3"))
+mp3s = sorted(f for f in os.listdir(AUDIO_DIR) if f.lower().endswith(".mp3") and not f.startswith(".dl_"))
 print(f"Found {len(mp3s)} mp3s to upload to bucket '{BUCKET}'")
 
 tracks = []
@@ -85,12 +86,14 @@ for i, name in enumerate(mp3s, 1):
         artist, title = stem.split(" - ", 1)
     else:
         artist, title = "Unknown", stem
+    size = os.path.getsize(local_path)
     tracks.append({
         "id": i,
         "title": title.strip(),
         "artist": artist.strip(),
         "url": target_url,
         "duration": dur,
+        "size": size,
     })
 
 with open(TRACKS, "w", encoding="utf-8") as f:
