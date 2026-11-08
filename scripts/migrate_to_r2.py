@@ -25,7 +25,7 @@ if os.path.exists(env_path):
 ACCESS_KEY = env.get("Access_Key_ID") or env.get("R2_ACCESS_KEY_ID")
 SECRET_KEY = env.get("Secret_Access_Key") or env.get("R2_SECRET_ACCESS_KEY")
 BUCKET = env.get("R2_BUCKET", "jamukot-audio")
-PUBLIC_URL = env.get("R2_PUBLIC_URL", "https://pub-f3f7d0214f7f488a9f393ca2dd122193.r2.dev")
+PUBLIC_URL = env.get("R2_PUBLIC_URL", "https://jamukot-audio.originragnarok05.workers.dev")
 ACCOUNT_ID = env.get("R2_ACCOUNT_ID", "5eaa981f4ddcdefe09597a949285c222")
 ENDPOINT = f"https://{ACCOUNT_ID}.r2.cloudflarestorage.com"
 
