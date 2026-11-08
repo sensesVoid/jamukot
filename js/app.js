@@ -12,6 +12,7 @@ const state = {
   repeat: 0, // 0 none, 1 all, 2 one
   lyrics: [], // {time, text}
   lyricIndex: -1,
+  lyricsSynced: false,
   settings: loadSettings(),
 };
 
@@ -147,6 +148,7 @@ function hashStr(s) { let h = 0; for (let i=0;i<s.length;i++){ h = ((h<<5)-h) + 
 async function fetchLyrics(t) {
   state.lyrics = [];
   state.lyricIndex = -1;
+  state.lyricsSynced = false;
   renderLyrics();
   $('#lyrics-status').textContent = 'loading';
   try {
@@ -167,11 +169,11 @@ async function fetchLyrics(t) {
     }
     if (data && data.syncedLyrics) {
       state.lyrics = parseLRC(data.syncedLyrics);
+      state.lyricsSynced = true;
       $('#lyrics-status').textContent = 'synced';
     } else if (data && data.plainLyrics) {
-      state.lyrics = data.plainLyrics.split('\n').map((line, i) => ({ time: i === 0 ? 0 : Infinity, text: line }));
-      // make plain lyrics show all at once by setting times 0? Better: show as static
       state.lyrics = data.plainLyrics.split('\n').map(line => ({ time: 0, text: line }));
+      state.lyricsSynced = false;
       $('#lyrics-status').textContent = 'plain';
     } else {
       $('#lyrics-status').textContent = 'none';
@@ -227,7 +229,7 @@ function renderLyrics() {
 }
 
 function syncLyrics(currentTime) {
-  if (!state.lyrics.length) return;
+  if (!state.lyrics.length || !state.lyricsSynced) return;
   // find index
   let idx = -1;
   for (let i = 0; i < state.lyrics.length; i++) {

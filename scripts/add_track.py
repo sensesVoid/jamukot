@@ -52,8 +52,13 @@ def main():
         try: os.remove(f)
         except OSError: pass
 
-    # download best audio
-    run(["yt-dlp", "-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist", args.url])
+    cmd = ["yt-dlp", "-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
+           "--extractor-args", "youtube:player_client=android,web"]
+    cookies = os.environ.get("YOUTUBE_COOKIES_FILE")
+    if cookies and os.path.exists(cookies):
+        cmd += ["--cookies", cookies]
+    cmd.append(args.url)
+    run(cmd)
 
     # find downloaded file
     cands = [f for f in glob.glob(tmp_base + ".*") if not f.endswith(".mp3") or True]

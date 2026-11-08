@@ -28,6 +28,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
           python -m pip install --upgrade pip yt-dlp
+          # deno (JS runtime for yt-dlp YouTube extraction)
+          curl -fsSL https://deno.land/install.sh | sh
+          echo "$HOME/.deno/bin" >> $GITHUB_PATH
+
+      - name: Prepare cookies (optional)
+        env:
+          YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
+        run: |
+          if [ -n "$YOUTUBE_COOKIES" ]; then
+            printf '%s' "$YOUTUBE_COOKIES" > /tmp/cookies.txt
+            echo "YOUTUBE_COOKIES_FILE=/tmp/cookies.txt" >> $GITHUB_ENV
+          fi
 
       - name: Download, compress, and register track
         run: |
