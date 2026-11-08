@@ -456,42 +456,41 @@ $('#add-submit').addEventListener('click', async () => {
     status.className = 'status err';
     return;
   }
-  const s = state.settings;
-  if (!s.token) {
-    status.textContent = 'No GitHub PAT configured. Set it in Settings first.';
-    status.className = 'status err';
-    return;
-  }
-  const btn = $('#add-submit');
-  btn.disabled = true;
-  status.textContent = 'Dispatching workflow…';
-  status.className = 'status';
+  const payload = `youtube_url: ${url}\ntitle: ${title}\nartist: ${artist}`;
+  let copied = false;
   try {
-    const ref = 'main';
-    const resp = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/workflows/${s.workflow}/dispatches`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${s.token}`,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ref, inputs: { youtube_url: url, title, artist } }),
-    });
-    if (resp.status === 204) {
-      status.textContent = 'Workflow dispatched. Polling run status…';
-      status.className = 'status ok';
-      $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
-      pollLatestRun(s, status);
-    } else {
-      const txt = await resp.text();
-      status.textContent = `Failed (${resp.status}): ${txt.slice(0,200)}`;
-      status.className = 'status err';
-    }
+    await navigator.clipboard.writeText(payload);
+    copied = true;
   } catch (e) {
-    status.textContent = 'Network error: ' + e.message;
+    copied = false;
+  }
+  const s = state.settings;
+  const owner = s.owner || 'sensesVoid';
+  const repo = s.repo || 'jamukot';
+  const wf = s.workflow || 'add-track.yml';
+  const actionsUrl = `https://github.com/${owner}/${repo}/actions/workflows/${wf}`;
+  window.open(actionsUrl, '_blank');
+  if (copied) {
+    status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.';
+    status.className = 'status ok';
+  } else {
+    status.textContent = `Could not copy automatically. Opened Actions tab. Use these inputs:\n${payload}`;
     status.className = 'status err';
-  } finally {
-    btn.disabled = false;
+  }
+  // optional: if a PAT is configured, also dispatch directly
+  if (s.token) {
+    try {
+      const resp = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/${wf}/dispatches`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main', inputs: { youtube_url: url, title, artist } }),
+      });
+      if (resp.status === 204) {
+        status.textContent += ' Also dispatched via API — polling run status…';
+        status.className = 'status ok';
+        pollLatestRun(s, status);
+      }
+    } catch (e) { /* ignore; manual path still works */ }
   }
 });
 

@@ -136,7 +136,7 @@
     <section class="view view-add" id="view-add">
       <div class="add-card">
         <h2>Add a track from YouTube</h2>
-        <p class="muted">Triggers a GitHub Actions workflow that downloads, compresses to 128kbps MP3, and commits the file to <code>AudioFile/</code>. Requires a GitHub Personal Access Token with <code>repo</code> + <code>workflow</code> scopes (stored only in your browser).</p>
+        <p class="muted">Download a YouTube track, compress it to 128 kbps MP3, and commit it to <code>AudioFile/</code>. No GitHub token needed — inputs are copied to your clipboard and you confirm the run on GitHub.</p>
         <div class="form">
           <label>YouTube URL
             <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
@@ -147,15 +147,16 @@
           <label>Artist
             <input type="text" id="add-artist" placeholder="Artist name" />
           </label>
-          <button class="primary-btn" id="add-submit">Dispatch workflow</button>
+          <button class="primary-btn" id="add-submit">Copy inputs &amp; open GitHub Actions</button>
           <div class="status" id="add-status"></div>
         </div>
         <div class="add-help">
-          <h3>Manual alternative</h3>
-          <p>Go to <em>Actions → "Add Track" → Run workflow</em> and fill in the inputs. The workflow commits the new MP3 and updates <code>data/tracks.json</code> automatically; refresh this page after it finishes.</p>
-          <h3>Local alternative (recommended if CI is blocked by YouTube)</h3>
-          <p><code>python -m pip install yt-dlp</code> then <code>python scripts/add_track.py "URL" --title "Song" --artist "Artist"</code>, then commit & push. (Requires <code>ffmpeg</code> and <code>node</code> on PATH.)</p>
+          <h3>How it works (no PAT needed)</h3>
+          <p>Clicking the button copies your inputs to the clipboard and opens the <em>Add Track</em> workflow page. There, click <strong>Run workflow</strong>, paste the three values, and confirm. The workflow downloads, compresses to 128 kbps, and commits the MP3 + updates <code>data/tracks.json</code>. Refresh this page when it finishes.</p>
+          <h3>Local alternative (fastest, fully automatic)</h3>
+          <p><code>python scripts/add_track.py "URL" --title "Song" --artist "Artist"</code>, then commit &amp; push. Requires <code>ffmpeg</code> + <code>node</code> on PATH.</p>
         </div>
+
       </div>
     </section>
 
