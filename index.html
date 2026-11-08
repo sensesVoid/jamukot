@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=4" />
+<link rel="stylesheet" href="css/style.css?v=5" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -136,7 +136,7 @@
     <section class="view view-add" id="view-add">
       <div class="add-card">
         <h2>Add a track from YouTube</h2>
-        <p class="muted">Download a YouTube track, compress it to 128 kbps MP3, and commit it to <code>AudioFile/</code>. No GitHub token needed — inputs are copied to your clipboard and you confirm the run on GitHub.</p>
+        <p class="muted">Download a YouTube track, compress to 128 kbps MP3, commit to <code>AudioFile/</code>.</p>
         <div class="form">
           <label>YouTube URL
             <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
@@ -147,15 +147,10 @@
           <label>Artist
             <input type="text" id="add-artist" placeholder="Artist name" />
           </label>
-          <button class="primary-btn" id="add-submit">Copy inputs &amp; open GitHub Actions</button>
+          <button class="primary-btn" id="add-submit">Add track</button>
           <div class="status" id="add-status"></div>
         </div>
-        <div class="add-help">
-          <h3>How it works (no PAT needed)</h3>
-          <p>Clicking the button copies your inputs to the clipboard and opens the <em>Add Track</em> workflow page. There, click <strong>Run workflow</strong>, paste the three values, and confirm. The workflow downloads, compresses to 128 kbps, and commits the MP3 + updates <code>data/tracks.json</code>. Refresh this page when it finishes.</p>
-          <h3>Local alternative (fastest, fully automatic)</h3>
-          <p><code>python scripts/add_track.py "URL" --title "Song" --artist "Artist"</code>, then commit &amp; push. Requires <code>ffmpeg</code> + <code>node</code> on PATH.</p>
-        </div>
+
 
       </div>
     </section>
@@ -190,6 +185,6 @@
 
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=4"></script>
+  <script src="js/app.js?v=5"></script>
 </body>
 </html>
