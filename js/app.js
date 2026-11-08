@@ -126,16 +126,13 @@ async function fetchCover(t) {
   const img2 = $('#cover-img2');
   const fb = $('#cover-fallback');
   const fb2 = $('#cover-fallback2');
-  // reset
   img.classList.remove('loaded'); img2.classList.remove('loaded');
   fb.textContent = initialsOf(t);
   fb2.textContent = initialsOf(t);
-  // gradient fallback color based on title
   const hue = hashStr(t.title + t.artist) % 360;
   const grad = `linear-gradient(135deg, hsl(${hue},70%,55%), hsl(${(hue+60)%360},70%,45%))`;
   fb.style.background = grad; fb2.style.background = grad;
   $('#vinyl-label').style.background = grad;
-  // try iTunes
   try {
     const q = encodeURIComponent(`${t.artist} ${t.title}`);
     const res = await fetch(`https://itunes.apple.com/search?term=${q}&media=music&limit=1`);
@@ -166,14 +163,12 @@ async function fetchLyrics(t) {
   const noteStart = $('#lyrics-note');
   if (noteStart) noteStart.textContent = '';
   try {
-    // try exact get
     let data = null;
     try {
       const r = await fetch(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`);
       if (r.ok) data = await r.json();
     } catch {}
     if (!data || !data.syncedLyrics) {
-      // search
       const r = await fetch(`https://lrclib.net/api/search?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`);
       if (r.ok) {
         const arr = await r.json();
@@ -185,13 +180,12 @@ async function fetchLyrics(t) {
       state.lyrics = parseLRC(data.syncedLyrics);
       state.lyricsSynced = true;
       $('#lyrics-status').textContent = 'synced';
-      // duration mismatch warning
       const note = $('#lyrics-note');
       if (note) {
         const refDur = data.duration || 0;
         const audioDur = t.duration || 0;
         if (refDur && audioDur && Math.abs(refDur - audioDur) > 5) {
-          note.textContent = `Lyrics timing is for a ${refDur.toFixed(0)}s version; your audio is ${audioDur.toFixed(0)}s. Use the Sync offset slider to align.`;
+          note.textContent = 'Lyrics timing is for a ' + refDur.toFixed(0) + 's version; your audio is ' + audioDur.toFixed(0) + 's. Use the Sync offset slider to align.';
         } else {
           note.textContent = '';
         }
@@ -228,7 +222,6 @@ function parseLRC(lrc) {
       if (text || lines.length) lines.push({ time, text });
     }
   }
-  // remove trailing empties
   while (lines.length && !lines[lines.length-1].text) lines.pop();
   return lines;
 }
@@ -259,7 +252,6 @@ function renderLyrics() {
 
 function syncLyrics(currentTime) {
   if (!state.lyrics.length || !state.lyricsSynced) return;
-  // find index
   let idx = -1;
   for (let i = 0; i < state.lyrics.length; i++) {
     if (state.lyrics[i].time + state.lyricOffset <= currentTime + 0.15) idx = i;
@@ -267,7 +259,6 @@ function syncLyrics(currentTime) {
   }
   if (idx === state.lyricIndex) return;
   state.lyricIndex = idx;
-  // update classes
   $$('#lyrics-list li').forEach((li, i) => {
     li.classList.toggle('active', i === idx);
     li.classList.toggle('past', i < idx);
@@ -276,7 +267,6 @@ function syncLyrics(currentTime) {
     el.classList.toggle('active', i === idx);
     el.classList.toggle('past', i < idx);
   });
-  // scroll
   const activeLi = $(`#lyrics-list li[data-i="${idx}"]`);
   if (activeLi) activeLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const activeLine = $(`#lf-lyrics .line[data-i="${idx}"]`);
@@ -353,8 +343,6 @@ $('#btn-shuffle').addEventListener('click', (e) => {
 });
 $('#btn-repeat').addEventListener('click', (e) => {
   state.repeat = (state.repeat + 1) % 3;
-  const labels = ['↻', '↻¹', '↻¹'];
-  // visual: active if repeat != 0
   e.currentTarget.classList.toggle('active', state.repeat !== 0);
   e.currentTarget.textContent = state.repeat === 2 ? '↻₁' : '↻';
 });
@@ -367,7 +355,7 @@ if (offsetSlider) {
     state.lyricOffset = parseFloat(e.target.value);
     $('#offset-val').textContent = state.lyricOffset.toFixed(1) + 's';
     if (state.index >= 0) saveOffset(state.tracks[state.index].id, state.lyricOffset);
-    state.lyricIndex = -1; // force re-sync
+    state.lyricIndex = -1;
     syncLyrics(audio.currentTime);
   });
 }
@@ -376,7 +364,6 @@ audio.volume = 0.8;
 /* ---------- Poll workflow run ---------- */
 async function pollLatestRun(s, statusEl) {
   const headers = { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json' };
-  // find the latest run for this workflow
   let run = null;
   for (let attempt = 0; attempt < 10 && !run; attempt++) {
     await new Promise(r => setTimeout(r, 2000));
@@ -389,7 +376,6 @@ async function pollLatestRun(s, statusEl) {
     } catch {}
   }
   if (!run) { statusEl.textContent = 'Dispatched, but could not fetch run status. Check the Actions tab.'; return; }
-  // poll until complete
   for (let i = 0; i < 60; i++) {
     try {
       const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/runs/${run.id}`, { headers });
@@ -400,12 +386,12 @@ async function pollLatestRun(s, statusEl) {
             statusEl.textContent = 'Run succeeded! Refresh the page to see the new track.';
             statusEl.className = 'status ok';
           } else {
-            statusEl.textContent = `Run ${r.conclusion}. Open the Actions tab for details (likely YouTube bot protection; add YOUTUBE_COOKIES secret or use the local method).`;
+            statusEl.textContent = 'Run ' + r.conclusion + '. Open the Actions tab for details (likely YouTube bot protection; add YOUTUBE_COOKIES secret or use the local method).';
             statusEl.className = 'status err';
           }
           return;
         }
-        statusEl.textContent = `Run status: ${r.status}…`;
+        statusEl.textContent = 'Run status: ' + r.status + '…';
       }
     } catch {}
     await new Promise(r => setTimeout(r, 4000));
@@ -431,6 +417,7 @@ function applySettingsToUI() {
   $('#set-repo').value = s.repo || 'jamukot';
   $('#set-workflow').value = s.workflow || 'add-track.yml';
   $('#set-token').value = s.token || '';
+  $('#set-worker').value = s.worker || '';
 }
 applySettingsToUI();
 $('#set-save').addEventListener('click', () => {
@@ -439,6 +426,7 @@ $('#set-save').addEventListener('click', () => {
     repo: $('#set-repo').value.trim(),
     workflow: $('#set-workflow').value.trim(),
     token: $('#set-token').value.trim(),
+    worker: $('#set-worker').value.trim(),
   };
   saveSettings(s);
   $('#set-status').textContent = 'Saved.';
@@ -456,41 +444,85 @@ $('#add-submit').addEventListener('click', async () => {
     status.className = 'status err';
     return;
   }
-  const payload = `youtube_url: ${url}\ntitle: ${title}\nartist: ${artist}`;
-  let copied = false;
-  try {
-    await navigator.clipboard.writeText(payload);
-    copied = true;
-  } catch (e) {
-    copied = false;
-  }
   const s = state.settings;
   const owner = s.owner || 'sensesVoid';
   const repo = s.repo || 'jamukot';
   const wf = s.workflow || 'add-track.yml';
-  const actionsUrl = `https://github.com/${owner}/${repo}/actions/workflows/${wf}`;
+
+  // 1-click path: Cloudflare Worker holds the token
+  if (s.worker) {
+    const btn = $('#add-submit');
+    btn.disabled = true;
+    status.textContent = 'Dispatching (1 click)...';
+    status.className = 'status';
+    try {
+      const resp = await fetch(s.worker, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ youtube_url: url, title, artist }),
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (resp.ok && data.ok) {
+        status.textContent = 'Dispatched! The run will download, compress, and commit. Refresh this page when it finishes (~1 min).';
+        status.className = 'status ok';
+        $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
+        if (s.token) pollLatestRun(s, status);
+      } else {
+        status.textContent = 'Worker error: ' + (data.error || resp.status);
+        status.className = 'status err';
+      }
+    } catch (e) {
+      status.textContent = 'Network error: ' + e.message;
+      status.className = 'status err';
+    } finally {
+      btn.disabled = false;
+    }
+    return;
+  }
+
+  // PAT path: dispatch directly from the browser
+  if (s.token) {
+    const btn = $('#add-submit');
+    btn.disabled = true;
+    status.textContent = 'Dispatching...';
+    status.className = 'status';
+    try {
+      const resp = await fetch('https://api.github.com/repos/' + owner + '/' + repo + '/actions/workflows/' + wf + '/dispatches', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + s.token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ref: 'main', inputs: { youtube_url: url, title, artist } }),
+      });
+      if (resp.status === 204) {
+        status.textContent = 'Dispatched! Polling run status...';
+        status.className = 'status ok';
+        $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
+        pollLatestRun(s, status);
+      } else {
+        const txt = await resp.text();
+        status.textContent = 'Failed (' + resp.status + '): ' + txt.slice(0,200);
+        status.className = 'status err';
+      }
+    } catch (e) {
+      status.textContent = 'Network error: ' + e.message;
+      status.className = 'status err';
+    } finally {
+      btn.disabled = false;
+    }
+    return;
+  }
+
+  // Fallback: clipboard + open Actions
+  const payload = 'youtube_url: ' + url + '\ntitle: ' + title + '\nartist: ' + artist;
+  let copied = false;
+  try { await navigator.clipboard.writeText(payload); copied = true; } catch (e) { copied = false; }
+  const actionsUrl = 'https://github.com/' + owner + '/' + repo + '/actions/workflows/' + wf;
   window.open(actionsUrl, '_blank');
   if (copied) {
     status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.';
     status.className = 'status ok';
   } else {
-    status.textContent = `Could not copy automatically. Opened Actions tab. Use these inputs:\n${payload}`;
+    status.textContent = 'Could not copy automatically. Opened Actions tab. Use these inputs:\n' + payload;
     status.className = 'status err';
-  }
-  // optional: if a PAT is configured, also dispatch directly
-  if (s.token) {
-    try {
-      const resp = await fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/${wf}/dispatches`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ref: 'main', inputs: { youtube_url: url, title, artist } }),
-      });
-      if (resp.status === 204) {
-        status.textContent += ' Also dispatched via API — polling run status…';
-        status.className = 'status ok';
-        pollLatestRun(s, status);
-      }
-    } catch (e) { /* ignore; manual path still works */ }
   }
 });
 
@@ -500,4 +532,3 @@ $('#add-submit').addEventListener('click', async () => {
 /* ---------- Init ---------- */
 loadTracks();
 if (state.tracks.length === 0) { /* nothing */ }
-// auto select first? no, wait for user

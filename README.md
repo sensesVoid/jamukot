@@ -32,8 +32,26 @@ A static music player hosted on **GitHub Pages** (`github.io`). Features:
 3. (Optional) In the player, open Settings and store a PAT (scopes `repo`, `workflow`) to dispatch the Add Track workflow from the UI.
 
 ## Add a track (UI)
-Open the player → **Add Track** → paste YouTube URL, title, artist → **Dispatch workflow**.
-Then wait for the workflow to finish and refresh.
+
+**Option A — 1-click (recommended):** deploy the included Cloudflare Worker once, then paste its URL into the player's Settings → "Worker URL". After that, the Add Track button dispatches the workflow in one click (no PAT, no copy/paste).
+
+Deploy the worker:
+```bash
+cd worker
+npm i -g wrangler          # one-time
+npx wrangler login          # one-time
+npx wrangler secret put GITHUB_TOKEN   # paste a PAT with repo+workflow scopes
+npx wrangler deploy
+```
+Copy the printed `https://...workers.dev` URL into the player's Settings.
+
+**Option B — No infra:** the Add Track button copies the inputs to your clipboard and opens the GitHub Actions page; click "Run workflow" and paste.
+
+**Option C — Local (fully automatic):**
+```bash
+python scripts/add_track.py "https://youtube.com/watch?v=..." --title "Song" --artist "Artist"
+git add AudioFile data/tracks.json && git commit -m "Add track" && git push
+```
 
 > **YouTube bot protection:** headless CI runners are often blocked by YouTube.
 > To make the workflow succeed, export your browser cookies to a Netscape

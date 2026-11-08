@@ -1,0 +1,8 @@
+name = "jamukot-dispatch"
+main = "index.js"
+compatibility_date = "2024-11-01"
+
+[vars]
+GITHUB_OWNER = "sensesVoid"
+GITHUB_REPO = "jamukot"
+WORKFLOW_FILE = "add-track.yml"
