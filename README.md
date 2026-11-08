@@ -1,5 +1,9 @@
 # Jamukot — Aesthetic Web Music Player
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-sensesvoid.github.io%2Fjamukot-7c5cff?style=for-the-badge)](https://sensesvoid.github.io/jamukot/)
+
+**Live site:** https://sensesvoid.github.io/jamukot/
+
 A static music player hosted on **GitHub Pages** (`github.io`). Features:
 - Playlist with search, shuffle, repeat, seek, volume
 - Vinyl/CD spin animation with tonearm + cover art
