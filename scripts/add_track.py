@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Download a YouTube video, compress to 128kbps MP3, save to AudioFile/, and update data/tracks.json."""
-import argparse, json, os, re, subprocess, sys, glob
+import argparse, json, os, re, subprocess, sys, glob, shutil
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUDIO_DIR = os.path.join(BASE, "AudioFile")
@@ -11,6 +11,41 @@ def sanitize(s):
     s = re.sub(r'[\\/:*?"<>|]', "", s)
     s = re.sub(r"\s+", " ", s).strip()
     return s[:120] or "track"
+
+def find_ytdlp():
+    # 1. binary on PATH
+    for name in ("yt-dlp", "yt-dlp.exe"):
+        p = shutil.which(name)
+        if p:
+            return [p]
+    # 2. current interpreter
+    try:
+        subprocess.run([sys.executable, "-c", "import yt_dlp"], check=True, capture_output=True)
+        return [sys.executable, "-m", "yt_dlp"]
+    except Exception:
+        pass
+    # 3. candidate interpreters
+    candidates = ["python3", "python", "py"]
+    # common Windows install locations
+    for root in (os.environ.get("LOCALAPPDATA", ""), os.environ.get("APPDATA", "")):
+        if root:
+            for sub in ("Python", "Programs/Python"):
+                base = os.path.join(root, sub)
+                if os.path.isdir(base):
+                    for d in os.listdir(base):
+                        exe = os.path.join(base, d, "python.exe")
+                        if os.path.exists(exe):
+                            candidates.append(exe)
+    for c in candidates:
+        exe = shutil.which(c) if not os.path.isabs(c) else c
+        if not exe or not os.path.exists(exe):
+            continue
+        try:
+            subprocess.run([exe, "-c", "import yt_dlp"], check=True, capture_output=True)
+            return [exe, "-m", "yt_dlp"]
+        except Exception:
+            continue
+    raise SystemExit("yt-dlp not found. Install it with: python -m pip install yt-dlp  (and ensure ffmpeg is on PATH)")
 
 def run(cmd):
     print(">", " ".join(cmd))
@@ -52,7 +87,7 @@ def main():
         try: os.remove(f)
         except OSError: pass
 
-    cmd = ["yt-dlp", "-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
+    cmd = find_ytdlp() + ["-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
            "--js-runtimes", "node", "--remote-components", "ejs:github"]
     cookies = os.environ.get("YOUTUBE_COOKIES_FILE")
     if cookies and os.path.exists(cookies):
