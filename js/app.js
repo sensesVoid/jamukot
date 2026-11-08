@@ -290,6 +290,69 @@ audio.addEventListener('ended', () => {
   nextTrack();
 });
 
+/* ---------- Audio visualizer (radio frequency wave) ---------- */
+let audioCtx = null;
+let analyser = null;
+let sourceNode = null;
+let vizCanvas = $('#visualizer');
+let vizCtx = vizCanvas ? vizCanvas.getContext('2d') : null;
+let vizRaf = null;
+
+function initVisualizer() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 128;
+    analyser.smoothingTimeConstant = 0.8;
+    sourceNode = audioCtx.createMediaElementSource(audio);
+    sourceNode.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    drawVisualizer();
+  } catch (e) {
+    console.error('Visualizer init failed', e);
+  }
+}
+
+function drawVisualizer() {
+  if (!vizCtx || !analyser) return;
+  vizRaf = requestAnimationFrame(drawVisualizer);
+  const bufLen = analyser.frequencyBinCount;
+  const data = new Uint8Array(bufLen);
+  analyser.getByteFrequencyData(data);
+  const w = vizCanvas.width;
+  const h = vizCanvas.height;
+  vizCtx.clearRect(0, 0, w, h);
+  const barCount = bufLen;
+  const barWidth = (w / barCount) * 0.8;
+  const gap = (w / barCount) * 0.2;
+  let bass = 0;
+  for (let i = 0; i < barCount; i++) {
+    const v = data[i] / 255;
+    const barH = v * h * 0.9;
+    const x = i * (barWidth + gap);
+    const hue = 260 + v * 80;
+    const grad = vizCtx.createLinearGradient(0, h - barH, 0, h);
+    grad.addColorStop(0, `hsla(${hue}, 90%, 65%, 0.95)`);
+    grad.addColorStop(1, `hsla(${hue}, 90%, 45%, 0.4)`);
+    vizCtx.fillStyle = grad;
+    vizCtx.fillRect(x, h - barH, barWidth, barH);
+    if (i < 4) bass += v;
+  }
+  bass /= 4;
+  // pulse vinyl
+  const vinyl = $('#vinyl');
+  if (vinyl) {
+    const scale = 1 + bass * 0.06;
+    vinyl.style.transform = `scale(${scale})`;
+  }
+}
+
+audio.addEventListener('play', () => {
+  if (!audioCtx) initVisualizer();
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+});
+
 /* Progress seek */
 const progressBar = $('#progress-bar');
 let seeking = false;

@@ -189,6 +189,7 @@ body {
 .ctrl-btn.active { color: var(--accent); border-color: var(--accent); }
 
 .volume-row { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 260px; }
+.visualizer { width: 100%; max-width: 320px; height: 80px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--panel-border); }
 .vol-icon { font-size: 16px; }
 .volume-row input[type=range] { flex: 1; accent-color: var(--accent); }
 
