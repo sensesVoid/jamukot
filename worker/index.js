@@ -39,6 +39,7 @@ export default {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github+json',
         'Content-Type': 'application/json',
+        'User-Agent': 'jamukot-dispatch-worker',
       },
       body: JSON.stringify({ ref: 'main', inputs: { youtube_url, title, artist } }),
     });
