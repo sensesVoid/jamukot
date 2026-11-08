@@ -88,7 +88,7 @@ function playIndex(idx) {
   if (idx < 0 || idx >= state.tracks.length) return;
   state.index = idx;
   const t = state.tracks[idx];
-  audio.src = encodeURI(t.file);
+  audio.src = encodeURI(t.url || t.file);
   audio.load();
   audio.play().catch(() => {});
   updateNowPlaying(t);
