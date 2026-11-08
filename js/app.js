@@ -45,6 +45,12 @@ async function loadTracks() {
     console.error('Failed to load tracks', e);
     state.tracks = [];
   }
+  // Alphabetical by title (case-insensitive), tie-break by artist
+  state.tracks.sort((a, b) => {
+    const byTitle = (a.title || '').localeCompare(b.title || '', undefined, { sensitivity: 'base' });
+    if (byTitle !== 0) return byTitle;
+    return (a.artist || '').localeCompare(b.artist || '', undefined, { sensitivity: 'base' });
+  });
   state.filtered = [...state.tracks];
   renderPlaylist();
   $('#track-count').textContent = `${state.tracks.length} tracks`;
