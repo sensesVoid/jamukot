@@ -41,20 +41,31 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--id", type=int)
     g.add_argument("--title")
+    ap.add_argument("--artist")
     ap.add_argument("--push", action="store_true")
     args = ap.parse_args()
 
     data = load()
     tracks = data["tracks"]
-    target = None
+    # find candidates
+    candidates = []
     for t in tracks:
         if args.id is not None and t["id"] == args.id:
-            target = t; break
-        if args.title and args.title.lower() in t["title"].lower():
-            target = t; break
-    if not target:
+            candidates.append(t)
+        elif args.title:
+            if args.title.lower() in t["title"].lower():
+                if args.artist and args.artist.lower() not in t["artist"].lower():
+                    continue
+                candidates.append(t)
+    if len(candidates) == 0:
         print("Track not found.")
         sys.exit(1)
+    if len(candidates) > 1:
+        print("Multiple matches found. Use --id to pick one:")
+        for t in candidates:
+            print(f"  id={t['id']}  {t['artist']} - {t['title']}")
+        sys.exit(1)
+    target = candidates[0]
 
     print(f"Deleting: {target['artist']} - {target['title']}")
     # delete from R2

@@ -41,40 +41,50 @@ python scripts/add_track.py "URL" --title "Song" --artist "Artist" --push
 
 ## Delete a track
 
-**By title (or partial match):**
+The player playlist shows each track's **ID** (e.g. `#42`) next to the duration. Use that ID to avoid ambiguity when titles repeat.
+
+**By track ID (recommended):**
+```powershell
+.\delete-track.ps1 5 -Push
+```
+
+**By title (partial match):**
 ```powershell
 .\delete-track.ps1 "Song title" -Push
 ```
 
-**By track ID:**
+**By title + artist (when titles repeat):**
 ```powershell
-.\delete-track.ps1 5 -Push
+.\delete-track.ps1 "Song title" -Artist "Artist name" -Push
 ```
 Removes the file from R2, removes the entry from `tracks.json`, commits, and pushes.
 
 **Manual (any shell):**
 ```bash
-python scripts/delete_track.py --title "Song" --push
-# or
 python scripts/delete_track.py --id 5 --push
+# or
+python scripts/delete_track.py --title "Song" --artist "Artist" --push
 ```
 
 ## Replace a track
 
-Replace an existing track with a new one (deletes old from R2, downloads + uploads new):
+Replace an existing track with a new one (deletes old from R2, downloads + uploads new). Use the track's **ID** (shown as `#N` in the playlist) to avoid confusion with duplicate titles.
 
-```powershell
-.\replace-track.ps1 "Old title" "https://youtube.com/watch?v=..." "New title" "New artist" -Push
-```
-
-**By ID:**
 ```powershell
 .\replace-track.ps1 5 "https://youtube.com/watch?v=..." "New title" "New artist" -Push
 ```
 
+**By title (or title + artist when titles repeat):**
+```powershell
+.\replace-track.ps1 "Old title" "URL" "New title" "New artist" -Push
+.\replace-track.ps1 "Old title" "URL" "New title" "New artist" -OldArtist "Artist" -Push
+```
+
 **Manual (any shell):**
 ```bash
-python scripts/replace_track.py --title "Old" "URL" --new-title "New" --new-artist "Artist" --push
+python scripts/replace_track.py --id 5 "URL" --new-title "New" --new-artist "Artist" --push
+# or
+python scripts/replace_track.py --title "Old" --artist "Artist" "URL" --new-title "New" --new-artist "Artist" --push
 ```
 
 ## Notes

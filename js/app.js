@@ -75,7 +75,7 @@ function renderPlaylist() {
         <div class="tt">${escapeHtml(t.title)}</div>
         <div class="ta">${escapeHtml(t.artist)}</div>
       </div>
-      <div class="td">${fmtTime(t.duration)}</div>`;
+      <div class="td">#${t.id}<br>${fmtTime(t.duration)}</div>`;
     li.addEventListener('click', () => playById(t.id));
     list.appendChild(li);
   });
