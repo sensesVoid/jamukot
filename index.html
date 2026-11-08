@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=6" />
+<link rel="stylesheet" href="css/style.css?v=7" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -22,10 +22,6 @@
       <span class="brand-dot"></span>
       <span class="brand-name">JAMUKOT</span>
     </div>
-    <nav class="topnav">
-      <button class="nav-btn active" data-view="player">Player</button>
-      <button class="nav-btn" data-view="admin">Admin</button>
-    </nav>
   </header>
 
   <main class="app">
@@ -110,71 +106,11 @@
       </div>
     </section>
 
-    <!-- ADMIN VIEW (password-gated) -->
-    <section class="view view-admin" id="view-admin">
-      <div class="admin-gate" id="admin-gate">
-        <div class="add-card">
-          <h2>Admin access</h2>
-          <p class="muted">Enter the admin password to continue.</p>
-          <div class="form">
-            <label>Password
-              <input type="password" id="admin-pass" placeholder="••••••••" />
-            </label>
-            <button class="primary-btn" id="admin-unlock">Unlock</button>
-            <div class="status" id="admin-gate-status"></div>
-          </div>
-        </div>
-      </div>
-      <div class="admin-content" id="admin-content" style="display:none;">
-        <div class="admin-grid">
-          <div class="add-card">
-            <h2>Add a track from YouTube</h2>
-            <p class="muted">Download a YouTube track, compress to 128 kbps MP3, commit to <code>AudioFile/</code>.</p>
-            <div class="form">
-              <label>YouTube URL
-                <input type="url" id="add-url" placeholder="https://www.youtube.com/watch?v=..." />
-              </label>
-              <label>Title
-                <input type="text" id="add-title" placeholder="Song title" />
-              </label>
-              <label>Artist
-                <input type="text" id="add-artist" placeholder="Artist name" />
-              </label>
-              <button class="primary-btn" id="add-submit">Add track</button>
-              <div class="status" id="add-status"></div>
-            </div>
-          </div>
-          <div class="add-card">
-            <h2>Settings</h2>
-            <div class="form">
-              <label>GitHub owner
-                <input type="text" id="set-owner" value="sensesVoid" />
-              </label>
-              <label>GitHub repo
-                <input type="text" id="set-repo" value="jamukot" />
-              </label>
-              <label>Workflow file
-                <input type="text" id="set-workflow" value="add-track.yml" />
-              </label>
-              <label>GitHub PAT (repo + workflow) — optional
-                <input type="password" id="set-token" placeholder="ghp_..." />
-              </label>
-              <label>Worker URL (for 1-click add, optional)
-                <input type="url" id="set-worker" placeholder="https://jamukot-dispatch.<you>.workers.dev" />
-              </label>
-              <button class="primary-btn" id="set-save">Save</button>
-              <div class="status" id="set-status"></div>
-            </div>
-            <p class="muted small">Token is stored in <code>localStorage</code> only. Never commit it.</p>
-            <button class="primary-btn" id="admin-lock" style="margin-top:12px;background:rgba(255,255,255,0.1);box-shadow:none;">Lock</button>
-          </div>
-        </div>
-      </div>
-    </section>
+
   </main>
 
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=6"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>
