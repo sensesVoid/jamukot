@@ -71,6 +71,7 @@ def main():
     ap.add_argument("url")
     ap.add_argument("--title", required=True)
     ap.add_argument("--artist", required=True)
+    ap.add_argument("--push", action="store_true", help="git add/commit/push after adding")
     args = ap.parse_args()
 
     os.makedirs(AUDIO_DIR, exist_ok=True)
@@ -131,6 +132,13 @@ def main():
         json.dump(data, f, ensure_ascii=False, indent=2)
 
     print(f"Added: {artist} - {title} ({dur}s) -> {out_path}")
+
+    if args.push:
+        print("Committing and pushing...")
+        subprocess.run(["git", "add", "AudioFile", "data/tracks.json"], cwd=BASE, check=True)
+        subprocess.run(["git", "commit", "-m", f"Add track: {artist} - {title}"], cwd=BASE, check=True)
+        subprocess.run(["git", "push"], cwd=BASE, check=True)
+        print("Pushed. Site will redeploy automatically.")
 
 if __name__ == "__main__":
     main()

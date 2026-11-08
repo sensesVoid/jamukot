@@ -31,27 +31,33 @@ A static music player hosted on **GitHub Pages** (`github.io`). Features:
 2. Enable GitHub Pages: Settings → Pages → Source = "GitHub Actions".
 3. (Optional) In the player, open Settings and store a PAT (scopes `repo`, `workflow`) to dispatch the Add Track workflow from the UI.
 
-## Add a track (UI)
+## Add a track (easiest: one command, no setup)
 
-**Option A — 1-click (recommended):** deploy the included Cloudflare Worker once, then paste its URL into the player's Settings → "Worker URL". After that, the Add Track button dispatches the workflow in one click (no PAT, no copy/paste).
+```powershell
+.\add-track.ps1 "https://youtube.com/watch?v=..." "Song title" "Artist name"
+```
+That's it — it downloads, compresses to 128 kbps, commits, and pushes. The site redeploys automatically; refresh after ~1 min.
 
-Deploy the worker:
+Or in any shell:
+```bash
+python scripts/add_track.py "URL" --title "Song" --artist "Artist" --push
+```
+
+## Add a track (in-browser, no terminal)
+
+Open the player → **Add Track** → paste URL/title/artist → click **Add track**.
+- If you deployed the Cloudflare Worker (see below) and set its URL in Settings, it's a true 1-click dispatch.
+- Otherwise it copies the inputs to your clipboard and opens the GitHub Actions page for you to confirm.
+
+### Optional: deploy the 1-click worker (one-time)
 ```bash
 cd worker
-npm i -g wrangler          # one-time
-npx wrangler login          # one-time
-npx wrangler secret put GITHUB_TOKEN   # paste a PAT with repo+workflow scopes
+npm i -g wrangler
+npx wrangler login
+npx wrangler secret put GITHUB_TOKEN   # PAT with repo+workflow scopes
 npx wrangler deploy
 ```
-Copy the printed `https://...workers.dev` URL into the player's Settings.
-
-**Option B — No infra:** the Add Track button copies the inputs to your clipboard and opens the GitHub Actions page; click "Run workflow" and paste.
-
-**Option C — Local (fully automatic):**
-```bash
-python scripts/add_track.py "https://youtube.com/watch?v=..." --title "Song" --artist "Artist"
-git add AudioFile data/tracks.json && git commit -m "Add track" && git push
-```
+Paste the printed `https://...workers.dev` URL into the player's Settings → Worker URL.
 
 > **YouTube bot protection:** headless CI runners are often blocked by YouTube.
 > To make the workflow succeed, export your browser cookies to a Netscape
