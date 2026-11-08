@@ -298,6 +298,13 @@ let vizCanvas = $('#visualizer');
 let vizCtx = vizCanvas ? vizCanvas.getContext('2d') : null;
 let vizRaf = null;
 
+function resizeVisualizer() {
+  if (!vizCanvas) return;
+  const rect = vizCanvas.getBoundingClientRect();
+  vizCanvas.width = Math.max(200, Math.floor(rect.width));
+  vizCanvas.height = 80;
+}
+
 function initVisualizer() {
   if (audioCtx) return;
   try {
@@ -308,6 +315,8 @@ function initVisualizer() {
     sourceNode = audioCtx.createMediaElementSource(audio);
     sourceNode.connect(analyser);
     analyser.connect(audioCtx.destination);
+    resizeVisualizer();
+    window.addEventListener('resize', resizeVisualizer);
     drawVisualizer();
   } catch (e) {
     console.error('Visualizer init failed', e);
@@ -323,27 +332,45 @@ function drawVisualizer() {
   const w = vizCanvas.width;
   const h = vizCanvas.height;
   vizCtx.clearRect(0, 0, w, h);
-  const barCount = bufLen;
-  const barWidth = (w / barCount) * 0.8;
-  const gap = (w / barCount) * 0.2;
+  const sampleRate = audioCtx.sampleRate;
+  const nyquist = sampleRate / 2;
+  // Logarithmic binning so the full spectrum spans the whole canvas
+  const barCount = 48;
+  const minFreq = 40;
+  const maxFreq = nyquist;
+  const logMin = Math.log(minFreq);
+  const logMax = Math.log(maxFreq);
+  const barWidth = (w / barCount) * 0.78;
+  const gap = (w / barCount) * 0.22;
   let bass = 0;
   for (let i = 0; i < barCount; i++) {
-    const v = data[i] / 255;
-    const barH = v * h * 0.9;
+    const fLow = Math.exp(logMin + (logMax - logMin) * (i / barCount));
+    const fHigh = Math.exp(logMin + (logMax - logMin) * ((i + 1) / barCount));
+    const binLow = Math.floor((fLow / nyquist) * bufLen);
+    const binHigh = Math.ceil((fHigh / nyquist) * bufLen);
+    let sum = 0, n = 0;
+    for (let b = Math.max(0, binLow); b < Math.min(bufLen, Math.max(binLow + 1, binHigh)); b++) {
+      sum += data[b];
+      n++;
+    }
+    const v = n ? (sum / n) / 255 : 0;
+    const barH = Math.max(2, v * h * 0.92);
     const x = i * (barWidth + gap);
-    const hue = 260 + v * 80;
+    const hue = 260 + (i / barCount) * 120 + v * 40;
     const grad = vizCtx.createLinearGradient(0, h - barH, 0, h);
     grad.addColorStop(0, `hsla(${hue}, 90%, 65%, 0.95)`);
-    grad.addColorStop(1, `hsla(${hue}, 90%, 45%, 0.4)`);
+    grad.addColorStop(1, `hsla(${hue}, 90%, 45%, 0.35)`);
     vizCtx.fillStyle = grad;
     vizCtx.fillRect(x, h - barH, barWidth, barH);
-    if (i < 4) bass += v;
+    // reflection
+    vizCtx.fillStyle = `hsla(${hue}, 90%, 65%, 0.12)`;
+    vizCtx.fillRect(x, h, barWidth, barH * 0.25);
+    if (i < 3) bass += v;
   }
-  bass /= 4;
-  // pulse vinyl
+  bass /= 3;
   const vinyl = $('#vinyl');
   if (vinyl) {
-    const scale = 1 + bass * 0.06;
+    const scale = 1 + bass * 0.08;
     vinyl.style.transform = `scale(${scale})`;
   }
 }
