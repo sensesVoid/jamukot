@@ -284,7 +284,11 @@ audio.addEventListener('loadedmetadata', () => {
   if (audio.duration) { const dt = $('#dur-time'); if (dt) dt.textContent = fmtTime(audio.duration); }
 });
 audio.addEventListener('play', () => updateVinyl(true));
-audio.addEventListener('pause', () => updateVinyl(false));
+audio.addEventListener('pause', () => {
+  updateVinyl(false);
+  const v = $('#vinyl');
+  if (v) v.style.scale = '1';
+});
 audio.addEventListener('ended', () => {
   if (state.repeat === 2) { audio.currentTime = 0; audio.play(); return; }
   nextTrack();
@@ -371,7 +375,8 @@ function drawVisualizer() {
   const vinyl = $('#vinyl');
   if (vinyl) {
     const scale = 1 + bass * 0.08;
-    vinyl.style.transform = `scale(${scale})`;
+    // use the independent `scale` property so it doesn't override the spin transform
+    vinyl.style.scale = scale.toFixed(3);
   }
 }
 
