@@ -148,6 +148,8 @@
         <div class="add-help">
           <h3>Manual alternative</h3>
           <p>Go to <em>Actions → "Add Track" → Run workflow</em> and fill in the inputs. The workflow commits the new MP3 and updates <code>data/tracks.json</code> automatically; refresh this page after it finishes.</p>
+          <h3>Local alternative (recommended if CI is blocked by YouTube)</h3>
+          <p><code>pip install yt-dlp</code> then <code>python scripts/add_track.py "URL" --title "Song" --artist "Artist"</code>, then commit & push.</p>
         </div>
       </div>
     </section>

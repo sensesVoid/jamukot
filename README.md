@@ -31,6 +31,13 @@ A static music player hosted on **GitHub Pages** (`github.io`). Features:
 Open the player → **Add Track** → paste YouTube URL, title, artist → **Dispatch workflow**.
 Then wait for the workflow to finish and refresh.
 
+> **YouTube bot protection:** headless CI runners are often blocked by YouTube.
+> To make the workflow succeed, export your browser cookies to a Netscape
+> `cookies.txt` and store its full contents in a repo secret named
+> `YOUTUBE_COOKIES` (Settings → Secrets and variables → Actions). The workflow
+> writes that secret to a file and passes it to yt-dlp automatically.
+> Without it, use the local method below (which uses your browser cookies).
+
 ## Add a track (CLI / local)
 ```bash
 pip install yt-dlp
