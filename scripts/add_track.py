@@ -53,7 +53,7 @@ def main():
         except OSError: pass
 
     cmd = ["yt-dlp", "-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
-           "--extractor-args", "youtube:player_client=android,web"]
+           "--js-runtimes", "node", "--remote-components", "ejs:github"]
     cookies = os.environ.get("YOUTUBE_COOKIES_FILE")
     if cookies and os.path.exists(cookies):
         cmd += ["--cookies", cookies]
