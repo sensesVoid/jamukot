@@ -114,8 +114,9 @@ function playIndex(idx) {
   const t = state.tracks[idx];
   const src = t.url || t.file;
   audio.src = /^https?:\/\//.test(src) ? src : encodeURI(src);
+  if (!audioCtx) initVisualizer();
   audio.load();
-  audio.play().catch(() => {});
+  audio.play().catch((e) => { console.warn('playback failed:', e && e.message); });
   updateNowPlaying(t);
   updateVinyl(true);
   fetchCover(t);
@@ -319,7 +320,7 @@ audio.addEventListener('pause', () => {
   if (v) v.style.scale = '1';
 });
 audio.addEventListener('ended', () => {
-  if (state.repeat === 2) { audio.currentTime = 0; audio.play(); return; }
+  if (state.repeat === 2) { audio.currentTime = 0; if (!audioCtx) initVisualizer(); audio.play(); return; }
   nextTrack();
 });
 
@@ -419,7 +420,6 @@ function stopVisualizer() {
 }
 audio.addEventListener('play', () => {
   updateVinyl(true);
-  if (!audioCtx) initVisualizer();
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
   startVisualizer();
 });
@@ -444,7 +444,7 @@ const playBtn = $('#btn-play');
 if (playBtn) {
   playBtn.addEventListener('click', () => {
     if (state.index < 0 && state.tracks.length) { playIndex(0); return; }
-    if (audio.paused) audio.play(); else audio.pause();
+    if (audio.paused) { if (!audioCtx) initVisualizer(); audio.play(); } else audio.pause();
   });
   playBtn.textContent = '▶';
 }
