@@ -1,0 +1,15 @@
+{
+  "requests": [
+    {
+      "id": "e0a169cd-d3aa-4a0c-85b1-d19fd04e08de",
+      "youtube_url": "https://www.youtube.com/watch?v=BaW_jenozKc",
+      "video_id": "BaW_jenozKc",
+      "title": "Jamukot Request Test",
+      "artist": "Test",
+      "requested_at": "2026-11-09T02:55:17.187Z",
+      "status": "pending",
+      "attempts": 0,
+      "last_error": null
+    }
+  ]
+}
