@@ -5,6 +5,8 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const audio = $('#audio');
 const REQUEST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/request';
+const RANTS_LIST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rants';
+const RANT_POST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant';
 const state = {
   tracks: [],
   filtered: [],
@@ -16,6 +18,10 @@ const state = {
   lyricsSynced: false,
   lyricOffset: 0,
   settings: loadSettings(),
+  wallRants: [],
+  wallOffset: 0,
+  wallTotal: 0,
+  wallLoading: false,
 };
 
 function loadSettings() {
@@ -756,9 +762,156 @@ function initRequestForm() {
   });
 }
 
+/* ---------- Rant wall ---------- */
+function fmtTimeAgo(iso) {
+  const t = Date.parse(iso);
+  if (!isFinite(t)) return '';
+  const diff = (Date.now() - t) / 1000;
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  return new Date(t).toLocaleDateString();
+}
+
+function updateWallCount() {
+  const el = $('#wall-count');
+  if (el) el.textContent = state.wallTotal + ' rants';
+}
+
+function renderWallList() {
+  const list = $('#wall-list');
+  if (!list) return;
+  if (state.wallRants.length === 0) {
+    list.innerHTML = '<div class="wall-empty">No rants yet. Be the first to post one.</div>';
+    return;
+  }
+  list.innerHTML = state.wallRants.map((r) => `
+    <div class="rant-card">
+      <div class="rant-alias">${escapeHtml(r.alias)}</div>
+      <div class="rant-msg">${escapeHtml(r.message)}</div>
+      <div class="rant-time">${escapeHtml(fmtTimeAgo(r.created_at))}</div>
+    </div>
+  `).join('');
+}
+
+async function loadWallRants(reset) {
+  if (state.wallLoading) return;
+  if (reset) { state.wallRants = []; state.wallOffset = 0; state.wallTotal = 0; }
+  state.wallLoading = true;
+  const more = $('#btn-wall-more');
+  if (more) more.disabled = true;
+  try {
+    const res = await fetch(`${RANTS_LIST_ENDPOINT}?limit=20&offset=${state.wallOffset}`, { cache: 'no-store' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    const items = Array.isArray(data.rants) ? data.rants : [];
+    state.wallRants = state.wallRants.concat(items);
+    state.wallOffset = state.wallRants.length;
+    state.wallTotal = typeof data.total === 'number' ? data.total : state.wallRants.length;
+    renderWallList();
+    updateWallCount();
+    if (more) more.hidden = state.wallOffset >= state.wallTotal;
+  } catch (e) {
+    const list = $('#wall-list');
+    if (list && state.wallRants.length === 0) {
+      list.innerHTML = `<div class="wall-empty">Could not load rants: ${escapeHtml(e.message)}</div>`;
+    }
+  } finally {
+    state.wallLoading = false;
+    if (more) more.disabled = false;
+  }
+}
+
+function initWall() {
+  const more = $('#btn-wall-more');
+  if (more) more.addEventListener('click', () => loadWallRants(false));
+  loadWallRants(true);
+}
+
+function initRantForm() {
+  const btn = $('#btn-rant');
+  const modal = $('#rant-modal');
+  const form = $('#rant-form');
+  const status = $('#rant-status');
+  const cancel = $('#rant-cancel');
+  const alias = $('#rant-alias');
+  const msg = $('#rant-message');
+  const counter = $('#rant-counter');
+  const submit = $('#rant-submit');
+  if (!btn || !modal || !form) return;
+
+  function setStatus(text, cls) {
+    if (!status) return;
+    status.textContent = text;
+    status.className = 'request-status' + (cls ? ' ' + cls : '');
+  }
+  function open() {
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    setStatus('');
+    if (alias) setTimeout(() => alias.focus(), 0);
+  }
+  function close() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+  btn.addEventListener('click', open);
+  if (cancel) cancel.addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) close(); });
+
+  if (msg && counter) {
+    const update = () => { counter.textContent = `${msg.value.length} / 200`; };
+    msg.addEventListener('input', update);
+    update();
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const a = (alias?.value || '').trim();
+    const m = (msg?.value || '').trim();
+    const website = $('#rant-website')?.value || '';
+    if (!a || !m) { setStatus('Alias and message are required.', 'err'); return; }
+    if (m.length > 200) { setStatus('Message must be 200 characters or fewer.', 'err'); return; }
+    if (submit) submit.disabled = true;
+    setStatus('Posting…');
+    try {
+      const resp = await fetch(RANT_POST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alias: a, message: m, website }),
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (resp.ok && data.ok) {
+        form.reset();
+        if (counter) counter.textContent = '0 / 200';
+        setStatus('Posted!', 'ok');
+        if (data.rant) {
+          state.wallRants.unshift(data.rant);
+          state.wallOffset = state.wallRants.length;
+          state.wallTotal = Math.max(state.wallTotal + 1, state.wallRants.length);
+          renderWallList();
+          updateWallCount();
+        } else {
+          loadWallRants(true);
+        }
+        setTimeout(close, 900);
+      } else {
+        setStatus(data.error || `Failed (${resp.status})`, 'err');
+      }
+    } catch (err) {
+      setStatus('Network error: ' + err.message, 'err');
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+}
+
 /* ---------- Sync lyrics view (mirror) ---------- */
 
 /* ---------- Init ---------- */
 loadTracks();
 initRequestForm();
+initWall();
+initRantForm();
 if (state.tracks.length === 0) { /* nothing */ }

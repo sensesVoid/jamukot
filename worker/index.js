@@ -14,7 +14,7 @@ const rateBuckets = new Map();
 function corsHeaders(env) {
   return {
     'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Vary': 'Origin',
   };
@@ -220,11 +220,106 @@ async function handleSongRequest(request, env) {
   return jsonResponse({ ok: false, error: 'Request queue is busy. Try again.' }, 503, cors);
 }
 
+async function handleRantsList(request, env) {
+  const cors = corsHeaders(env);
+  const allowedOrigin = env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io';
+  const origin = request.headers.get('Origin') || '';
+  if (origin && origin !== allowedOrigin) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, cors);
+  }
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: cors });
+  }
+  if (request.method !== 'GET') {
+    return jsonResponse({ ok: false, error: 'Method not allowed' }, 405, cors);
+  }
+  const kv = env.RANTS;
+  if (!kv) {
+    return jsonResponse({ ok: false, error: 'Rant wall is not configured' }, 500, cors);
+  }
+  const url = new URL(request.url);
+  const limit = Math.min(50, Math.max(1, parseInt(url.searchParams.get('limit') || '20', 10) || 20));
+  const offset = Math.max(0, parseInt(url.searchParams.get('offset') || '0', 10) || 0);
+
+  let keys = [];
+  let cursor;
+  do {
+    const list = await kv.list({ prefix: 'rant:', limit: 1000, cursor });
+    keys = keys.concat(list.keys || []);
+    cursor = list.list_complete ? undefined : list.cursor;
+  } while (cursor);
+
+  keys.sort((a, b) => (a.name > b.name ? -1 : a.name < b.name ? 1 : 0));
+  const slice = keys.slice(offset, offset + limit);
+  const rants = [];
+  for (const key of slice) {
+    const value = await kv.get(key.name, 'json');
+    if (value) rants.push(value);
+  }
+  return jsonResponse({ rants, total: keys.length, offset, limit }, 200, cors);
+}
+
+async function handleRantPost(request, env) {
+  const cors = corsHeaders(env);
+  const allowedOrigin = env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io';
+  const origin = request.headers.get('Origin') || '';
+  if (origin && origin !== allowedOrigin) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, cors);
+  }
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: cors });
+  }
+  if (request.method !== 'POST') {
+    return jsonResponse({ ok: false, error: 'Method not allowed' }, 405, cors);
+  }
+  const kv = env.RANTS;
+  if (!kv) {
+    return jsonResponse({ ok: false, error: 'Rant wall is not configured' }, 500, cors);
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    body = null;
+  }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return jsonResponse({ ok: false, error: 'Invalid JSON body' }, 400, cors);
+  }
+  const alias = sanitizeText(body.alias, 32);
+  const message = sanitizeText(body.message, 200);
+  if (!alias) return jsonResponse({ ok: false, error: 'Alias is required' }, 400, cors);
+  if (!message) return jsonResponse({ ok: false, error: 'Message is required' }, 400, cors);
+
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const date = new Date().toISOString().slice(0, 10);
+  const limitKey = `limit:${ip}:${date}`;
+  const current = parseInt((await kv.get(limitKey)) || '0', 10) || 0;
+  if (current >= 3) {
+    return jsonResponse({ ok: false, error: 'Daily limit reached (3 rants/day). Try again tomorrow.' }, 429, cors);
+  }
+
+  const id = crypto.randomUUID();
+  const ts = Date.now();
+  const key = `rant:${String(ts).padStart(13, '0')}:${id}`;
+  const created_at = new Date(ts).toISOString();
+  const value = { id, alias, message, created_at };
+  await kv.put(key, JSON.stringify(value));
+  await kv.put(limitKey, String(current + 1), { expirationTtl: 86400 });
+  return jsonResponse({ ok: true, rant: value }, 201, cors);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/request') {
       return handleSongRequest(request, env);
+    }
+    if (url.pathname === '/rants') {
+      return handleRantsList(request, env);
+    }
+    if (url.pathname === '/rant') {
+      return handleRantPost(request, env);
     }
 
     const allowedOrigin = env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io';

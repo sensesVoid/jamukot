@@ -419,6 +419,114 @@ body.modal-open .request-hint { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .request-hint { animation: none; }
 }
+
+/* Rant wall */
+.wall-panel { display: flex; flex-direction: column; gap: 10px; }
+.rant-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(124,92,255,0.4);
+  background: linear-gradient(135deg, rgba(124,92,255,0.22), rgba(255,92,138,0.12));
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.rant-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(124,92,255,0.25); }
+.wall-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+.rant-card {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255,255,255,0.03);
+  display: grid;
+  gap: 6px;
+}
+.rant-card .rant-alias {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-2);
+  letter-spacing: 0.3px;
+}
+.rant-card .rant-msg {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.rant-card .rant-time {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+}
+.wall-more {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.wall-more:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.wall-more[hidden] { display: none; }
+.wall-empty {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  margin-top: 24px;
+  line-height: 1.5;
+}
+
+/* Lyrics nested in player */
+.nowplaying-panel .lyrics-panel {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--panel-border);
+}
+.nowplaying-panel .lyrics-panel .panel-head { margin-bottom: 8px; }
+.nowplaying-panel .lyrics-scroll { max-height: 220px; }
+
+/* Rant modal form */
+.request-card textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: rgba(0,0,0,0.28);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+}
+.request-card textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124,92,255,0.16);
+}
+.rant-counter {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+  margin-top: -4px;
+}
+
+@media (max-width: 1100px) {
+  .wall-panel { display: none; }
+  .nowplaying-panel .lyrics-scroll { max-height: 160px; }
+}
 body.modal-open { overflow: hidden; }
 
 @media (max-width: 600px) {

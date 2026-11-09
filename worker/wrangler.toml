@@ -7,3 +7,7 @@ GITHUB_OWNER = "sensesVoid"
 GITHUB_REPO = "jamukot"
 WORKFLOW_FILE = "add-track.yml"
 ALLOWED_ORIGIN = "https://sensesvoid.github.io"
+
+[[kv_namespaces]]
+binding = "RANTS"
+id = "6df0a40ffedb47ad88449bd4d069639a"

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=17" />
+<link rel="stylesheet" href="css/style.css?v=18" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -90,25 +90,36 @@
             <span class="vol-icon">🔊</span>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" />
           </div>
+
+          <!-- Lyrics below the player -->
+          <aside class="lyrics-panel" id="lyrics-panel">
+            <div class="panel-head">
+              <h2>Lyrics</h2>
+              <span class="badge" id="lyrics-status">idle</span>
+            </div>
+            <div class="offset-row">
+              <label>Sync offset: <span id="offset-val">0.0s</span></label>
+              <input type="range" id="lyric-offset" min="-60" max="60" step="0.5" value="0" />
+            </div>
+            <div class="lyrics-note" id="lyrics-note"></div>
+            <div class="lyrics-scroll" id="lyrics-scroll">
+              <div class="lyrics-empty" id="lyrics-empty">
+                Play a track to load synced lyrics from LRCLIB.
+              </div>
+              <ul class="lyrics-list" id="lyrics-list"></ul>
+            </div>
+          </aside>
         </section>
 
-        <!-- Right: lyrics -->
-        <aside class="panel lyrics-panel" id="lyrics-panel">
+        <!-- Right: rant wall -->
+        <aside class="panel wall-panel" id="wall-panel">
           <div class="panel-head">
-            <h2>Lyrics</h2>
-            <span class="badge" id="lyrics-status">idle</span>
+            <h2>Rant Wall</h2>
+            <span class="count" id="wall-count">0 rants</span>
           </div>
-          <div class="offset-row">
-            <label>Sync offset: <span id="offset-val">0.0s</span></label>
-            <input type="range" id="lyric-offset" min="-60" max="60" step="0.5" value="0" />
-          </div>
-          <div class="lyrics-note" id="lyrics-note"></div>
-          <div class="lyrics-scroll" id="lyrics-scroll">
-            <div class="lyrics-empty" id="lyrics-empty">
-              Play a track to load synced lyrics from LRCLIB.
-            </div>
-            <ul class="lyrics-list" id="lyrics-list"></ul>
-          </div>
+          <button class="rant-btn" id="btn-rant" type="button">+ Rant</button>
+          <div class="wall-list" id="wall-list"></div>
+          <button class="wall-more" id="btn-wall-more" type="button">Load more</button>
         </aside>
       </div>
     </section>
@@ -160,8 +171,35 @@
     </form>
   </div>
 
+  <div class="request-modal" id="rant-modal" hidden>
+    <div class="request-backdrop" data-close></div>
+    <form class="request-card" id="rant-form" role="dialog" aria-modal="true" aria-labelledby="rant-modal-title">
+      <div class="request-head">
+        <h2 id="rant-modal-title">Work Rant / Confession</h2>
+        <p>Anonymous-ish. Alias + message (max 200 chars). 3 per day.</p>
+      </div>
+      <label class="request-field">
+        <span>Alias</span>
+        <input type="text" id="rant-alias" name="alias" placeholder="Your alias" required maxlength="32" autocomplete="off" />
+      </label>
+      <label class="request-field">
+        <span>Message</span>
+        <textarea id="rant-message" name="message" placeholder="What's on your mind?" required maxlength="200" rows="4"></textarea>
+        <span class="rant-counter" id="rant-counter">0 / 200</span>
+      </label>
+      <div class="request-hp" aria-hidden="true">
+        <label>Website <input type="text" id="rant-website" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div class="request-status" id="rant-status" role="status"></div>
+      <div class="request-actions">
+        <button type="button" class="request-btn ghost" id="rant-cancel">Cancel</button>
+        <button type="submit" class="request-btn primary" id="rant-submit">Post</button>
+      </div>
+    </form>
+  </div>
+
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=17"></script>
+  <script src="js/app.js?v=18"></script>
 </body>
 </html>
