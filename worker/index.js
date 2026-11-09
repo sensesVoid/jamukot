@@ -308,7 +308,7 @@ async function handleRantPost(request, env) {
 
   const id = crypto.randomUUID();
   const ts = Date.now();
-  const key = `rant:${String(ts).padStart(13, '0')}:${id}`;
+  const key = `rant:${id}`;
   const created_at = new Date(ts).toISOString();
   const value = { id, alias, message, created_at };
   await kv.put(key, JSON.stringify(value));
@@ -356,25 +356,9 @@ async function handleRantPin(request, env) {
   }
   const pinned = !!body.pinned;
 
-  // find the key for this id
-  let targetKey = null;
-  let value = null;
-  let cursor;
-  do {
-    const list = await kv.list({ prefix: 'rant:', limit: 1000, cursor });
-    for (const key of list.keys || []) {
-      const v = await kv.get(key.name, 'json');
-      if (v && v.id === id) {
-        targetKey = key.name;
-        value = v;
-        break;
-      }
-    }
-    cursor = list.list_complete ? undefined : list.cursor;
-    if (targetKey) break;
-  } while (cursor);
-
-  if (!targetKey || !value) {
+  const targetKey = `rant:${id}`;
+  const value = await kv.get(targetKey, 'json');
+  if (!value) {
     return jsonResponse({ ok: false, error: 'Rant not found' }, 404, cors);
   }
   value.pinned = pinned;
