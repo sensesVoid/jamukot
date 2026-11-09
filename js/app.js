@@ -165,8 +165,8 @@ async function fetchCover(t) {
   if (label) label.style.background = grad;
   try {
     const q = encodeURIComponent(`${t.artist} ${t.title}`);
-    const res = await fetch(`https://itunes.apple.com/search?term=${q}&media=music&limit=1`);
-    const data = await res.json();
+    const res = await fetchWithTimeout(`https://itunes.apple.com/search?term=${q}&media=music&limit=1`, 6000);
+    const data = await res.json().catch(() => ({}));
     if (data.results && data.results[0] && data.results[0].artworkUrl100) {
       const url = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
       img.src = url;
