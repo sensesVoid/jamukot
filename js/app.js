@@ -115,8 +115,16 @@ function playIndex(idx) {
   const src = t.url || t.file;
   audio.src = /^https?:\/\//.test(src) ? src : encodeURI(src);
   if (!audioCtx) initVisualizer();
-  audio.load();
-  audio.play().catch((e) => { console.warn('playback failed:', e && e.message); });
+  const playPromise = audio.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch((e) => {
+      console.warn('playback failed:', e && e.message);
+      // Retry once when the media becomes ready (common on mobile)
+      const retry = () => { audio.play().catch(() => {}); audio.removeEventListener('canplay', retry); };
+      audio.addEventListener('canplay', retry, { once: true });
+      setTimeout(() => audio.removeEventListener('canplay', retry), 8000);
+    });
+  }
   updateNowPlaying(t);
   updateVinyl(true);
   fetchCover(t);
@@ -319,6 +327,14 @@ audio.addEventListener('pause', () => {
   const v = vinylEl;
   if (v) v.style.scale = '1';
 });
+audio.addEventListener('error', () => {
+  const err = audio.error;
+  console.error('Audio error:', err && err.code, err && err.message);
+  const np = $('#np-title');
+  if (np && err) np.textContent = 'Playback error (' + err.code + ')';
+});
+audio.addEventListener('stalled', () => { console.warn('Audio stalled (buffering)'); });
+audio.addEventListener('waiting', () => { console.warn('Audio waiting for data'); });
 audio.addEventListener('ended', () => {
   if (state.repeat === 2) { audio.currentTime = 0; if (!audioCtx) initVisualizer(); audio.play(); return; }
   nextTrack();
@@ -354,6 +370,10 @@ function initVisualizer() {
     window.addEventListener('resize', resizeVisualizer);
   } catch (e) {
     console.error('Visualizer init failed', e);
+    // Reset so audio falls back to direct playback; never block music
+    try { if (sourceNode) sourceNode.disconnect(); } catch {}
+    try { if (analyser) analyser.disconnect(); } catch {}
+    audioCtx = null; analyser = null; sourceNode = null;
   }
 }
 
