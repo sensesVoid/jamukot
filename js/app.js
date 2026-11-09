@@ -115,11 +115,11 @@ function playIndex(idx) {
   const src = t.url || t.file;
   audio.src = /^https?:\/\//.test(src) ? src : encodeURI(src);
   if (!audioCtx) initVisualizer();
+  audio.load();
   const playPromise = audio.play();
   if (playPromise && typeof playPromise.catch === 'function') {
     playPromise.catch((e) => {
-      console.warn('playback failed:', e && e.message);
-      // Retry once when the media becomes ready (common on mobile)
+      console.warn('playback failed:', e && e.message, src);
       const retry = () => { audio.play().catch(() => {}); audio.removeEventListener('canplay', retry); };
       audio.addEventListener('canplay', retry, { once: true });
       setTimeout(() => audio.removeEventListener('canplay', retry), 8000);
@@ -329,9 +329,9 @@ audio.addEventListener('pause', () => {
 });
 audio.addEventListener('error', () => {
   const err = audio.error;
-  console.error('Audio error:', err && err.code, err && err.message);
+  console.error('Audio error:', err && err.code, err && err.message, 'src=', audio.currentSrc);
   const np = $('#np-title');
-  if (np && err) np.textContent = 'Playback error (' + err.code + ')';
+  if (np && err) np.textContent = 'Playback error (' + err.code + ') ' + (err.message || '');
 });
 audio.addEventListener('stalled', () => { console.warn('Audio stalled (buffering)'); });
 audio.addEventListener('waiting', () => { console.warn('Audio waiting for data'); });
