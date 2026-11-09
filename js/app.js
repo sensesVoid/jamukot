@@ -133,10 +133,11 @@ function updateNowPlaying(t) {
 }
 
 /* ---------- Vinyl / cover ---------- */
+const tonearmEl = $('#tonearm');
 function updateVinyl(playing) {
-  const v = $('#vinyl');
+  const v = vinylEl;
   if (v) { if (playing) v.classList.add('spinning'); else v.classList.remove('spinning'); }
-  const arm = $('#tonearm');
+  const arm = tonearmEl;
   if (arm) { if (playing) arm.classList.add('playing'); else arm.classList.remove('playing'); }
 }
 
@@ -168,6 +169,15 @@ async function fetchCover(t) {
 function hashStr(s) { let h = 0; for (let i=0;i<s.length;i++){ h = ((h<<5)-h) + s.charCodeAt(i); h |= 0; } return Math.abs(h); }
 
 /* ---------- Lyrics ---------- */
+async function fetchWithTimeout(url, ms = 7000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function fetchLyrics(t) {
   state.lyrics = [];
   state.lyricIndex = -1;
@@ -185,13 +195,13 @@ async function fetchLyrics(t) {
   try {
     let data = null;
     try {
-      const r = await fetch(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`);
-      if (r.ok) data = await r.json();
+      const r = await fetchWithTimeout(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
+      if (r.ok) data = await r.json().catch(() => null);
     } catch {}
     if (!data || !data.syncedLyrics) {
-      const r = await fetch(`https://lrclib.net/api/search?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`);
+      const r = await fetchWithTimeout(`https://lrclib.net/api/search?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
       if (r.ok) {
-        const arr = await r.json();
+        const arr = await r.json().catch(() => []);
         const found = (arr || []).find(x => x.syncedLyrics) || (arr || [])[0];
         data = found;
       }
@@ -285,22 +295,27 @@ function syncLyrics(currentTime) {
 }
 
 /* ---------- Audio events ---------- */
+const curTimeEl = $('#cur-time');
+const progressFillEl = $('#progress-fill');
+const progressThumbEl = $('#progress-thumb');
 audio.addEventListener('timeupdate', () => {
   const cur = audio.currentTime;
   const dur = audio.duration || 0;
   const pct = dur ? (cur / dur) * 100 : 0;
-  const curTime = $('#cur-time'); if (curTime) curTime.textContent = fmtTime(cur);
-  const pf = $('#progress-fill'); if (pf) pf.style.width = pct + '%';
-  const pt = $('#progress-thumb'); if (pt) pt.style.left = pct + '%';
+  if (curTimeEl) curTimeEl.textContent = fmtTime(cur);
+  if (progressFillEl) progressFillEl.style.width = pct + '%';
+  if (progressThumbEl) progressThumbEl.style.left = pct + '%';
   syncLyrics(cur);
 });
+const durTimeEl = $('#dur-time');
 audio.addEventListener('loadedmetadata', () => {
-  if (audio.duration) { const dt = $('#dur-time'); if (dt) dt.textContent = fmtTime(audio.duration); }
+  if (audio.duration && durTimeEl) durTimeEl.textContent = fmtTime(audio.duration);
 });
 audio.addEventListener('play', () => updateVinyl(true));
 audio.addEventListener('pause', () => {
   updateVinyl(false);
-  const v = $('#vinyl');
+  stopVisualizer();
+  const v = vinylEl;
   if (v) v.style.scale = '1';
 });
 audio.addEventListener('ended', () => {
@@ -315,6 +330,7 @@ let sourceNode = null;
 let vizCanvas = $('#visualizer');
 let vizCtx = vizCanvas ? vizCanvas.getContext('2d') : null;
 let vizRaf = null;
+let vinylEl = $('#vinyl');
 
 function resizeVisualizer() {
   if (!vizCanvas) return;
@@ -335,7 +351,6 @@ function initVisualizer() {
     analyser.connect(audioCtx.destination);
     resizeVisualizer();
     window.addEventListener('resize', resizeVisualizer);
-    drawVisualizer();
   } catch (e) {
     console.error('Visualizer init failed', e);
   }
@@ -343,6 +358,7 @@ function initVisualizer() {
 
 function drawVisualizer() {
   if (!vizCtx || !analyser) return;
+  if (audio.paused) { vizRaf = null; return; }
   vizRaf = requestAnimationFrame(drawVisualizer);
   const bufLen = analyser.frequencyBinCount;
   const data = new Uint8Array(bufLen);
@@ -386,7 +402,7 @@ function drawVisualizer() {
     if (i < 3) bass += v;
   }
   bass /= 3;
-  const vinyl = $('#vinyl');
+  const vinyl = vinylEl;
   if (vinyl) {
     const scale = 1 + bass * 0.08;
     // use the independent `scale` property so it doesn't override the spin transform
@@ -394,9 +410,18 @@ function drawVisualizer() {
   }
 }
 
+function startVisualizer() {
+  if (vizRaf || !vizCtx || !analyser || audio.paused) return;
+  vizRaf = requestAnimationFrame(drawVisualizer);
+}
+function stopVisualizer() {
+  if (vizRaf) { cancelAnimationFrame(vizRaf); vizRaf = null; }
+}
 audio.addEventListener('play', () => {
+  updateVinyl(true);
   if (!audioCtx) initVisualizer();
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  startVisualizer();
 });
 
 /* Progress seek */
@@ -475,190 +500,6 @@ if (offsetSlider) {
     syncLyrics(audio.currentTime);
   });
 }
-
-/* ---------- Poll workflow run ---------- */
-async function pollLatestRun(s, statusEl) {
-  const headers = { 'Authorization': `Bearer ${s.token}`, 'Accept': 'application/vnd.github+json' };
-  let run = null;
-  for (let attempt = 0; attempt < 10 && !run; attempt++) {
-    await new Promise(r => setTimeout(r, 2000));
-    try {
-      const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/workflows/${s.workflow}/runs?per_page=1`, { headers });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.workflow_runs && data.workflow_runs.length) run = data.workflow_runs[0];
-      }
-    } catch {}
-  }
-  if (!run) { statusEl.textContent = 'Dispatched, but could not fetch run status. Check the Actions tab.'; return; }
-  for (let i = 0; i < 60; i++) {
-    try {
-      const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}/actions/runs/${run.id}`, { headers });
-      if (res.ok) {
-        const r = await res.json();
-        if (r.status === 'completed') {
-          if (r.conclusion === 'success') {
-            statusEl.textContent = 'Run succeeded! Refresh the page to see the new track.';
-            statusEl.className = 'status ok';
-          } else {
-            statusEl.textContent = 'Run ' + r.conclusion + '. Open the Actions tab for details.';
-            statusEl.className = 'status err';
-          }
-          return;
-        }
-        statusEl.textContent = 'Run status: ' + r.status + '…';
-      }
-    } catch {}
-    await new Promise(r => setTimeout(r, 4000));
-  }
-  statusEl.textContent = 'Still running. Check the Actions tab.';
-}
-
-/* ---------- Views ---------- */
-$$('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    $$('.nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const view = btn.dataset.view;
-    $$('.view').forEach(v => v.classList.remove('active'));
-    const target = $(`#view-${view}`);
-    if (target) target.classList.add('active');
-  });
-});
-
-/* ---------- Settings ---------- */
-function applySettingsToUI() {
-  const s = state.settings;
-  const o = $('#set-owner'); if (o) o.value = s.owner || 'sensesVoid';
-  const r = $('#set-repo'); if (r) r.value = s.repo || 'jamukot';
-  const w = $('#set-workflow'); if (w) w.value = s.workflow || 'add-track.yml';
-  const t = $('#set-token'); if (t) t.value = s.token || '';
-  const wk = $('#set-worker'); if (wk) wk.value = s.worker || '';
-}
-applySettingsToUI();
-const saveBtn = $('#set-save');
-if (saveBtn) saveBtn.addEventListener('click', () => {
-  const s = {
-    owner: $('#set-owner').value.trim(),
-    repo: $('#set-repo').value.trim(),
-    workflow: $('#set-workflow').value.trim(),
-    token: $('#set-token').value.trim(),
-    worker: $('#set-worker').value.trim(),
-  };
-  saveSettings(s);
-  const ss = $('#set-status'); if (ss) { ss.textContent = 'Saved.'; ss.className = 'status ok'; }
-});
-
-/* ---------- Admin gate ---------- */
-const ADMIN_PASS = 'iamironman!';
-const adminGate = $('#admin-gate');
-const adminContent = $('#admin-content');
-function unlockAdmin() {
-  const val = $('#admin-pass').value;
-  const st = $('#admin-gate-status');
-  if (val === ADMIN_PASS) {
-    if (adminGate) adminGate.style.display = 'none';
-    if (adminContent) adminContent.style.display = 'block';
-    sessionStorage.setItem('jamukot.admin', '1');
-    if (st) st.textContent = '';
-  } else {
-    if (st) { st.textContent = 'Wrong password.'; st.className = 'status err'; }
-  }
-}
-const unlockBtn = $('#admin-unlock');
-if (unlockBtn) unlockBtn.addEventListener('click', unlockAdmin);
-const passInput = $('#admin-pass');
-if (passInput) passInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlockAdmin(); });
-const lockBtn = $('#admin-lock');
-if (lockBtn) lockBtn.addEventListener('click', () => {
-  if (adminGate) adminGate.style.display = '';
-  if (adminContent) adminContent.style.display = 'none';
-  sessionStorage.removeItem('jamukot.admin');
-  if (passInput) passInput.value = '';
-});
-if (sessionStorage.getItem('jamukot.admin') === '1') {
-  if (adminGate) adminGate.style.display = 'none';
-  if (adminContent) adminContent.style.display = 'block';
-}
-
-/* ---------- Add track ---------- */
-const addSubmit = $('#add-submit');
-if (addSubmit) addSubmit.addEventListener('click', async () => {
-  const url = $('#add-url').value.trim();
-  const title = $('#add-title').value.trim();
-  const artist = $('#add-artist').value.trim();
-  const status = $('#add-status');
-  if (!url || !title || !artist) {
-    if (status) { status.textContent = 'Please fill in all fields.'; status.className = 'status err'; }
-    return;
-  }
-  const s = state.settings;
-  const owner = s.owner || 'sensesVoid';
-  const repo = s.repo || 'jamukot';
-  const wf = s.workflow || 'add-track.yml';
-
-  if (s.worker && /^https:\/\//.test(s.worker)) {
-    const btn = addSubmit;
-    btn.disabled = true;
-    if (status) { status.textContent = 'Dispatching (1 click)...'; status.className = 'status'; }
-    try {
-      const resp = await fetch(s.worker, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ youtube_url: url, title, artist }),
-      });
-      const data = await resp.json().catch(() => ({}));
-      if (resp.ok && data.ok) {
-        if (status) { status.textContent = 'Dispatched! The run will download, compress, and commit. Refresh this page when it finishes (~1 min).'; status.className = 'status ok'; }
-        $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
-        if (s.token) pollLatestRun(s, status);
-      } else {
-        if (status) { status.textContent = 'Worker error: ' + (data.error || resp.status); status.className = 'status err'; }
-      }
-    } catch (e) {
-      if (status) { status.textContent = 'Network error: ' + e.message; status.className = 'status err'; }
-    } finally {
-      btn.disabled = false;
-    }
-    return;
-  }
-
-  if (s.token) {
-    const btn = addSubmit;
-    btn.disabled = true;
-    if (status) { status.textContent = 'Dispatching...'; status.className = 'status'; }
-    try {
-      const resp = await fetch('https://api.github.com/repos/' + owner + '/' + repo + '/actions/workflows/' + wf + '/dispatches', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + s.token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ref: 'main', inputs: { youtube_url: url, title, artist } }),
-      });
-      if (resp.status === 204) {
-        if (status) { status.textContent = 'Dispatched! Polling run status...'; status.className = 'status ok'; }
-        $('#add-url').value = ''; $('#add-title').value = ''; $('#add-artist').value = '';
-        pollLatestRun(s, status);
-      } else {
-        const txt = await resp.text();
-        if (status) { status.textContent = 'Failed (' + resp.status + '): ' + txt.slice(0,200); status.className = 'status err'; }
-      }
-    } catch (e) {
-      if (status) { status.textContent = 'Network error: ' + e.message; status.className = 'status err'; }
-    } finally {
-      btn.disabled = false;
-    }
-    return;
-  }
-
-  const payload = 'youtube_url: ' + url + '\ntitle: ' + title + '\nartist: ' + artist;
-  let copied = false;
-  try { await navigator.clipboard.writeText(payload); copied = true; } catch (e) { copied = false; }
-  const actionsUrl = 'https://github.com/' + owner + '/' + repo + '/actions/workflows/' + wf;
-  window.open(actionsUrl, '_blank', 'noopener,noreferrer');
-  if (status) {
-    if (copied) { status.textContent = 'Inputs copied to clipboard. In the new tab: click "Run workflow", paste the three values, then confirm.'; status.className = 'status ok'; }
-    else { status.textContent = 'Could not copy automatically. Opened Actions tab. Use these inputs:\n' + payload; status.className = 'status err'; }
-  }
-});
 
 /* ---------- Song request ---------- */
 function initRequestForm() {
