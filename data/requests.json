@@ -8,8 +8,8 @@
       "artist": "Test",
       "requested_at": "2026-11-09T02:55:17.187Z",
       "status": "pending",
-      "attempts": 0,
-      "last_error": null
+      "attempts": 1,
+      "last_error": "ERROR: [youtube] BaW_jenozKc: This video is unavailable"
     }
   ]
 }
