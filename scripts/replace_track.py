@@ -26,7 +26,7 @@ ENV = load_env()
 ACCESS_KEY = ENV.get("Access_Key_ID") or ENV.get("R2_ACCESS_KEY_ID")
 SECRET_KEY = ENV.get("Secret_Access_Key") or ENV.get("R2_SECRET_ACCESS_KEY")
 BUCKET = ENV.get("R2_BUCKET", "jamukot-audio")
-PUBLIC_URL = ENV.get("R2_PUBLIC_URL", "https://pub-f3f7d0214f7f488a9f393ca2dd122193.r2.dev")
+PUBLIC_URL = ENV.get("R2_PUBLIC_URL", "https://jamukot-audio.originragnarok05.workers.dev")
 ACCOUNT_ID = ENV.get("R2_ACCOUNT_ID", "5eaa981f4ddcdefe09597a949285c222")
 
 s3 = boto3.client("s3", endpoint_url=f"https://{ACCOUNT_ID}.r2.cloudflarestorage.com",
