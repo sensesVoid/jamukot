@@ -6,6 +6,7 @@
 import { extractYouTubeId, sanitizeText, findDuplicate } from './request-utils.js';
 
 const REQUESTS_PATH = 'data/requests.json';
+const MAX_PENDING_REQUESTS = 200;
 const MAX_REQUESTS_PER_WINDOW = 5;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const rateBuckets = new Map();
@@ -176,6 +177,13 @@ async function handleSongRequest(request, env) {
     }
     if (duplicate === 'request') {
       return jsonResponse({ ok: false, error: 'Already requested' }, 409, cors);
+    }
+
+    const pendingCount = read.queue.requests.filter(
+      (r) => !r.status || r.status === 'pending'
+    ).length;
+    if (pendingCount >= MAX_PENDING_REQUESTS) {
+      return jsonResponse({ ok: false, error: 'Request queue is full. Try again later.' }, 503, cors);
     }
 
     const entry = {

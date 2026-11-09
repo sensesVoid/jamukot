@@ -88,6 +88,20 @@ test('duplicate pending request returns 409', async () => {
   assert.equal(res.status, 409);
 });
 
+test('full queue returns 503', async () => {
+  const requests = Array.from({ length: 200 }, (_, i) => ({
+    title: `Song ${i}`,
+    artist: 'Artist',
+    status: 'pending',
+  }));
+  mockGitHub({ queue: { requests } });
+  const res = await worker.fetch(
+    request(body({ youtube_url: 'https://youtu.be/ddddddddddd', title: 'New', artist: 'New' }), '8.8.8.8'),
+    env
+  );
+  assert.equal(res.status, 503);
+});
+
 test('honeypot and invalid URL return 400', async () => {
   mockGitHub();
   const spam = await worker.fetch(request(body({ website: 'spam' }), '5.5.5.5'), env);
