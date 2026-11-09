@@ -1,3 +1,15 @@
 {
-  "requests": []
+  "requests": [
+    {
+      "id": "47ba1f05-05a6-4229-9595-24f2035ff722",
+      "youtube_url": "https://youtu.be/BN634wbjGrM?si=zvqzNAyVDAQlNgVa",
+      "video_id": "BN634wbjGrM",
+      "title": "KLSP",
+      "artist": "Spongecola",
+      "requested_at": "2026-11-09T03:35:08.838Z",
+      "status": "pending",
+      "attempts": 0,
+      "last_error": null
+    }
+  ]
 }
