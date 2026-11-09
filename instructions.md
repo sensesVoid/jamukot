@@ -1,6 +1,6 @@
 # Jamukot — Track Management Reference
 
-Quick reference for adding, deleting, and replacing tracks. Audio is hosted on Cloudflare R2 (free tier, 10 GB cap). The site auto-redeploys after every push.
+Quick reference for adding, deleting, replacing, and approving requested tracks. Audio is hosted on Cloudflare R2 (free tier, 10 GB cap). The site auto-redeploys after any push that changes player files.
 
 ## Prerequisites (one-time)
 
@@ -87,9 +87,25 @@ python scripts/replace_track.py --id 5 "URL" --new-title "New" --new-artist "Art
 python scripts/replace_track.py --title "Old" --artist "Artist" "URL" --new-title "New" --new-artist "Artist" --push
 ```
 
+## Song requests
+
+Visitors can click the small floating button at the bottom-right of the player and submit a YouTube URL, title, and artist. Submissions are appended to `data/requests.json` by the `jamukot-dispatch` Worker through the GitHub Contents API. Duplicate submissions are rejected immediately (same normalized title + artist, or same YouTube video ID).
+
+Preview the queue without changing anything:
+```powershell
+.\approve-requests.ps1 -DryRun
+```
+
+Approve every pending request:
+```powershell
+.\approve-requests.ps1 -Push
+```
+For each pending request, the script downloads with `yt-dlp`, compresses to 128 kbps, uploads to R2, and appends to `data/tracks.json`. Approved and duplicate entries are removed from `data/requests.json`; failed downloads stay queued with `attempts` and `last_error` so they can be retried. A duplicate or failure never stops the rest of the batch. The 9.5 GB cap stops the batch before an upload that would exceed it.
+
+The Worker needs a `GITHUB_TOKEN` secret with **Contents: Read and write** on `sensesVoid/jamukot` (plus the existing workflow-dispatch scope). Commits that only touch `data/requests.json` do not trigger a Pages deploy.
+
 ## Notes
 
 - All scripts require `ffmpeg` and `node` on PATH (for yt-dlp).
-- The in-browser "Add Track" button dispatches a GitHub Actions workflow, but YouTube blocks CI runners — use the local scripts above instead.
-- After any change, refresh https://sensesvoid.github.io/jamukot/ to see updates (~1 min after push).
+- After any player change, refresh https://sensesvoid.github.io/jamukot/ to see updates (~1 min after push).
 - Storage usage is shown in the top bar of the player (X.XX / 9.5 GB).
