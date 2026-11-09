@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=16" />
+<link rel="stylesheet" href="css/style.css?v=17" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -125,6 +125,11 @@
     </svg>
   </button>
 
+  <div class="request-hint" id="request-hint" hidden>
+    <span>Request a song? Click here</span>
+    <span class="request-hint-arrow" aria-hidden="true">↘</span>
+  </div>
+
   <div class="request-modal" id="request-modal" hidden>
     <div class="request-backdrop" data-close></div>
     <form class="request-card" id="request-form" role="dialog" aria-modal="true" aria-labelledby="request-modal-title">
@@ -157,6 +162,6 @@
 
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=16"></script>
+  <script src="js/app.js?v=17"></script>
 </body>
 </html>

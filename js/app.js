@@ -687,6 +687,28 @@ function initRequestForm() {
 
   btn.addEventListener('click', open);
   if (cancel) cancel.addEventListener('click', close);
+
+  // One-time helper bubble pointing at the request button
+  const hint = $('#request-hint');
+  const HINT_KEY = 'jamukot.requestHintDismissed';
+  function dismissHint() {
+    if (!hint || hint.hidden) return;
+    hint.classList.add('dismissed');
+    setTimeout(() => { hint.hidden = true; }, 260);
+    try { localStorage.setItem(HINT_KEY, '1'); } catch {}
+  }
+  if (hint) {
+    try {
+      if (!localStorage.getItem(HINT_KEY)) {
+        hint.hidden = false;
+        hint.addEventListener('click', (e) => { e.preventDefault(); dismissHint(); open(); });
+        btn.addEventListener('click', dismissHint, { once: true });
+        setTimeout(dismissHint, 8000);
+      }
+    } catch {
+      hint.hidden = true;
+    }
+  }
   modal.addEventListener('click', (e) => {
     if (e.target.closest('[data-close]')) close();
   });
