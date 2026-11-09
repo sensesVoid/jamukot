@@ -4,6 +4,7 @@ const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const audio = $('#audio');
+const REQUEST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/request';
 const state = {
   tracks: [],
   filtered: [],
@@ -652,8 +653,90 @@ if (addSubmit) addSubmit.addEventListener('click', async () => {
   }
 });
 
+/* ---------- Song request ---------- */
+function initRequestForm() {
+  const btn = $('#request-song-btn');
+  const modal = $('#request-modal');
+  const form = $('#request-form');
+  const status = $('#request-status');
+  const cancel = $('#request-cancel');
+  if (!btn || !modal || !form) return;
+
+  let lastFocus = null;
+
+  function setStatus(text, cls) {
+    if (!status) return;
+    status.textContent = text;
+    status.className = 'request-status' + (cls ? ' ' + cls : '');
+  }
+
+  function open() {
+    lastFocus = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    setStatus('');
+    const url = $('#request-url');
+    if (url) setTimeout(() => url.focus(), 0);
+  }
+
+  function close() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  btn.addEventListener('click', open);
+  if (cancel) cancel.addEventListener('click', close);
+  modal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-close]')) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) close();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const youtubeUrl = ($('#request-url')?.value || '').trim();
+    const title = ($('#request-title')?.value || '').trim();
+    const artist = ($('#request-artist')?.value || '').trim();
+    const website = $('#request-website')?.value || '';
+    const submit = $('#request-submit');
+
+    if (!youtubeUrl || !title || !artist) {
+      setStatus('Please fill in the YouTube URL, title, and artist.', 'err');
+      return;
+    }
+    if (!/^https?:\/\//i.test(youtubeUrl)) {
+      setStatus('Enter a full YouTube URL starting with https://', 'err');
+      return;
+    }
+
+    if (submit) submit.disabled = true;
+    setStatus('Sending…');
+    try {
+      const resp = await fetch(REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ youtube_url: youtubeUrl, title, artist, website }),
+      });
+      const data = await resp.json().catch(() => ({}));
+      if (resp.ok && data.ok) {
+        form.reset();
+        setStatus('Request sent! The owner will review it.', 'ok');
+      } else {
+        setStatus(data.error || `Request failed (${resp.status})`, 'err');
+      }
+    } catch (err) {
+      setStatus('Network error: ' + err.message, 'err');
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+}
+
 /* ---------- Sync lyrics view (mirror) ---------- */
 
 /* ---------- Init ---------- */
 loadTracks();
+initRequestForm();
 if (state.tracks.length === 0) { /* nothing */ }

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=15" />
+<link rel="stylesheet" href="css/style.css?v=16" />
 </head>
 <body>
   <div class="bg-orbs">
@@ -116,8 +116,47 @@
 
   </main>
 
+  <button class="request-fab" id="request-song-btn" type="button" aria-label="Request a song" title="Request a song">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <circle cx="18" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2" />
+      <path d="M9 9l12-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+
+  <div class="request-modal" id="request-modal" hidden>
+    <div class="request-backdrop" data-close></div>
+    <form class="request-card" id="request-form" role="dialog" aria-modal="true" aria-labelledby="request-modal-title">
+      <div class="request-head">
+        <h2 id="request-modal-title">Request a song</h2>
+        <p>Drop a YouTube link and the owner will review it.</p>
+      </div>
+      <label class="request-field">
+        <span>YouTube URL</span>
+        <input type="url" id="request-url" name="youtube_url" placeholder="https://youtube.com/watch?v=..." required maxlength="500" autocomplete="off" />
+      </label>
+      <label class="request-field">
+        <span>Title</span>
+        <input type="text" id="request-title" name="title" placeholder="Song title" required maxlength="120" autocomplete="off" />
+      </label>
+      <label class="request-field">
+        <span>Artist</span>
+        <input type="text" id="request-artist" name="artist" placeholder="Artist name" required maxlength="120" autocomplete="off" />
+      </label>
+      <div class="request-hp" aria-hidden="true">
+        <label>Website <input type="text" id="request-website" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+      <div class="request-status" id="request-status" role="status"></div>
+      <div class="request-actions">
+        <button type="button" class="request-btn ghost" id="request-cancel">Cancel</button>
+        <button type="submit" class="request-btn primary" id="request-submit">Send request</button>
+      </div>
+    </form>
+  </div>
+
   <audio id="audio" preload="metadata" crossorigin="anonymous"></audio>
 
-  <script src="js/app.js?v=15"></script>
+  <script src="js/app.js?v=16"></script>
 </body>
 </html>
