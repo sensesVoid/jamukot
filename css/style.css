@@ -450,7 +450,40 @@ body.modal-open .request-hint { display: none; }
   background: rgba(255,255,255,0.03);
   display: grid;
   gap: 6px;
+  transition: border-color .2s ease, background .2s ease;
 }
+.rant-card.pinned {
+  border-color: rgba(255,92,138,0.55);
+  background: linear-gradient(145deg, rgba(255,92,138,0.1), rgba(124,92,255,0.06));
+  box-shadow: 0 0 0 1px rgba(255,92,138,0.18) inset;
+}
+.rant-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.rant-card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.wall-pinned-badge {
+  font-size: 12px;
+  line-height: 1;
+}
+.wall-pin {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.wall-pin:hover { opacity: 1; transform: scale(1.1); }
+.wall-pin:disabled { opacity: 0.4; cursor: default; }
 .rant-card .rant-alias {
   font-size: 12px;
   font-weight: 700;

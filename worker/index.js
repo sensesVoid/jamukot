@@ -249,14 +249,21 @@ async function handleRantsList(request, env) {
     cursor = list.list_complete ? undefined : list.cursor;
   } while (cursor);
 
-  keys.sort((a, b) => (a.name > b.name ? -1 : a.name < b.name ? 1 : 0));
-  const slice = keys.slice(offset, offset + limit);
-  const rants = [];
-  for (const key of slice) {
+  const all = [];
+  for (const key of keys) {
     const value = await kv.get(key.name, 'json');
-    if (value) rants.push(value);
+    if (value) all.push(value);
   }
-  return jsonResponse({ rants, total: keys.length, offset, limit }, 200, cors);
+  all.sort((a, b) => {
+    const pa = a && a.pinned ? 1 : 0;
+    const pb = b && b.pinned ? 1 : 0;
+    if (pb !== pa) return pb - pa;
+    const ta = a && a.created_at ? a.created_at : '';
+    const tb = b && b.created_at ? b.created_at : '';
+    return ta > tb ? -1 : ta < tb ? 1 : 0;
+  });
+  const rants = all.slice(offset, offset + limit);
+  return jsonResponse({ rants, total: all.length, offset, limit }, 200, cors);
 }
 
 async function handleRantPost(request, env) {
@@ -309,6 +316,72 @@ async function handleRantPost(request, env) {
   return jsonResponse({ ok: true, rant: value }, 201, cors);
 }
 
+async function handleRantPin(request, env) {
+  const cors = corsHeaders(env);
+  const allowedOrigin = env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io';
+  const origin = request.headers.get('Origin') || '';
+  if (origin && origin !== allowedOrigin) {
+    return jsonResponse({ ok: false, error: 'Origin not allowed' }, 403, cors);
+  }
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: cors });
+  }
+  if (request.method !== 'POST') {
+    return jsonResponse({ ok: false, error: 'Method not allowed' }, 405, cors);
+  }
+  const token = env.RANT_ADMIN_TOKEN;
+  if (!token) {
+    return jsonResponse({ ok: false, error: 'Pin is not configured' }, 500, cors);
+  }
+  const kv = env.RANTS;
+  if (!kv) {
+    return jsonResponse({ ok: false, error: 'Rant wall is not configured' }, 500, cors);
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    body = null;
+  }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return jsonResponse({ ok: false, error: 'Invalid JSON body' }, 400, cors);
+  }
+  if (String(body.secret || '') !== token) {
+    return jsonResponse({ ok: false, error: 'Unauthorized' }, 401, cors);
+  }
+  const id = sanitizeText(body.id, 64);
+  if (!id) {
+    return jsonResponse({ ok: false, error: 'Missing rant id' }, 400, cors);
+  }
+  const pinned = !!body.pinned;
+
+  // find the key for this id
+  let targetKey = null;
+  let value = null;
+  let cursor;
+  do {
+    const list = await kv.list({ prefix: 'rant:', limit: 1000, cursor });
+    for (const key of list.keys || []) {
+      const v = await kv.get(key.name, 'json');
+      if (v && v.id === id) {
+        targetKey = key.name;
+        value = v;
+        break;
+      }
+    }
+    cursor = list.list_complete ? undefined : list.cursor;
+    if (targetKey) break;
+  } while (cursor);
+
+  if (!targetKey || !value) {
+    return jsonResponse({ ok: false, error: 'Rant not found' }, 404, cors);
+  }
+  value.pinned = pinned;
+  await kv.put(targetKey, JSON.stringify(value));
+  return jsonResponse({ ok: true, rant: value }, 200, cors);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -320,6 +393,9 @@ export default {
     }
     if (url.pathname === '/rant') {
       return handleRantPost(request, env);
+    }
+    if (url.pathname === '/rant/pin') {
+      return handleRantPin(request, env);
     }
 
     const allowedOrigin = env.ALLOWED_ORIGIN || 'https://sensesvoid.github.io';

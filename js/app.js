@@ -7,6 +7,7 @@ const audio = $('#audio');
 const REQUEST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/request';
 const RANTS_LIST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rants';
 const RANT_POST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant';
+const RANT_PIN_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant/pin';
 const state = {
   tracks: [],
   filtered: [],
@@ -778,6 +779,11 @@ function updateWallCount() {
   if (el) el.textContent = state.wallTotal + ' rants';
 }
 
+let wallAdminToken = '';
+try { wallAdminToken = sessionStorage.getItem('jamukot.wallAdminToken') || ''; } catch {}
+
+function isWallAdmin() { return !!wallAdminToken; }
+
 function renderWallList() {
   const list = $('#wall-list');
   if (!list) return;
@@ -786,8 +792,14 @@ function renderWallList() {
     return;
   }
   list.innerHTML = state.wallRants.map((r) => `
-    <div class="rant-card">
-      <div class="rant-alias">${escapeHtml(r.alias)}</div>
+    <div class="rant-card ${r.pinned ? 'pinned' : ''}">
+      <div class="rant-card-head">
+        <div class="rant-alias">${escapeHtml(r.alias)}</div>
+        <div class="rant-card-actions">
+          ${r.pinned ? '<span class="wall-pinned-badge" title="Pinned">📌</span>' : ''}
+          ${isWallAdmin() ? `<button class="wall-pin" type="button" data-id="${escapeHtml(r.id)}" data-pinned="${r.pinned ? '1' : '0'}" title="Pin">${r.pinned ? '📌' : '📍'}</button>` : ''}
+        </div>
+      </div>
       <div class="rant-msg">${escapeHtml(r.message)}</div>
       <div class="rant-time">${escapeHtml(fmtTimeAgo(r.created_at))}</div>
     </div>
@@ -825,6 +837,73 @@ async function loadWallRants(reset) {
 function initWall() {
   const more = $('#btn-wall-more');
   if (more) more.addEventListener('click', () => loadWallRants(false));
+
+  const list = $('#wall-list');
+  if (list) {
+    list.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.wall-pin');
+      if (!btn || !wallAdminToken) return;
+      const id = btn.dataset.id;
+      const currentlyPinned = btn.dataset.pinned === '1';
+      btn.disabled = true;
+      try {
+        const resp = await fetch(RANT_PIN_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, pinned: !currentlyPinned, secret: wallAdminToken }),
+        });
+        const data = await resp.json().catch(() => ({}));
+        if (resp.ok && data.ok) {
+          const r = state.wallRants.find((x) => x.id === id);
+          if (r) r.pinned = !currentlyPinned;
+          state.wallRants.sort((a, b) => {
+            const pa = a.pinned ? 1 : 0;
+            const pb = b.pinned ? 1 : 0;
+            if (pb !== pa) return pb - pa;
+            const ta = a.created_at || '';
+            const tb = b.created_at || '';
+            return ta > tb ? -1 : ta < tb ? 1 : 0;
+          });
+          renderWallList();
+        } else {
+          if (resp.status === 401) {
+            wallAdminToken = '';
+            try { sessionStorage.removeItem('jamukot.wallAdminToken'); } catch {}
+            renderWallList();
+            alert('Invalid admin token.');
+          } else {
+            alert(data.error || `Pin failed (${resp.status})`);
+          }
+        }
+      } catch (err) {
+        alert('Network error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
+  // Triple-click the wall title to enter admin (pin) mode
+  const title = document.querySelector('#wall-panel .panel-head h2');
+  let clicks = 0, timer = null;
+  if (title) {
+    title.style.cursor = 'pointer';
+    title.addEventListener('click', () => {
+      clicks += 1;
+      clearTimeout(timer);
+      timer = setTimeout(() => { clicks = 0; }, 1500);
+      if (clicks >= 3) {
+        clicks = 0;
+        const tok = prompt('Admin token:');
+        if (tok) {
+          wallAdminToken = tok;
+          try { sessionStorage.setItem('jamukot.wallAdminToken', tok); } catch {}
+          renderWallList();
+        }
+      }
+    });
+  }
+
   loadWallRants(true);
 }
 
