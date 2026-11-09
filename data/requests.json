@@ -10,6 +10,17 @@
       "status": "pending",
       "attempts": 1,
       "last_error": "ERROR: [youtube] BaW_jenozKc: This video is unavailable"
+    },
+    {
+      "id": "c136a891-7175-4077-9afa-74fa786b5b9d",
+      "youtube_url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+      "video_id": "jNQXAC9IVRw",
+      "title": "Me at the zoo",
+      "artist": "Jawed Karim",
+      "requested_at": "2026-11-09T02:59:06.301Z",
+      "status": "pending",
+      "attempts": 0,
+      "last_error": null
     }
   ]
 }
