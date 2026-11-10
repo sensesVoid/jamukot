@@ -59,7 +59,7 @@ function fmtTime(s) {
 /* ---------- Audio (Web Audio + Opus) ---------- */
 async function initAudio() {
   if (audioCtx) return;
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000 });
   gainNode = audioCtx.createGain();
   gainNode.gain.value = parseFloat($('#volume')?.value || '0.8');
   analyser = audioCtx.createAnalyser();
