@@ -95,11 +95,12 @@ async function loadTrack(url) {
       await opusDecoder.ready;
     }
     const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
+    console.log('Opus decode result:', 'channels=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errors=' + (result.errors ? result.errors.length : 0));
     const channelData = result.channelData;
     const samplesDecoded = result.samplesDecoded;
     const sampleRate = result.sampleRate || 48000;
     if (!channelData || channelData.length === 0 || !samplesDecoded) {
-      throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples)');
+      throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples, sr=' + sampleRate + ')');
     }
     buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
     for (let ch = 0; ch < channelData.length; ch++) {
