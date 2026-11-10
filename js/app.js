@@ -62,6 +62,7 @@ function fmtTime(s) {
 async function initAudio() {
   if (audioCtx) return;
   audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000 });
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
   gainNode = audioCtx.createGain();
   gainNode.gain.value = parseFloat($('#volume')?.value || '0.8');
   analyser = audioCtx.createAnalyser();
