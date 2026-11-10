@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert');
-const { mapSpectrum, barCoords, smoothLevels } = require('../js/wave-ring.js');
+const { mapSpectrum, barCoords, smoothLevels, Ring } = require('../js/wave-ring.js');
 
 test('mapSpectrum fills one level per bar in 0..1', () => {
   const data = new Uint8Array(128);
@@ -63,4 +63,43 @@ test('smoothLevels moves toward targets and clamps the factor', () => {
   const snapped = new Float32Array([0, 0]);
   smoothLevels(new Float32Array([0.3, 0.7]), snapped, 2);
   assert.deepEqual(Array.from(snapped), [0.3, 0.7].map(Math.fround));
+});
+
+function fakeCanvas(size = 300) {
+  const calls = { clearRect: 0, stroke: 0, fill: 0, arc: 0 };
+  const ctx = {
+    setTransform() {},
+    clearRect() { calls.clearRect++; },
+    beginPath() {},
+    moveTo() {},
+    lineTo() {},
+    arc() { calls.arc++; },
+    stroke() { calls.stroke++; },
+    fill() { calls.fill++; },
+    set lineWidth(v) {},
+    set lineCap(v) {},
+    set strokeStyle(v) {},
+    set fillStyle(v) {},
+  };
+  const canvas = {
+    width: 0,
+    height: 0,
+    getContext: () => ctx,
+    getBoundingClientRect: () => ({ width: size, height: size }),
+  };
+  return { canvas, calls };
+}
+
+test('Ring.resize sizes the backing store and drawResting uses two draw calls', () => {
+  const { canvas, calls } = fakeCanvas(300);
+  const ring = new Ring(canvas);
+  ring.resize();
+  assert.equal(canvas.width, 300);
+  assert.equal(canvas.height, 300);
+  ring.drawResting();
+  assert.equal(calls.clearRect, 1);
+  assert.equal(calls.stroke, 1);
+  assert.equal(calls.fill, 1);
+  assert.equal(calls.arc, 80);
+  ring.destroy();
 });

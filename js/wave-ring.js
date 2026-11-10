@@ -64,5 +64,219 @@
     return levels;
   }
 
-  return { mapSpectrum, barCoords, smoothLevels };
+  class Ring {
+    constructor(canvas, options = {}) {
+      this.canvas = canvas;
+      this.barCount = options.barCount ?? 80;
+      this.smoothing = options.smoothing ?? 0.22;
+      this.dprCap = options.dprCap ?? 2;
+      this.levels = new Float32Array(this.barCount);
+      this.targets = new Float32Array(this.barCount);
+      this.geo = {};
+      this.playing = false;
+      this.frameId = 0;
+      this.analyser = null;
+      this.freq = null;
+      this.resizeObserver = null;
+      this.visibilityHandler = null;
+      this.reducedMotion = false;
+
+      if (typeof canvas !== 'undefined' && canvas && typeof canvas.getContext === 'function') {
+        this.ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
+      } else {
+        this.ctx = null;
+      }
+
+      this._setupResizeObserver();
+      this._setupVisibilityHandler();
+      this._checkReducedMotion();
+    }
+
+    _setupResizeObserver() {
+      if (typeof ResizeObserver !== 'undefined' && this.canvas) {
+        this.resizeObserver = new ResizeObserver(() => {
+          if (!this.playing) {
+            this.resize();
+            this.drawResting();
+          } else {
+            this.resize();
+          }
+        });
+        this.resizeObserver.observe(this.canvas);
+      }
+    }
+
+    _setupVisibilityHandler() {
+      if (typeof document !== 'undefined') {
+        this.visibilityHandler = () => {
+          if (document.hidden) {
+            this._cancelFrame();
+          } else if (this.playing && !this.reducedMotion) {
+            this._scheduleFrame();
+          }
+        };
+        document.addEventListener('visibilitychange', this.visibilityHandler);
+      }
+    }
+
+    _checkReducedMotion() {
+      if (typeof matchMedia !== 'undefined') {
+        const mediaQuery = matchMedia('(prefers-reduced-motion: reduce)');
+        this.reducedMotion = mediaQuery.matches;
+        mediaQuery.addEventListener('change', (e) => {
+          this.reducedMotion = e.matches;
+          if (this.playing) {
+            if (this.reducedMotion) {
+              this._cancelFrame();
+              this.draw(0.35);
+            } else {
+              this._scheduleFrame();
+            }
+          }
+        });
+      }
+    }
+
+    _cancelFrame() {
+      if (this.frameId) {
+        if (typeof cancelAnimationFrame !== 'undefined') {
+          cancelAnimationFrame(this.frameId);
+        }
+        this.frameId = 0;
+      }
+    }
+
+    _scheduleFrame() {
+      this._cancelFrame();
+      if (typeof requestAnimationFrame !== 'undefined') {
+        this.frameId = requestAnimationFrame(() => this._loop());
+      }
+    }
+
+    _loop() {
+      if (!this.playing || !this.analyser) {
+        return;
+      }
+
+      const freq = this._ensureFreq();
+      this.analyser.getByteFrequencyData(freq);
+      mapSpectrum(freq, this.targets, this.analyser.context.sampleRate);
+      smoothLevels(this.targets, this.levels, this.smoothing);
+
+      let bass = 0;
+      for (let i = 0; i < Math.min(3, this.barCount); i++) {
+        bass += this.targets[i];
+      }
+      bass /= Math.min(3, this.barCount);
+
+      this.draw(0.9, bass);
+      this._scheduleFrame();
+    }
+
+    _ensureFreq() {
+      const binCount = this.analyser.frequencyBinCount;
+      if (!this.freq || this.freq.length !== binCount) {
+        this.freq = new Uint8Array(binCount);
+      }
+      return this.freq;
+    }
+
+    setAnalyser(analyser) {
+      this.analyser = analyser;
+    }
+
+    resize() {
+      if (!this.canvas || !this.ctx) return;
+
+      const rect = this.canvas.getBoundingClientRect();
+      const size = Math.min(rect.width, rect.height);
+      const dpr = Math.min((typeof window !== 'undefined' && window.devicePixelRatio) || 1, this.dprCap);
+
+      this.canvas.width = Math.round(size * dpr);
+      this.canvas.height = Math.round(size * dpr);
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      this._size = size;
+    }
+
+    drawResting() {
+      for (let i = 0; i < this.barCount; i++) {
+        this.levels[i] = 0.07 + 0.03 * (0.5 + 0.5 * Math.sin(i * 0.55));
+      }
+      this.draw(0.35);
+    }
+
+    start() {
+      if (!this.analyser) return;
+      this.playing = true;
+      if (this.reducedMotion) {
+        this.draw(0.35);
+      } else {
+        this._scheduleFrame();
+      }
+    }
+
+    draw(alpha, bass = 0) {
+      if (!this.ctx || !this._size) return;
+
+      const size = this._size;
+      const ctx = this.ctx;
+
+      ctx.clearRect(0, 0, size, size);
+
+      const lineWidth = Math.max(1, size * 0.005);
+      const tipGap = size * 0.008;
+      const dotRadius = Math.max(1, size * 0.005);
+      const scale = 1 + bass * 0.02;
+
+      ctx.lineWidth = lineWidth;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+
+      // Stroke all bars in one path
+      ctx.beginPath();
+      for (let i = 0; i < this.barCount; i++) {
+        barCoords(this.geo, size, this.barCount, i, this.levels[i], scale);
+        ctx.moveTo(this.geo.x1, this.geo.y1);
+        ctx.lineTo(this.geo.x2 - Math.cos(this.geo.angle) * tipGap, this.geo.y2 - Math.sin(this.geo.angle) * tipGap);
+      }
+      ctx.stroke();
+
+      // Fill all tip dots in one path
+      ctx.beginPath();
+      for (let i = 0; i < this.barCount; i++) {
+        barCoords(this.geo, size, this.barCount, i, this.levels[i], scale);
+        const x = this.geo.x2;
+        const y = this.geo.y2;
+        ctx.moveTo(x + dotRadius, y);
+        ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+      }
+      ctx.fill();
+    }
+
+    stop() {
+      this.playing = false;
+      this._cancelFrame();
+      this.drawResting();
+    }
+
+    destroy() {
+      this.stop();
+      if (this.resizeObserver && this.canvas) {
+        this.resizeObserver.unobserve(this.canvas);
+        this.resizeObserver.disconnect();
+        this.resizeObserver = null;
+      }
+      if (this.visibilityHandler && typeof document !== 'undefined') {
+        document.removeEventListener('visibilitychange', this.visibilityHandler);
+        this.visibilityHandler = null;
+      }
+      this.analyser = null;
+      this.freq = null;
+      this.canvas = null;
+      this.ctx = null;
+    }
+  }
+
+  return { mapSpectrum, barCoords, smoothLevels, Ring };
 });
