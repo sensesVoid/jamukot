@@ -179,7 +179,6 @@ function playBuffer(buffer, offset = 0) {
   playbackStartCtx = audioCtx.currentTime;
   isPlaying = true;
   startProgressLoop();
-  startVisualizer();
   const playBtn = $('#btn-play'); if (playBtn) playBtn.textContent = '⏸';
 }
 
@@ -190,10 +189,7 @@ function pausePlayback() {
   stopSource();
   isPlaying = false;
   stopProgressLoop();
-  stopVisualizer();
-  const v = vinylEl; if (v) v.style.scale = '1';
   const playBtn = $('#btn-play'); if (playBtn) playBtn.textContent = '▶';
-  updateVinyl(false);
 }
 
 function seekTo(time) {
@@ -316,9 +312,7 @@ async function playIndex(idx) {
   const t = state.tracks[idx];
   const src = t.url || t.file;
   await initAudio();
-  initVisualizer();
   updateNowPlaying(t);
-  updateVinyl(true);
   fetchCover(t);
   fetchLyrics(t);
   renderPlaylist();
@@ -330,7 +324,6 @@ async function playIndex(idx) {
   } catch (e) {
     console.error('Failed to load track:', e && e.message, src);
     const np = $('#np-title'); if (np) np.textContent = 'Playback error: ' + (e && e.message ? e.message : 'unknown');
-    updateVinyl(false);
     // auto-skip to next track after 2s
     setTimeout(() => { if (state.index === idx) nextTrack(); }, 2000);
   }
@@ -345,15 +338,6 @@ function updateNowPlaying(t) {
   const pt = $('#progress-thumb'); if (pt) pt.style.left = '0%';
 }
 
-/* ---------- Vinyl / cover ---------- */
-const tonearmEl = $('#tonearm');
-function updateVinyl(playing) {
-  const v = vinylEl;
-  if (v) { if (playing) v.classList.add('spinning'); else v.classList.remove('spinning'); }
-  const arm = tonearmEl;
-  if (arm) { if (playing) arm.classList.add('playing'); else arm.classList.remove('playing'); }
-}
-
 function initialsOf(t) { return (t.title || '?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
 
 async function fetchCover(t) {
@@ -365,8 +349,6 @@ async function fetchCover(t) {
   const hue = hashStr(t.title + t.artist) % 360;
   const grad = `linear-gradient(135deg, hsl(${hue},70%,55%), hsl(${(hue+60)%360},70%,45%))`;
   fb.style.background = grad;
-  const label = $('#vinyl-label');
-  if (label) label.style.background = grad;
   // cache check
   const cacheKey = t.title + '|' + t.artist;
   if (state.coverCache.has(cacheKey)) {
@@ -540,87 +522,14 @@ const progressFillEl = $('#progress-fill');
 const progressThumbEl = $('#progress-thumb');
 // 'ended' is now handled by AudioBufferSourceNode.onended in playBuffer
 
-/* ---------- Audio visualizer (radio frequency wave) ---------- */
-let vizCanvas = $('#visualizer');
-let vizCtx = vizCanvas ? vizCanvas.getContext('2d') : null;
-let vizRaf = null;
-let vinylEl = $('#vinyl');
-
-function resizeVisualizer() {
-  if (!vizCanvas) return;
-  const rect = vizCanvas.getBoundingClientRect();
-  vizCanvas.width = Math.max(200, Math.floor(rect.width));
-  vizCanvas.height = 80;
+/* ---------- Circular Wave Ring ---------- */
+let waveRing = null;
+function initWaveRing() {
+  const canvas = $('#wave-ring');
+  if (!canvas || !window.WaveRing || waveRing) return;
+  waveRing = new window.WaveRing.Ring(canvas);
+  waveRing.drawResting();
 }
-
-function initVisualizer() {
-  if (!vizCanvas) return;
-  resizeVisualizer();
-  window.addEventListener('resize', resizeVisualizer);
-}
-
-function drawVisualizer() {
-  if (!vizCtx || !analyser) return;
-  if (!isPlaying) { vizRaf = null; return; }
-  vizRaf = requestAnimationFrame(drawVisualizer);
-  const bufLen = analyser.frequencyBinCount;
-  const data = new Uint8Array(bufLen);
-  analyser.getByteFrequencyData(data);
-  const w = vizCanvas.width;
-  const h = vizCanvas.height;
-  vizCtx.clearRect(0, 0, w, h);
-  const sampleRate = audioCtx.sampleRate;
-  const nyquist = sampleRate / 2;
-  // Logarithmic binning so the full spectrum spans the whole canvas
-  const barCount = 48;
-  const minFreq = 40;
-  const maxFreq = nyquist;
-  const logMin = Math.log(minFreq);
-  const logMax = Math.log(maxFreq);
-  const barWidth = (w / barCount) * 0.78;
-  const gap = (w / barCount) * 0.22;
-  let bass = 0;
-  for (let i = 0; i < barCount; i++) {
-    const fLow = Math.exp(logMin + (logMax - logMin) * (i / barCount));
-    const fHigh = Math.exp(logMin + (logMax - logMin) * ((i + 1) / barCount));
-    const binLow = Math.floor((fLow / nyquist) * bufLen);
-    const binHigh = Math.ceil((fHigh / nyquist) * bufLen);
-    let sum = 0, n = 0;
-    for (let b = Math.max(0, binLow); b < Math.min(bufLen, Math.max(binLow + 1, binHigh)); b++) {
-      sum += data[b];
-      n++;
-    }
-    const v = n ? (sum / n) / 255 : 0;
-    const barH = Math.max(2, v * h * 0.92);
-    const x = i * (barWidth + gap);
-    const hue = 260 + (i / barCount) * 120 + v * 40;
-    const grad = vizCtx.createLinearGradient(0, h - barH, 0, h);
-    grad.addColorStop(0, `hsla(${hue}, 90%, 65%, 0.95)`);
-    grad.addColorStop(1, `hsla(${hue}, 90%, 45%, 0.35)`);
-    vizCtx.fillStyle = grad;
-    vizCtx.fillRect(x, h - barH, barWidth, barH);
-    // reflection
-    vizCtx.fillStyle = `hsla(${hue}, 90%, 65%, 0.12)`;
-    vizCtx.fillRect(x, h, barWidth, barH * 0.25);
-    if (i < 3) bass += v;
-  }
-  bass /= 3;
-  const vinyl = vinylEl;
-  if (vinyl) {
-    const scale = 1 + bass * 0.08;
-    // use the independent `scale` property so it doesn't override the spin transform
-    vinyl.style.scale = scale.toFixed(3);
-  }
-}
-
-function startVisualizer() {
-  if (vizRaf || !vizCtx || !analyser || !isPlaying) return;
-  vizRaf = requestAnimationFrame(drawVisualizer);
-}
-function stopVisualizer() {
-  if (vizRaf) { cancelAnimationFrame(vizRaf); vizRaf = null; }
-}
-// audio element no longer used for playback (Web Audio + Opus)
 
 /* Progress seek */
 const progressBar = $('#progress-bar');
@@ -664,7 +573,7 @@ function nextTrack() {
   } else {
     next = state.index + 1;
     if (next >= state.tracks.length) {
-      if (state.repeat === 1) next = 0; else { updateVinyl(false); return; }
+      if (state.repeat === 1) next = 0; else return;
     }
   }
   playIndex(next);
@@ -1051,6 +960,7 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------- Init ---------- */
 loadTracks();
+initWaveRing();
 initRequestForm();
 initWall();
 initRantForm();

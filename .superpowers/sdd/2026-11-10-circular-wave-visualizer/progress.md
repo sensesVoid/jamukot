@@ -22,6 +22,11 @@ No conflicts. Proceeding to Task 1.
 **Commits:** 8cdca50 - feat: add wave-ring spectrum and geometry helpers  
 **Review:** Clean — implementation matches spec; test precision bug was fixed in committed file (line 59 uses `Math.fround`). All 6 tests pass.
 
+## Task 2
+**Status:** DONE  
+**Commits:** 197de71 feat: add canvas ring renderer  
+**Review:** Initial review flagged 3 critical bugs but the committed code already fixed them (first-frame allocation via `_ensureFreq()`, Node DPR guard, resting redraw on resize, radial tip gap). All 7 tests pass. Minor design choice: inner radius scales with bass pulse (kept as-is).
+
 ---
 
-## Task 2
+## Task 3
