@@ -7,7 +7,7 @@ from urllib.parse import quote
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
 AUDIO_DIR = os.path.join(BASE, "audio")
-LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)  # 900 MB (GitHub Pages ~1 GB limit)
+LIMIT_BYTES = int(780 * 1024 * 1024)  # 780 MB (GitHub Pages ~1 GB limit, matches player tracker)
 
 
 def load_env():
@@ -139,6 +139,11 @@ def main():
     tmp_opus = opus_path + ".tmp"
     run(["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", args.bitrate,
          "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_opus])
+    if not os.path.exists(tmp_opus) or os.path.getsize(tmp_opus) == 0:
+        raise SystemExit("ffmpeg produced an empty Opus file")
+    with open(tmp_opus, "rb") as f:
+        if f.read(4) != b"OggS":
+            raise SystemExit("ffmpeg output is not a valid Ogg Opus file")
     os.replace(tmp_opus, opus_path)
     try:
         os.remove(src)
@@ -148,7 +153,7 @@ def main():
     size = os.path.getsize(opus_path)
     if total + size > LIMIT_BYTES:
         os.remove(opus_path)
-        print(f"Adding this track would exceed the 0.9 GB limit ({(total+size)/1e9:.2f} GB). Delete a song first.")
+        print(f"Adding this track would exceed the 780 MB limit ({(total+size)/1e6:.0f} MB). Delete a song first.")
         sys.exit(1)
 
     dur = duration_of(opus_path)

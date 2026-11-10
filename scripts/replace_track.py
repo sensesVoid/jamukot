@@ -7,7 +7,7 @@ from urllib.parse import quote, unquote
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
 AUDIO_DIR = os.path.join(BASE, "audio")
-LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)
+LIMIT_BYTES = int(780 * 1024 * 1024)  # 780 MB (GitHub Pages ~1 GB limit, matches player tracker)
 
 
 def sanitize(s):
@@ -135,6 +135,11 @@ def main():
     tmp_opus = opus_path + ".tmp"
     run(["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", args.bitrate,
          "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_opus])
+    if not os.path.exists(tmp_opus) or os.path.getsize(tmp_opus) == 0:
+        raise SystemExit("ffmpeg produced an empty Opus file")
+    with open(tmp_opus, "rb") as f:
+        if f.read(4) != b"OggS":
+            raise SystemExit("ffmpeg output is not a valid Ogg Opus file")
     os.replace(tmp_opus, opus_path)
     try:
         os.remove(src)

@@ -37,7 +37,7 @@ Downloads from YouTube, compresses to 128 kbps MP3, uploads to R2, updates `data
 python scripts/add_track.py "URL" --title "Song" --artist "Artist" --push
 ```
 
-**Storage limit:** 9.5 GB. The script refuses to add if the limit would be exceeded. Check usage in the top bar of the player.
+**Storage limit:** 780 MB. The script refuses to add if the limit would be exceeded. Check usage in the top bar of the player.
 
 ## Delete a track
 
@@ -122,7 +122,7 @@ Approve every pending request:
 ```powershell
 .\approve-requests.ps1 -Push
 ```
-For each pending request, the script downloads with `yt-dlp`, compresses to 128 kbps, uploads to R2, and appends to `data/tracks.json`. Approved and duplicate entries are removed from `data/requests.json`; failed downloads stay queued with `attempts` and `last_error` so they can be retried. A duplicate or failure never stops the rest of the batch. The 9.5 GB cap stops the batch before an upload that would exceed it.
+For each pending request, the script downloads with `yt-dlp`, encodes to Opus, stores it in `audio/`, and appends to `data/tracks.json`. Approved and duplicate entries are removed from `data/requests.json`; failed downloads stay queued with `attempts` and `last_error` so they can be retried. A duplicate or failure never stops the rest of the batch. The 780 MB cap stops the batch before an encode that would exceed it.
 
 The Worker needs a `GITHUB_TOKEN` secret with **Contents: Read and write** on `sensesVoid/jamukot` (plus the existing workflow-dispatch scope). Commits that only touch `data/requests.json` do not trigger a Pages deploy.
 
@@ -161,8 +161,23 @@ git push
 **Notes:**
 - The player auto-detects `.opus` vs `.mp3` URLs and decodes accordingly.
 - Opus decoder (`js/lib/ogg-opus-decoder.min.js`) is vendored — no CDN needed.
-- GitHub Pages has a 1 GB site limit; 480 tracks at 16 kbps ≈ 288 MB.
+- GitHub Pages has a 1 GB site limit; 480 tracks at 16 kbps ≈ 220 MB.
 - The rant wall and song requests still use Cloudflare Workers (allowed in strict environments).
+
+**Verify audio before pushing (important):**
+```powershell
+python scripts/verify_audio.py
+```
+Checks that every track exists, is non-empty, starts with the `OggS` magic bytes, and matches the size recorded in `tracks.json`. The Pages workflow runs this automatically and **blocks the deploy** if any file is missing, empty, invalid, or out of sync.
+
+If a track fails with `Audio file is empty`, re-encode it:
+```powershell
+.\encode-opus.ps1 -Force -Limit 1
+```
+or restore it from the last known-good commit:
+```powershell
+git checkout 77cde0b -- audio/2.opus
+```
 
 ## Upgrade bitrate (when audio sounds garbled)
 
@@ -173,14 +188,17 @@ If Opus at 16 kbps sounds garbled on complex music, upgrade to 32 kbps:
 ```
 Re-downloads all tracks from R2, re-encodes at 32 kbps, overwrites every `.opus` file, updates `tracks.json`. Takes ~30-60 min.
 
-Then commit and push:
+**Watch the output.** If R2 refuses a source or ffmpeg fails, that track is reported as `FAILED` and the existing `.opus` file is left untouched (the encoder only replaces a file after confirming a non-empty `OggS` output). Do not commit a partial run.
+
+Then verify and push:
 ```powershell
+python scripts/verify_audio.py
 git add audio/ data/tracks.json
 git commit -m "Upgrade to Opus 32kbps"
 git push
 ```
 
-Size impact: 480 tracks at 32 kbps ≈ 346 MB (well within 1 GB GitHub Pages limit).
+Size impact: 480 tracks at 32 kbps ≈ 346 MB (well within the 780 MB budget).
 
 ## Notes
 

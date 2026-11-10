@@ -17,7 +17,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
 REQUESTS = os.path.join(BASE, "data", "requests.json")
-LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)  # 900 MB (GitHub Pages ~1 GB limit)
+LIMIT_BYTES = int(780 * 1024 * 1024)  # 780 MB (GitHub Pages ~1 GB limit, matches player tracker)
 
 
 def load_env():
@@ -134,7 +134,7 @@ def unique_filename(stem, tracks):
 def check_capacity(total, size, limit=LIMIT_BYTES):
     if total + size > limit:
         raise StorageLimitError(
-            f"Adding this track would exceed the 9.5 GB limit "
+            f"Adding this track would exceed the 780 MB limit "
             f"({(total + size) / 1e9:.2f} GB). Delete a song first."
         )
 
@@ -236,6 +236,11 @@ def download_and_compress(url, workdir):
     tmp_output = output + ".tmp"
     run_cmd(["ffmpeg", "-y", "-i", source, "-c:a", "libopus", "-b:a", "16k",
              "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_output])
+    if not os.path.exists(tmp_output) or os.path.getsize(tmp_output) == 0:
+        raise RuntimeError("ffmpeg produced an empty Opus file")
+    with open(tmp_output, "rb") as f:
+        if f.read(4) != b"OggS":
+            raise RuntimeError("ffmpeg output is not a valid Ogg Opus file")
     os.replace(tmp_output, output)
     return output
 
@@ -258,7 +263,7 @@ def process_one(req, tracks_data, workdir):
 
     total = sum(int(t.get("size", 0) or 0) for t in tracks)
     if total >= LIMIT_BYTES:
-        raise StorageLimitError(f"Storage limit reached ({total / 1e9:.2f} GB / 9.5 GB).")
+        raise StorageLimitError(f"Storage limit reached ({total / 1e6:.0f} MB / 780 MB).")
     check_capacity(total, 0)
 
     opus = download_and_compress(youtube_url, workdir)
