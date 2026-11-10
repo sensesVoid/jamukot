@@ -10,6 +10,17 @@
       "status": "pending",
       "attempts": 0,
       "last_error": null
+    },
+    {
+      "id": "1b64ace6-0121-4b28-91f4-8d59c7ad5c8c",
+      "youtube_url": "https://youtu.be/v_HQJDHF5rc?si=Aak5XgCi10maxsGk",
+      "video_id": "v_HQJDHF5rc",
+      "title": "Please Please Please!",
+      "artist": "Sabrina Carpenter",
+      "requested_at": "2026-11-10T06:18:07.167Z",
+      "status": "pending",
+      "attempts": 0,
+      "last_error": null
     }
   ]
 }
