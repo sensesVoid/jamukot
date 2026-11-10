@@ -87,6 +87,28 @@ python scripts/replace_track.py --id 5 "URL" --new-title "New" --new-artist "Art
 python scripts/replace_track.py --title "Old" --artist "Artist" "URL" --new-title "New" --new-artist "Artist" --push
 ```
 
+## Lyrics (offline / strict environment)
+
+Lyrics are fetched from LRCLIB at encode time and stored in `data/lyrics.json`. The player reads from this file first (works offline and in strict environments), then falls back to LRCLIB live.
+
+**Fetch lyrics for all tracks:**
+```powershell
+.\fetch-lyrics.ps1
+```
+Takes ~5-10 min for 480 tracks (rate-limited to be polite to LRCLIB).
+
+**Fetch lyrics for a batch:**
+```powershell
+.\fetch-lyrics.ps1 -Limit 50
+```
+
+After fetching, commit and push:
+```powershell
+git add data/lyrics.json
+git commit -m "Add offline lyrics"
+git push
+```
+
 ## Song requests
 
 Visitors can click the small floating button at the bottom-right of the player and submit a YouTube URL, title, and artist. Submissions are appended to `data/requests.json` by the `jamukot-dispatch` Worker through the GitHub Contents API. Duplicate submissions are rejected immediately (same normalized title + artist, or same YouTube video ID).

@@ -35,6 +35,7 @@ const state = {
   wallOffset: 0,
   wallTotal: 0,
   wallLoading: false,
+  lyricsCache: null,
 };
 
 function loadSettings() {
@@ -337,17 +338,34 @@ async function fetchLyrics(t) {
   if (noteStart) noteStart.textContent = '';
   try {
     let data = null;
-    try {
-      const r = await fetchWithTimeout(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
-      if (r.ok) data = await r.json().catch(() => null);
-    } catch {}
+    // 1) Try pre-fetched lyrics stored in the repo (works offline / in strict envs)
+    if (!state.lyricsCache) {
+      try {
+        const lr = await fetch('data/lyrics.json', { cache: 'no-store' });
+        if (lr.ok) state.lyricsCache = await lr.json();
+      } catch {}
+      if (!state.lyricsCache) state.lyricsCache = {};
+    }
+    const cached = state.lyricsCache[String(t.id)];
+    if (cached && (cached.synced || cached.plain)) {
+      data = { syncedLyrics: cached.synced, plainLyrics: cached.plain, duration: cached.duration };
+    }
+    // 2) Fall back to LRCLIB (may be blocked in strict envs)
+    if (!data || (!data.syncedLyrics && !data.plainLyrics)) {
+      try {
+        const r = await fetchWithTimeout(`https://lrclib.net/api/get?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
+        if (r.ok) data = await r.json().catch(() => null);
+      } catch {}
+    }
     if (!data || !data.syncedLyrics) {
-      const r = await fetchWithTimeout(`https://lrclib.net/api/search?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
-      if (r.ok) {
-        const arr = await r.json().catch(() => []);
-        const found = (arr || []).find(x => x.syncedLyrics) || (arr || [])[0];
-        data = found;
-      }
+      try {
+        const r = await fetchWithTimeout(`https://lrclib.net/api/search?artist_name=${encodeURIComponent(t.artist)}&track_name=${encodeURIComponent(t.title)}`, 7000);
+        if (r.ok) {
+          const arr = await r.json().catch(() => []);
+          const found = (arr || []).find(x => x.syncedLyrics) || (arr || [])[0];
+          data = found;
+        }
+      } catch {}
     }
     if (data && data.syncedLyrics) {
       state.lyrics = parseLRC(data.syncedLyrics);

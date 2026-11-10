@@ -34,3818 +34,4772 @@
       "id": 4,
       "title": "Dear Mama",
       "artist": "2Pac",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/2Pac%20-%20Dear%20Mama.mp3",
+      "url": "audio/4.opus",
       "duration": 278.41,
-      "size": 4455580
+      "size": 517120,
+      "format": "opus",
+      "original_size": 4455580
     },
     {
       "id": 5,
       "title": "I Get Around",
       "artist": "2Pac",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/2Pac%20-%20I%20Get%20Around.mp3",
+      "url": "audio/5.opus",
       "duration": 258.64,
-      "size": 4139510
+      "size": 486141,
+      "format": "opus",
+      "original_size": 4139510
     },
     {
       "id": 6,
       "title": "It Ain't Easy",
       "artist": "2Pac",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/2Pac%20-%20It%20Ain%27t%20Easy.mp3",
+      "url": "audio/6.opus",
       "duration": 293.93,
-      "size": 4704173
+      "size": 582610,
+      "format": "opus",
+      "original_size": 4704173
     },
     {
       "id": 7,
       "title": "Life Goes On",
       "artist": "2Pac",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/2Pac%20-%20Life%20Goes%20On.mp3",
+      "url": "audio/7.opus",
       "duration": 301.78,
-      "size": 4829561
+      "size": 551889,
+      "format": "opus",
+      "original_size": 4829561
     },
     {
       "id": 8,
       "title": "Princesa",
       "artist": "6cyclemind",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/6cyclemind%20-%20Princesa.mp3",
+      "url": "audio/8.opus",
       "duration": 268.65,
-      "size": 4299682
+      "size": 546524,
+      "format": "opus",
+      "original_size": 4299682
     },
     {
       "id": 9,
       "title": "Sandalan",
       "artist": "6cyclemind",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/6cyclemind%20-%20Sandalan.mp3",
+      "url": "audio/9.opus",
       "duration": 237.08,
-      "size": 3794276
+      "size": 471436,
+      "format": "opus",
+      "original_size": 3794276
     },
     {
       "id": 10,
       "title": "Sige",
       "artist": "6cyclemind",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/6cyclemind%20-%20Sige.mp3",
+      "url": "audio/10.opus",
       "duration": 311.15,
-      "size": 4979701
+      "size": 601774,
+      "format": "opus",
+      "original_size": 4979701
     },
     {
       "id": 11,
       "title": "Trip",
       "artist": "6cyclemind",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/6cyclemind%20-%20Trip.mp3",
+      "url": "audio/11.opus",
       "duration": 210.7,
-      "size": 3372230
+      "size": 409211,
+      "format": "opus",
+      "original_size": 3372230
     },
     {
       "id": 12,
       "title": "Upside Down",
       "artist": "6cyclemind",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/6cyclemind%20-%20Upside%20Down.mp3",
+      "url": "audio/12.opus",
       "duration": 326.43,
-      "size": 5223789
+      "size": 651236,
+      "format": "opus",
+      "original_size": 5223789
     },
     {
       "id": 13,
       "title": "Take On Me",
       "artist": "A-ha",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/A-ha%20-%20Take%20On%20Me.mp3",
+      "url": "audio/13.opus",
       "duration": 225.35,
-      "size": 3606705
+      "size": 444743,
+      "format": "opus",
+      "original_size": 3606705
     },
     {
       "id": 14,
       "title": "STR8 UP",
       "artist": "ACDMND$",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/ACDMND%24%20-%20STR8%20UP.mp3",
+      "url": "audio/14.opus",
       "duration": 234.54,
-      "size": 3753827
+      "size": 526643,
+      "format": "opus",
+      "original_size": 3753827
     },
     {
       "id": 15,
       "title": "Sumabay Sa Paglipad",
       "artist": "ACDMND$",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/ACDMND%24%20-%20Sumabay%20Sa%20Paglipad.mp3",
+      "url": "audio/15.opus",
       "duration": 300.09,
-      "size": 4802487
+      "size": 573528,
+      "format": "opus",
+      "original_size": 4802487
     },
     {
       "id": 16,
       "title": "Take It Easy",
       "artist": "ACDMND$",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/ACDMND%24%20-%20Take%20It%20Easy.mp3",
+      "url": "audio/16.opus",
       "duration": 260.13,
-      "size": 4163427
+      "size": 502949,
+      "format": "opus",
+      "original_size": 4163427
     },
     {
       "id": 17,
       "title": "Bagay Tayo",
       "artist": "ALLMO$T",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/ALLMO%24T%20-%20Bagay%20Tayo.mp3",
+      "url": "audio/17.opus",
       "duration": 392.16,
-      "size": 6275700
+      "size": 824698,
+      "format": "opus",
+      "original_size": 6275700
     },
     {
       "id": 18,
       "title": "Miracle Nights",
       "artist": "ALLMO$T",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/ALLMO%24T%20-%20Miracle%20Nights.mp3",
+      "url": "audio/18.opus",
       "duration": 376.72,
-      "size": 6028779
+      "size": 760107,
+      "format": "opus",
+      "original_size": 6028779
     },
     {
       "id": 19,
       "title": "Abrakadabra",
       "artist": "Abra",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Abra%20-%20Abrakadabra.mp3",
+      "url": "audio/19.opus",
       "duration": 271.01,
-      "size": 4337205
+      "size": 513578,
+      "format": "opus",
+      "original_size": 4337205
     },
     {
       "id": 20,
       "title": "Gayuma",
       "artist": "Abra Ft. Thyro & Jeriko Aguilar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Abra%20Ft.%20Thyro%20%26%20Jeriko%20Aguilar%20-%20%20Gayuma.mp3",
+      "url": "audio/20.opus",
       "duration": 286.26,
-      "size": 4581386
+      "size": 552405,
+      "format": "opus",
+      "original_size": 4581386
     },
     {
       "id": 21,
       "title": "Lost Stars",
       "artist": "Adam Levine",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Adam%20Levine%20-%20Lost%20Stars.mp3",
+      "url": "audio/21.opus",
       "duration": 274.89,
-      "size": 4399481
+      "size": 539918,
+      "format": "opus",
+      "original_size": 4399481
     },
     {
       "id": 22,
       "title": "Ngayong Gabi",
       "artist": "Al James",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Al%20James%20-%20Ngayong%20Gabi.mp3",
+      "url": "audio/22.opus",
       "duration": 267.47,
-      "size": 4280781
+      "size": 523266,
+      "format": "opus",
+      "original_size": 4280781
     },
     {
       "id": 23,
       "title": "PSG",
       "artist": "Al James",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Al%20James%20-%20PSG.mp3",
+      "url": "audio/23.opus",
       "duration": 183.18,
-      "size": 2932119
+      "size": 357721,
+      "format": "opus",
+      "original_size": 2932119
     },
     {
       "id": 24,
       "title": "Pa-umaga",
       "artist": "Al James",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Al%20James%20-%20Pa-umaga.mp3",
+      "url": "audio/24.opus",
       "duration": 188.94,
-      "size": 3024070
+      "size": 376651,
+      "format": "opus",
+      "original_size": 3024070
     },
     {
       "id": 25,
       "title": "Atin-Atin Lang",
       "artist": "Al James Ft. Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Al%20James%20Ft.%20Flow%20G%20-%20Atin-Atin%20Lang.mp3",
+      "url": "audio/25.opus",
       "duration": 223.14,
-      "size": 3571597
+      "size": 400276,
+      "format": "opus",
+      "original_size": 3571597
     },
     {
       "id": 26,
       "title": "Head over Feet",
       "artist": "Alanis Morissette",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Alanis%20Morissette%20-%20Head%20over%20Feet.mp3",
+      "url": "audio/26.opus",
       "duration": 264.38,
-      "size": 4231136
+      "size": 503588,
+      "format": "opus",
+      "original_size": 4231136
     },
     {
       "id": 27,
       "title": "Ironic",
       "artist": "Alanis Morissette",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Alanis%20Morissette%20-%20Ironic.mp3",
+      "url": "audio/27.opus",
       "duration": 228.57,
-      "size": 3658439
+      "size": 452934,
+      "format": "opus",
+      "original_size": 3658439
     },
     {
       "id": 28,
       "title": "Heroes",
       "artist": "Alesso",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Alesso%20-%20Heroes.mp3",
+      "url": "audio/28.opus",
       "duration": 210.05,
-      "size": 3361781
+      "size": 416275,
+      "format": "opus",
+      "original_size": 3361781
     },
     {
       "id": 29,
       "title": "Just Another Woman In love",
       "artist": "Anne Murray",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Anne%20Murray%20-%20Just%20Another%20Woman%20In%20love.mp3",
+      "url": "audio/29.opus",
       "duration": 188.73,
-      "size": 3020727
+      "size": 360514,
+      "format": "opus",
+      "original_size": 3020727
     },
     {
       "id": 30,
       "title": "Guijo St. (Makes You Wonder)",
       "artist": "Apartel",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Apartel%20-%20Guijo%20St.%20%28Makes%20You%20Wonder%29.mp3",
+      "url": "audio/30.opus",
       "duration": 300.02,
-      "size": 4801558
+      "size": 590406,
+      "format": "opus",
+      "original_size": 4801558
     },
     {
       "id": 31,
       "title": "Tangina",
       "artist": "Apekz",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Apekz%20-%20Tangina.mp3",
+      "url": "audio/31.opus",
       "duration": 242.96,
-      "size": 3888317
+      "size": 455474,
+      "format": "opus",
+      "original_size": 3888317
     },
     {
       "id": 32,
       "title": "Arangkada",
       "artist": "Apekz Ft. Aya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Apekz%20Ft.%20Aya%20-%20Arangkada.mp3",
+      "url": "audio/32.opus",
       "duration": 230.56,
-      "size": 3690204
+      "size": 435373,
+      "format": "opus",
+      "original_size": 3690204
     },
     {
       "id": 33,
       "title": "Mitsa",
       "artist": "Apekz Ft. Mikerapphone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Apekz%20Ft.%20Mikerapphone%20-%20Mitsa.mp3",
+      "url": "audio/33.opus",
       "duration": 299.87,
-      "size": 4799050
+      "size": 603455,
+      "format": "opus",
+      "original_size": 4799050
     },
     {
       "id": 34,
       "title": "Always",
       "artist": "Atlantic Starr",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Atlantic%20Starr%20-%20Always.mp3",
+      "url": "audio/34.opus",
       "duration": 288.49,
-      "size": 4616820
+      "size": 564657,
+      "format": "opus",
+      "original_size": 4616820
     },
     {
       "id": 35,
       "title": "Languyin",
       "artist": "Autotelic",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Autotelic%20-%20Languyin.mp3",
+      "url": "audio/35.opus",
       "duration": 265.02,
-      "size": 4241492
+      "size": 501048,
+      "format": "opus",
+      "original_size": 4241492
     },
     {
       "id": 36,
       "title": "Levels",
       "artist": "Avicii",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Avicii%20-%20Levels.mp3",
+      "url": "audio/36.opus",
       "duration": 198.41,
-      "size": 3175789
+      "size": 381747,
+      "format": "opus",
+      "original_size": 3175789
     },
     {
       "id": 37,
       "title": "The Nights",
       "artist": "Avicii",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Avicii%20-%20The%20Nights.mp3",
+      "url": "audio/37.opus",
       "duration": 175.89,
-      "size": 2815416
+      "size": 328225,
+      "format": "opus",
+      "original_size": 2815416
     },
     {
       "id": 38,
       "title": "As Long as You Love Me",
       "artist": "Backstreet Boys",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Backstreet%20Boys%20-%20As%20Long%20as%20You%20Love%20Me.mp3",
+      "url": "audio/38.opus",
       "duration": 221.11,
-      "size": 3538903
+      "size": 437052,
+      "format": "opus",
+      "original_size": 3538903
     },
     {
       "id": 39,
       "title": "I Want It That Way",
       "artist": "Backstreet Boys",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Backstreet%20Boys%20-%20I%20Want%20It%20That%20Way.mp3",
+      "url": "audio/39.opus",
       "duration": 211.35,
-      "size": 3382679
+      "size": 422557,
+      "format": "opus",
+      "original_size": 3382679
     },
     {
       "id": 40,
       "title": "Shape Of My Heart",
       "artist": "Backstreet Boys",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Backstreet%20Boys%20-%20Shape%20Of%20My%20Heart.mp3",
+      "url": "audio/40.opus",
       "duration": 228.95,
-      "size": 3664384
+      "size": 444461,
+      "format": "opus",
+      "original_size": 3664384
     },
     {
       "id": 41,
       "title": "Hallelujah",
       "artist": "Bamboo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bamboo%20-%20Hallelujah.mp3",
+      "url": "audio/41.opus",
       "duration": 291.64,
-      "size": 4667486
+      "size": 557040,
+      "format": "opus",
+      "original_size": 4667486
     },
     {
       "id": 42,
       "title": "Masaya",
       "artist": "Bamboo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bamboo%20-%20Masaya.mp3",
+      "url": "audio/42.opus",
       "duration": 225.7,
-      "size": 3612139
+      "size": 455100,
+      "format": "opus",
+      "original_size": 3612139
     },
     {
       "id": 43,
       "title": "Truth",
       "artist": "Bamboo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bamboo%20-%20Truth.mp3",
+      "url": "audio/43.opus",
       "duration": 267.87,
-      "size": 4287143
+      "size": 502762,
+      "format": "opus",
+      "original_size": 4287143
     },
     {
       "id": 44,
       "title": "Nang Dumating Ka",
       "artist": "Bandang Lapis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bandang%20Lapis%20-%20Nang%20Dumating%20Ka.mp3",
+      "url": "audio/44.opus",
       "duration": 412.55,
-      "size": 6601801
+      "size": 897624,
+      "format": "opus",
+      "original_size": 6601801
     },
     {
       "id": 45,
       "title": "Kalawakan",
       "artist": "Baryo Berde Atbp.",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Baryo%20Berde%20Atbp.%20-%20Kalawakan.mp3",
+      "url": "audio/45.opus",
       "duration": 317.74,
-      "size": 5085027
+      "size": 618946,
+      "format": "opus",
+      "original_size": 5085027
     },
     {
       "id": 46,
       "title": "BMW",
       "artist": "Because",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Because%20-%20BMW.mp3",
+      "url": "audio/46.opus",
       "duration": 165.65,
-      "size": 2651669
+      "size": 344729,
+      "format": "opus",
+      "original_size": 2651669
     },
     {
       "id": 47,
       "title": "Islands In The Stream",
       "artist": "Bee Gees",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bee%20Gees%20-%20Islands%20In%20The%20Stream.mp3",
+      "url": "audio/47.opus",
       "duration": 220.22,
-      "size": 3524785
+      "size": 413930,
+      "format": "opus",
+      "original_size": 3524785
     },
     {
       "id": 48,
       "title": "Kathang Isip",
       "artist": "Ben & Ben",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ben%20%26%20Ben%20-%20Kathang%20Isip.mp3",
+      "url": "audio/48.opus",
       "duration": 318.81,
-      "size": 5102163
+      "size": 682700,
+      "format": "opus",
+      "original_size": 5102163
     },
     {
       "id": 49,
       "title": "Birds of a Feather",
       "artist": "Billie Eillish",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Billie%20Eillish%20-%20Birds%20of%20a%20Feather.mp3",
+      "url": "audio/49.opus",
       "duration": 210.52,
-      "size": 3369630
+      "size": 408994,
+      "format": "opus",
+      "original_size": 3369630
     },
     {
       "id": 50,
       "title": "Uptown Girl",
       "artist": "Billy Joel",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Billy%20Joel%20-%20Uptown%20Girl.mp3",
+      "url": "audio/50.opus",
       "duration": 199.3,
-      "size": 3190000
+      "size": 368622,
+      "format": "opus",
+      "original_size": 3190000
     },
     {
       "id": 51,
       "title": "Deep",
       "artist": "Binoculars",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Binoculars%20-%20Deep.mp3",
+      "url": "audio/51.opus",
       "duration": 266.38,
-      "size": 4263319
+      "size": 534768,
+      "format": "opus",
+      "original_size": 4263319
     },
     {
       "id": 52,
       "title": "Adam's Song",
       "artist": "Blink-182",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Blink-182%20-%20Adam%27s%20Song.mp3",
+      "url": "audio/52.opus",
       "duration": 253.93,
-      "size": 4063953
+      "size": 477170,
+      "format": "opus",
+      "original_size": 4063953
     },
     {
       "id": 53,
       "title": "I Miss You",
       "artist": "Blink-182",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Blink-182%20-%20I%20Miss%20You.mp3",
+      "url": "audio/53.opus",
       "duration": 229.88,
-      "size": 3679012
+      "size": 423268,
+      "format": "opus",
+      "original_size": 3679012
     },
     {
       "id": 54,
       "title": "One Love",
       "artist": "Blue",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Blue%20-%20One%20Love.mp3",
+      "url": "audio/54.opus",
       "duration": 210.25,
-      "size": 3365032
+      "size": 411161,
+      "format": "opus",
+      "original_size": 3365032
     },
     {
       "id": 55,
       "title": "Days Of Our Livez",
       "artist": "Bone Thugs-N-Harmony",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bone%20Thugs-N-Harmony%20-%20Days%20Of%20Our%20Livez.mp3",
+      "url": "audio/55.opus",
       "duration": 348.76,
-      "size": 5581563
+      "size": 702289,
+      "format": "opus",
+      "original_size": 5581563
     },
     {
       "id": 56,
       "title": "If I Could Teach the World",
       "artist": "Bone Thugs-N-Harmony",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bone%20Thugs-N-Harmony%20-%20If%20I%20Could%20Teach%20the%20World.mp3",
+      "url": "audio/56.opus",
       "duration": 264.01,
-      "size": 4225285
+      "size": 498367,
+      "format": "opus",
+      "original_size": 4225285
     },
     {
       "id": 57,
       "title": "Tha Crossroads",
       "artist": "Bone Thugs-N-Harmony",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bone%20Thugs-N-Harmony%20-%20Tha%20Crossroads.mp3",
+      "url": "audio/57.opus",
       "duration": 223.55,
-      "size": 3577773
+      "size": 425154,
+      "format": "opus",
+      "original_size": 3577773
     },
     {
       "id": 58,
       "title": "Breakdown",
       "artist": "Bone Thugs-N-Harmony Ft. Mariah Carey",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bone%20Thugs-N-Harmony%20Ft.%20Mariah%20Carey%20-%20Breakdown.mp3",
+      "url": "audio/58.opus",
       "duration": 309.13,
-      "size": 4947100
+      "size": 590404,
+      "format": "opus",
+      "original_size": 4947100
     },
     {
       "id": 59,
       "title": "Notorious Thugs",
       "artist": "Bone Thugs-N-Harmony Ft. The Notorious B.I.G.",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bone%20Thugs-N-Harmony%20Ft.%20The%20Notorious%20B.I.G.%20-%20Notorious%20Thugs.mp3",
+      "url": "audio/59.opus",
       "duration": 367.23,
-      "size": 5876549
+      "size": 676330,
+      "format": "opus",
+      "original_size": 5876549
     },
     {
       "id": 60,
       "title": "1985",
       "artist": "Bowling For Soup",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bowling%20For%20Soup%20-%201985.mp3",
+      "url": "audio/60.opus",
       "duration": 193.0,
-      "size": 3089272
+      "size": 358421,
+      "format": "opus",
+      "original_size": 3089272
     },
     {
       "id": 61,
       "title": "Tinamad Silang Lahat",
       "artist": "Bugoy na Koykoy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Bugoy%20na%20Koykoy%20-%20Tinamad%20Silang%20Lahat.mp3",
+      "url": "audio/61.opus",
       "duration": 243.67,
-      "size": 3899695
+      "size": 451694,
+      "format": "opus",
+      "original_size": 3899695
     },
     {
       "id": 62,
       "title": "Bat Ngayon",
       "artist": "CLR",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/CLR%20-%20Bat%20Ngayon.mp3",
+      "url": "audio/62.opus",
       "duration": 217.01,
-      "size": 3473376
+      "size": 428634,
+      "format": "opus",
+      "original_size": 3473376
     },
     {
       "id": 63,
       "title": "IAFLS",
       "artist": "CLR",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/CLR%20-%20IAFLS.mp3",
+      "url": "audio/63.opus",
       "duration": 253.98,
-      "size": 4064789
+      "size": 537573,
+      "format": "opus",
+      "original_size": 4064789
     },
     {
       "id": 64,
       "title": "Hey Ma",
       "artist": "Cam'Ron",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cam%27Ron%20-%20Hey%20Ma.mp3",
+      "url": "audio/64.opus",
       "duration": 216.5,
-      "size": 3465017
+      "size": 401617,
+      "format": "opus",
+      "original_size": 3465017
     },
     {
       "id": 65,
       "title": "Close to you",
       "artist": "Carpenters",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Carpenters%20-%20Close%20to%20you.mp3",
+      "url": "audio/65.opus",
       "duration": 223.61,
-      "size": 3578702
+      "size": 482552,
+      "format": "opus",
+      "original_size": 3578702
     },
     {
       "id": 66,
       "title": "I Won't Last A Day Without You",
       "artist": "Carpenters",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Carpenters%20-%20I%20Won%27t%20Last%20A%20Day%20Without%20You.mp3",
+      "url": "audio/66.opus",
       "duration": 269.54,
-      "size": 4313892
+      "size": 568644,
+      "format": "opus",
+      "original_size": 4313892
     },
     {
       "id": 67,
       "title": "Top Of The World",
       "artist": "Carpenters",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Carpenters%20-%20Top%20Of%20The%20World.mp3",
+      "url": "audio/67.opus",
       "duration": 178.57,
-      "size": 2858465
+      "size": 367661,
+      "format": "opus",
+      "original_size": 2858465
     },
     {
       "id": 68,
       "title": "Yesterday Once More",
       "artist": "Carpenters",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Carpenters%20-%20Yesterday%20Once%20More.mp3",
+      "url": "audio/68.opus",
       "duration": 240.37,
-      "size": 3847032
+      "size": 494987,
+      "format": "opus",
+      "original_size": 3847032
     },
     {
       "id": 69,
       "title": "Take Me Home",
       "artist": "Cash Cash",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cash%20Cash%20-%20Take%20Me%20Home.mp3",
+      "url": "audio/69.opus",
       "duration": 203.1,
-      "size": 3251022
+      "size": 392798,
+      "format": "opus",
+      "original_size": 3251022
     },
     {
       "id": 70,
       "title": "Sunday Candy",
       "artist": "Chance The Rapper",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Chance%20The%20Rapper%20-%20Sunday%20Candy.mp3",
+      "url": "audio/70.opus",
       "duration": 230.62,
-      "size": 3691133
+      "size": 451616,
+      "format": "opus",
+      "original_size": 3691133
     },
     {
       "id": 71,
       "title": "Young Homie",
       "artist": "Chris Rene",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Chris%20Rene%20-%20Young%20Homie.mp3",
+      "url": "audio/71.opus",
       "duration": 207.84,
-      "size": 3326580
+      "size": 390703,
+      "format": "opus",
+      "original_size": 3326580
     },
     {
       "id": 72,
       "title": "Sailing",
       "artist": "Christopher Cross",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Christopher%20Cross%20-%20Sailing.mp3",
+      "url": "audio/72.opus",
       "duration": 255.49,
-      "size": 4089030
+      "size": 545690,
+      "format": "opus",
+      "original_size": 4089030
     },
     {
       "id": 73,
       "title": "TL Ako Sayo",
       "artist": "Cinderella",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cinderella%20-%20TL%20Ako%20Sayo.mp3",
+      "url": "audio/73.opus",
       "duration": 185.49,
-      "size": 2968807
+      "size": 359631,
+      "format": "opus",
+      "original_size": 2968807
     },
     {
       "id": 74,
       "title": "A Favor House Atlantic",
       "artist": "Coheed And Cambria",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coheed%20And%20Cambria%20-%20A%20Favor%20House%20Atlantic.mp3",
+      "url": "audio/74.opus",
       "duration": 208.72,
-      "size": 3340883
+      "size": 390431,
+      "format": "opus",
+      "original_size": 3340883
     },
     {
       "id": 75,
       "title": "The Suffering",
       "artist": "Coheed And Cambria",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coheed%20And%20Cambria%20-%20The%20Suffering.mp3",
+      "url": "audio/75.opus",
       "duration": 255.02,
-      "size": 4081414
+      "size": 466406,
+      "format": "opus",
+      "original_size": 4081414
     },
     {
       "id": 76,
       "title": "Welcome Home",
       "artist": "Coheed And Cambria",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coheed%20And%20Cambria%20-%20Welcome%20Home.mp3",
+      "url": "audio/76.opus",
       "duration": 263.96,
-      "size": 4224356
+      "size": 478050,
+      "format": "opus",
+      "original_size": 4224356
     },
     {
       "id": 77,
       "title": "The Scientist",
       "artist": "Coldplay",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coldplay%20-%20The%20Scientist.mp3",
+      "url": "audio/77.opus",
       "duration": 265.22,
-      "size": 4244511
+      "size": 558678,
+      "format": "opus",
+      "original_size": 4244511
     },
     {
       "id": 78,
       "title": "Viva La Vida",
       "artist": "Coldplay",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coldplay%20-%20Viva%20La%20Vida.mp3",
+      "url": "audio/78.opus",
       "duration": 242.16,
-      "size": 3875871
+      "size": 481241,
+      "format": "opus",
+      "original_size": 3875871
     },
     {
       "id": 79,
       "title": "Gangsta's Paradise",
       "artist": "Coolio",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Coolio%20-%20Gangsta%27s%20Paradise.mp3",
+      "url": "audio/79.opus",
       "duration": 243.5,
-      "size": 3897094
+      "size": 435737,
+      "format": "opus",
+      "original_size": 3897094
     },
     {
       "id": 80,
       "title": "7 Days",
       "artist": "Craig David",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Craig%20David%20-%207%20Days.mp3",
+      "url": "audio/80.opus",
       "duration": 235.22,
-      "size": 3764694
+      "size": 497187,
+      "format": "opus",
+      "original_size": 3764694
     },
     {
       "id": 81,
       "title": "Don't Love You No More",
       "artist": "Craig David",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Craig%20David%20-%20Don%27t%20Love%20You%20No%20More.mp3",
+      "url": "audio/81.opus",
       "duration": 242.99,
-      "size": 3888735
+      "size": 476539,
+      "format": "opus",
+      "original_size": 3888735
     },
     {
       "id": 82,
       "title": "Panaginip",
       "artist": "Crazy as Pinoy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Crazy%20as%20Pinoy%20-%20Panaginip.mp3",
+      "url": "audio/82.opus",
       "duration": 292.19,
-      "size": 4676170
+      "size": 572628,
+      "format": "opus",
+      "original_size": 4676170
     },
     {
       "id": 83,
       "title": "Have You Ever Seen The Rain",
       "artist": "Creedence Clearwater Revival",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Creedence%20Clearwater%20Revival%20-%20Have%20You%20Ever%20Seen%20The%20Rain.mp3",
+      "url": "audio/83.opus",
       "duration": 165.0,
-      "size": 2641220
+      "size": 322477,
+      "format": "opus",
+      "original_size": 2641220
     },
     {
       "id": 84,
       "title": "Minsan",
       "artist": "Cueshé",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cuesh%C3%A9%20-%20Minsan.mp3",
+      "url": "audio/84.opus",
       "duration": 232.53,
-      "size": 3721551
+      "size": 474420,
+      "format": "opus",
+      "original_size": 3721551
     },
     {
       "id": 85,
       "title": "Estranghero",
       "artist": "Cup Of Joe",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cup%20Of%20Joe%20-%20Estranghero.mp3",
+      "url": "audio/85.opus",
       "duration": 200.88,
-      "size": 3215078
+      "size": 402216,
+      "format": "opus",
+      "original_size": 3215078
     },
     {
       "id": 86,
       "title": "Multo (Live at The Cozy Cove)",
       "artist": "Cup of Joe",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cup%20of%20Joe%20-%20%20Multo%20%28Live%20at%20The%20Cozy%20Cove%29.mp3",
+      "url": "audio/86.opus",
       "duration": 245.11,
-      "size": 3923100
+      "size": 460697,
+      "format": "opus",
+      "original_size": 3923100
     },
     {
       "id": 87,
       "title": "Time After Time",
       "artist": "Cyndi Lauper",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Cyndi%20Lauper%20-%20Time%20After%20Time.mp3",
+      "url": "audio/87.opus",
       "duration": 242.88,
-      "size": 3887156
+      "size": 513996,
+      "format": "opus",
+      "original_size": 3887156
     },
     {
       "id": 88,
       "title": "Bad Day",
       "artist": "Daniel Powter",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Daniel%20Powter%20-%20Bad%20Day.mp3",
+      "url": "audio/88.opus",
       "duration": 228.9,
-      "size": 3663455
+      "size": 455984,
+      "format": "opus",
+      "original_size": 3663455
     },
     {
       "id": 89,
       "title": "Hands Down",
       "artist": "Dashboard Confessional",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dashboard%20Confessional%20-%20Hands%20Down.mp3",
+      "url": "audio/89.opus",
       "duration": 197.21,
-      "size": 3156563
+      "size": 372240,
+      "format": "opus",
+      "original_size": 3156563
     },
     {
       "id": 90,
       "title": "Screaming Infidelities",
       "artist": "Dashboard Confessional",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dashboard%20Confessional%20-%20Screaming%20Infidelities.mp3",
+      "url": "audio/90.opus",
       "duration": 225.29,
-      "size": 3605776
+      "size": 437821,
+      "format": "opus",
+      "original_size": 3605776
     },
     {
       "id": 91,
       "title": "Stolen",
       "artist": "Dashboard Confessional",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dashboard%20Confessional%20-%20Stolen.mp3",
+      "url": "audio/91.opus",
       "duration": 233.24,
-      "size": 3732836
+      "size": 469908,
+      "format": "opus",
+      "original_size": 3732836
     },
     {
       "id": 92,
       "title": "Vindicated",
       "artist": "Dashboard Confessional",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dashboard%20Confessional%20-%20Vindicated.mp3",
+      "url": "audio/92.opus",
       "duration": 200.34,
-      "size": 3206718
+      "size": 382996,
+      "format": "opus",
+      "original_size": 3206718
     },
     {
       "id": 93,
       "title": "Over You",
       "artist": "Daughtry",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Daughtry%20-%20Over%20You.mp3",
+      "url": "audio/93.opus",
       "duration": 224.03,
-      "size": 3585389
+      "size": 434275,
+      "format": "opus",
+      "original_size": 3585389
     },
     {
       "id": 94,
       "title": "Sa Ngalan Ng Pag-Ibig",
       "artist": "December Avenue",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/December%20Avenue%20-%20Sa%20Ngalan%20Ng%20Pag-Ibig.mp3",
+      "url": "audio/94.opus",
       "duration": 273.11,
-      "size": 4371153
+      "size": 555595,
+      "format": "opus",
+      "original_size": 4371153
     },
     {
       "id": 95,
       "title": "Kung Di Rin Lang Ikaw",
       "artist": "December Avenue Ft. Moira",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/December%20Avenue%20Ft.%20Moira%20-%20Kung%20Di%20Rin%20Lang%20Ikaw.mp3",
+      "url": "audio/95.opus",
       "duration": 280.45,
-      "size": 4488181
+      "size": 595567,
+      "format": "opus",
+      "original_size": 4488181
     },
     {
       "id": 96,
       "title": "Five Hours",
       "artist": "Deorro",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Deorro%20-%20Five%20Hours.mp3",
+      "url": "audio/96.opus",
       "duration": 329.26,
-      "size": 5269347
+      "size": 647057,
+      "format": "opus",
+      "original_size": 5269347
     },
     {
       "id": 97,
       "title": "Marilag",
       "artist": "Dionela",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dionela%20-%20Marilag.mp3",
+      "url": "audio/97.opus",
       "duration": 158.8,
-      "size": 2542163
+      "size": 321175,
+      "format": "opus",
+      "original_size": 2542163
     },
     {
       "id": 98,
       "title": "Down With The Sickness",
       "artist": "Disturbed",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Disturbed%20-%20Down%20With%20The%20Sickness.mp3",
+      "url": "audio/98.opus",
       "duration": 216.29,
-      "size": 3461674
+      "size": 380129,
+      "format": "opus",
+      "original_size": 3461674
     },
     {
       "id": 99,
       "title": "Stupify",
       "artist": "Disturbed",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Disturbed%20-%20Stupify.mp3",
+      "url": "audio/99.opus",
       "duration": 274.11,
-      "size": 4387035
+      "size": 490910,
+      "format": "opus",
+      "original_size": 4387035
     },
     {
       "id": 100,
       "title": "End of Beginning",
       "artist": "Djo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Djo%20-%20End%20of%20Beginning.mp3",
+      "url": "audio/100.opus",
       "duration": 161.26,
-      "size": 2581358
+      "size": 307050,
+      "format": "opus",
+      "original_size": 2581358
     },
     {
       "id": 101,
       "title": "Let's Groove",
       "artist": "Earth, Wind & Fire",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Earth%2C%20Wind%20%26%20Fire%20-%20Let%27s%20Groove.mp3",
+      "url": "audio/101.opus",
       "duration": 340.24,
-      "size": 5444797
+      "size": 630066,
+      "format": "opus",
+      "original_size": 5444797
     },
     {
       "id": 102,
       "title": "Lose Yourself",
       "artist": "Eminem",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20-%20Lose%20Yourself.mp3",
+      "url": "audio/102.opus",
       "duration": 320.39,
-      "size": 5127241
+      "size": 624476,
+      "format": "opus",
+      "original_size": 5127241
     },
     {
       "id": 103,
       "title": "The Real Slim Shady",
       "artist": "Eminem",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20-%20The%20Real%20Slim%20Shady.mp3",
+      "url": "audio/103.opus",
       "duration": 284.93,
-      "size": 4560070
+      "size": 605409,
+      "format": "opus",
+      "original_size": 4560070
     },
     {
       "id": 104,
       "title": "Godzilla",
       "artist": "Eminem Ft. Juice WRLD",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20Ft.%20Juice%20WRLD%20-%20Godzilla.mp3",
+      "url": "audio/104.opus",
       "duration": 210.88,
-      "size": 3375156
+      "size": 404068,
+      "format": "opus",
+      "original_size": 3375156
     },
     {
       "id": 105,
       "title": "Love The Way You Lie",
       "artist": "Eminem Ft. Rihanna",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20Ft.%20Rihanna%20-%20Love%20The%20Way%20You%20Lie.mp3",
+      "url": "audio/105.opus",
       "duration": 263.5,
-      "size": 4217344
+      "size": 512909,
+      "format": "opus",
+      "original_size": 4217344
     },
     {
       "id": 106,
       "title": "The Monster",
       "artist": "Eminem Ft. Rihanna",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20Ft.%20Rihanna%20-%20The%20Monster.mp3",
+      "url": "audio/106.opus",
       "duration": 252.26,
-      "size": 4037110
+      "size": 471227,
+      "format": "opus",
+      "original_size": 4037110
     },
     {
       "id": 107,
       "title": "Stan",
       "artist": "Eminem Ft. ft. Dido",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eminem%20Ft.%20ft.%20Dido%20-%20Stan.mp3",
+      "url": "audio/107.opus",
       "duration": 404.17,
-      "size": 6467636
+      "size": 723806,
+      "format": "opus",
+      "original_size": 6467636
     },
     {
       "id": 108,
       "title": "Ang Huling El Bimbo",
       "artist": "Eraserheads",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eraserheads%20-%20Ang%20Huling%20El%20Bimbo.mp3",
+      "url": "audio/108.opus",
       "duration": 449.56,
-      "size": 7194049
+      "size": 930702,
+      "format": "opus",
+      "original_size": 7194049
     },
     {
       "id": 109,
       "title": "Huwag Mo Nang Itanong",
       "artist": "Eraserheads",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eraserheads%20-%20Huwag%20Mo%20Nang%20Itanong.mp3",
+      "url": "audio/109.opus",
       "duration": 252.0,
-      "size": 4032931
+      "size": 484780,
+      "format": "opus",
+      "original_size": 4032931
     },
     {
       "id": 110,
       "title": "With A Smile",
       "artist": "Eraserheads",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Eraserheads%20-%20With%20A%20Smile.mp3",
+      "url": "audio/110.opus",
       "duration": 278.17,
-      "size": 4451726
+      "size": 566577,
+      "format": "opus",
+      "original_size": 4451726
     },
     {
       "id": 111,
       "title": "Pahimakas",
       "artist": "Esseca",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Esseca%20-%20Pahimakas.mp3",
+      "url": "audio/111.opus",
       "duration": 247.13,
-      "size": 3955283
+      "size": 561028,
+      "format": "opus",
+      "original_size": 3955283
     },
     {
       "id": 112,
       "title": "Moment Of Truth",
       "artist": "FM Static",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/FM%20Static%20-%20Moment%20Of%20Truth.mp3",
+      "url": "audio/112.opus",
       "duration": 228.61,
-      "size": 3658857
+      "size": 434987,
+      "format": "opus",
+      "original_size": 3658857
     },
     {
       "id": 113,
       "title": "Nice Piece Of Art",
       "artist": "FM Static",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/FM%20Static%20-%20Nice%20Piece%20Of%20Art.mp3",
+      "url": "audio/113.opus",
       "duration": 212.57,
-      "size": 3402230
+      "size": 420933,
+      "format": "opus",
+      "original_size": 3402230
     },
     {
       "id": 114,
       "title": "Something To Believe In",
       "artist": "FM Static",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/FM%20Static%20-%20Something%20To%20Believe%20In.mp3",
+      "url": "audio/114.opus",
       "duration": 169.79,
-      "size": 2717613
+      "size": 309054,
+      "format": "opus",
+      "original_size": 2717613
     },
     {
       "id": 115,
       "title": "Tonight",
       "artist": "FM Static",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/FM%20Static%20-%20Tonight.mp3",
+      "url": "audio/115.opus",
       "duration": 220.52,
-      "size": 3529290
+      "size": 461062,
+      "format": "opus",
+      "original_size": 3529290
     },
     {
       "id": 116,
       "title": "Tongue Tied",
       "artist": "Faber Drive",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Faber%20Drive%20-%20Tongue%20Tied.mp3",
+      "url": "audio/116.opus",
       "duration": 208.97,
-      "size": 3344552
+      "size": 386561,
+      "format": "opus",
+      "original_size": 3344552
     },
     {
       "id": 117,
       "title": "America's Suitehearts",
       "artist": "Fall Out Boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fall%20Out%20Boy%20-%20America%27s%20Suitehearts.mp3",
+      "url": "audio/117.opus",
       "duration": 215.81,
-      "size": 3454150
+      "size": 408343,
+      "format": "opus",
+      "original_size": 3454150
     },
     {
       "id": 118,
       "title": "I'm Like a Lawyer With the Way I'm Always Trying to Get You Off (Me  You)",
       "artist": "Fall Out Boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fall%20Out%20Boy%20-%20I%27m%20Like%20a%20Lawyer%20With%20the%20Way%20I%27m%20Always%20Trying%20to%20Get%20You%20Off%20%28Me%20%20You%29.mp3",
+      "url": "audio/118.opus",
       "duration": 211.8,
-      "size": 3390110
+      "size": 391435,
+      "format": "opus",
+      "original_size": 3390110
     },
     {
       "id": 119,
       "title": "Sugar, We're Goin Down",
       "artist": "Fall Out Boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fall%20Out%20Boy%20-%20Sugar%2C%20We%27re%20Goin%20Down.mp3",
+      "url": "audio/119.opus",
       "duration": 229.23,
-      "size": 3668981
+      "size": 418340,
+      "format": "opus",
+      "original_size": 3668981
     },
     {
       "id": 120,
       "title": "The Take Over, The Breaks Over",
       "artist": "Fall Out Boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fall%20Out%20Boy%20-%20The%20Take%20Over%2C%20The%20Breaks%20Over.mp3",
+      "url": "audio/120.opus",
       "duration": 226.07,
-      "size": 3618315
+      "size": 421434,
+      "format": "opus",
+      "original_size": 3618315
     },
     {
       "id": 121,
       "title": "A Little Less Sixteen Candles, A Little More Touch Me",
       "artist": "Fall Out boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fall%20Out%20boy%20-%20A%20Little%20Less%20Sixteen%20Candles%2C%20A%20Little%20More%20Touch%20Me.mp3",
+      "url": "audio/121.opus",
       "duration": 169.09,
-      "size": 2706421
+      "size": 313819,
+      "format": "opus",
+      "original_size": 2706421
     },
     {
       "id": 122,
       "title": "679",
       "artist": "Fetty Wap",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fetty%20Wap%20-%20679.mp3",
+      "url": "audio/122.opus",
       "duration": 191.03,
-      "size": 3057507
+      "size": 386588,
+      "format": "opus",
+      "original_size": 3057507
     },
     {
       "id": 123,
       "title": "Trap Queen",
       "artist": "Fetty Wap",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fetty%20Wap%20-%20Trap%20Queen.mp3",
+      "url": "audio/123.opus",
       "duration": 225.26,
-      "size": 3605451
+      "size": 447541,
+      "format": "opus",
+      "original_size": 3605451
     },
     {
       "id": 124,
       "title": "100 Years",
       "artist": "Five For Fighting",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Five%20For%20Fighting%20-%20100%20Years.mp3",
+      "url": "audio/124.opus",
       "duration": 240.48,
-      "size": 3848611
+      "size": 513157,
+      "format": "opus",
+      "original_size": 3848611
     },
     {
       "id": 125,
       "title": "Lagi Na Lang",
       "artist": "Floetics",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Floetics%20-%20Lagi%20Na%20Lang.mp3",
+      "url": "audio/125.opus",
       "duration": 341.96,
-      "size": 5472475
+      "size": 673915,
+      "format": "opus",
+      "original_size": 5472475
     },
     {
       "id": 126,
       "title": "Batugan",
       "artist": "Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Flow%20G%20-%20%20Batugan.mp3",
+      "url": "audio/126.opus",
       "duration": 247.32,
-      "size": 3958209
+      "size": 483687,
+      "format": "opus",
+      "original_size": 3958209
     },
     {
       "id": 127,
       "title": "G Wolf",
       "artist": "Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Flow%20G%20-%20%20G%20Wolf.mp3",
+      "url": "audio/127.opus",
       "duration": 223.98,
-      "size": 3584971
+      "size": 479230,
+      "format": "opus",
+      "original_size": 3584971
     },
     {
       "id": 128,
       "title": "Rapstar",
       "artist": "Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Flow%20G%20-%20%20Rapstar.mp3",
+      "url": "audio/128.opus",
       "duration": 249.06,
-      "size": 3986212
+      "size": 517838,
+      "format": "opus",
+      "original_size": 3986212
     },
     {
       "id": 129,
       "title": "Araw araw Love",
       "artist": "Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Flow%20G%20-%20Araw%20araw%20Love.mp3",
+      "url": "audio/129.opus",
       "duration": 247.87,
-      "size": 3966986
+      "size": 514517,
+      "format": "opus",
+      "original_size": 3966986
     },
     {
       "id": 130,
       "title": "Stacy's Mom",
       "artist": "Fountains Of Wayne",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Fountains%20Of%20Wayne%20-%20Stacy%27s%20Mom.mp3",
+      "url": "audio/130.opus",
       "duration": 197.99,
-      "size": 3169009
+      "size": 365977,
+      "format": "opus",
+      "original_size": 3169009
     },
     {
       "id": 131,
       "title": "Aurora Sunrise",
       "artist": "Franco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Franco%20-%20Aurora%20Sunrise.mp3",
+      "url": "audio/131.opus",
       "duration": 292.59,
-      "size": 4682439
+      "size": 555624,
+      "format": "opus",
+      "original_size": 4682439
     },
     {
       "id": 132,
       "title": "Better Days",
       "artist": "Franco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Franco%20-%20Better%20Days.mp3",
+      "url": "audio/132.opus",
       "duration": 290.86,
-      "size": 4654854
+      "size": 554003,
+      "format": "opus",
+      "original_size": 4654854
     },
     {
       "id": 133,
       "title": "Castaway",
       "artist": "Franco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Franco%20-%20Castaway.mp3",
+      "url": "audio/133.opus",
       "duration": 270.98,
-      "size": 4336880
+      "size": 505939,
+      "format": "opus",
+      "original_size": 4336880
     },
     {
       "id": 134,
       "title": "Song for the Suspect",
       "artist": "Franco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Franco%20-%20Song%20for%20the%20Suspect.mp3",
+      "url": "audio/134.opus",
       "duration": 306.27,
-      "size": 4901543
+      "size": 558192,
+      "format": "opus",
+      "original_size": 4901543
     },
     {
       "id": 135,
       "title": "Emily",
       "artist": "From First To Last",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/From%20First%20To%20Last%20-%20Emily.mp3",
+      "url": "audio/135.opus",
       "duration": 158.94,
-      "size": 2544253
+      "size": 341690,
+      "format": "opus",
+      "original_size": 2544253
     },
     {
       "id": 136,
       "title": "Sun and Moon",
       "artist": "Gabby Alipe",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gabby%20Alipe%20-%20Sun%20and%20Moon.mp3",
+      "url": "audio/136.opus",
       "duration": 240.05,
-      "size": 3842016
+      "size": 476450,
+      "format": "opus",
+      "original_size": 3842016
     },
     {
       "id": 137,
       "title": "Di Bale Na Lang",
       "artist": "Gary Valenciano",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gary%20Valenciano%20-%20Di%20Bale%20Na%20Lang.mp3",
+      "url": "audio/137.opus",
       "duration": 282.7,
-      "size": 4524544
+      "size": 534901,
+      "format": "opus",
+      "original_size": 4524544
     },
     {
       "id": 138,
       "title": "Got My Mind Set On You",
       "artist": "George Harrison",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/George%20Harrison%20-%20Got%20My%20Mind%20Set%20On%20You.mp3",
+      "url": "audio/138.opus",
       "duration": 231.61,
-      "size": 3706923
+      "size": 425568,
+      "format": "opus",
+      "original_size": 3706923
     },
     {
       "id": 139,
       "title": "Baon",
       "artist": "Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20-%20Baon.mp3",
+      "url": "audio/139.opus",
       "duration": 294.01,
-      "size": 4705520
+      "size": 578921,
+      "format": "opus",
+      "original_size": 4705520
     },
     {
       "id": 140,
       "title": "Hinahanap Ng Puso",
       "artist": "Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20-%20Hinahanap%20Ng%20Puso.mp3",
+      "url": "audio/140.opus",
       "duration": 259.08,
-      "size": 4146198
+      "size": 501358,
+      "format": "opus",
+      "original_size": 4146198
     },
     {
       "id": 141,
       "title": "Simpleng Tao",
       "artist": "Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20-%20Simpleng%20Tao.mp3",
+      "url": "audio/141.opus",
       "duration": 261.35,
-      "size": 4182560
+      "size": 521336,
+      "format": "opus",
+      "original_size": 4182560
     },
     {
       "id": 142,
       "title": "Upuan",
       "artist": "Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20-%20Upuan.mp3",
+      "url": "audio/142.opus",
       "duration": 247.81,
-      "size": 3966057
+      "size": 485422,
+      "format": "opus",
+      "original_size": 3966057
     },
     {
       "id": 143,
       "title": "Walang Natira",
       "artist": "Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20-%20Walang%20Natira.mp3",
+      "url": "audio/143.opus",
       "duration": 238.23,
-      "size": 3812666
+      "size": 469809,
+      "format": "opus",
+      "original_size": 3812666
     },
     {
       "id": 144,
       "title": "Sirena",
       "artist": "Gloc 9 Ft. Ebe Dancel",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20Ft.%20Ebe%20Dancel%20-%20Sirena.mp3",
+      "url": "audio/144.opus",
       "duration": 275.18,
-      "size": 4404171
+      "size": 532190,
+      "format": "opus",
+      "original_size": 4404171
     },
     {
       "id": 145,
       "title": "Elmer",
       "artist": "Gloc 9 Ft. Jaq Dionisio",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20Ft.%20Jaq%20Dionisio%20-%20Elmer.mp3",
+      "url": "audio/145.opus",
       "duration": 257.7,
-      "size": 4124139
+      "size": 505393,
+      "format": "opus",
+      "original_size": 4124139
     },
     {
       "id": 146,
       "title": "The Bobo Song",
       "artist": "Gloc 9 Ft. Loonie",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20Ft.%20Loonie%20-%20The%20Bobo%20Song.mp3",
+      "url": "audio/146.opus",
       "duration": 242.15,
-      "size": 3875360
+      "size": 455643,
+      "format": "opus",
+      "original_size": 3875360
     },
     {
       "id": 147,
       "title": "Magda",
       "artist": "Gloc 9 Ft. Rico Blanco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gloc%209%20Ft.%20Rico%20Blanco%20-%20Magda.mp3",
+      "url": "audio/147.opus",
       "duration": 324.19,
-      "size": 5188170
+      "size": 613612,
+      "format": "opus",
+      "original_size": 5188170
     },
     {
       "id": 148,
       "title": "Ginto Part 2",
       "artist": "Guddhist Gunatita Ft. Ghetto Gecko",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Guddhist%20Gunatita%20Ft.%20Ghetto%20Gecko%20-%20Ginto%20Part%202.mp3",
+      "url": "audio/148.opus",
       "duration": 261.15,
-      "size": 4179727
+      "size": 530230,
+      "format": "opus",
+      "original_size": 4179727
     },
     {
       "id": 149,
       "title": "Cruisin'",
       "artist": "Gwyneth Paltrow & Huey Lewis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Gwyneth%20Paltrow%20%26%20Huey%20Lewis%20-%20Cruisin%27.mp3",
+      "url": "audio/149.opus",
       "duration": 292.78,
-      "size": 4685458
+      "size": 583819,
+      "format": "opus",
+      "original_size": 4685458
     },
     {
       "id": 150,
       "title": "MMMBop",
       "artist": "Hanson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hanson%20-%20MMMBop.mp3",
+      "url": "audio/150.opus",
       "duration": 238.75,
-      "size": 3821118
+      "size": 427390,
+      "format": "opus",
+      "original_size": 3821118
     },
     {
       "id": 151,
       "title": "Ohio Is For Lovers",
       "artist": "Hawthorne Heights",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hawthorne%20Heights%20-%20Ohio%20Is%20For%20Lovers.mp3",
+      "url": "audio/151.opus",
       "duration": 243.71,
-      "size": 3900438
+      "size": 453618,
+      "format": "opus",
+      "original_size": 3900438
     },
     {
       "id": 152,
       "title": "Welcome2DTQ",
       "artist": "Hev Abi",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hev%20Abi%20-%20%20Welcome2DTQ.mp3",
+      "url": "audio/152.opus",
       "duration": 179.12,
-      "size": 2866918
+      "size": 348940,
+      "format": "opus",
+      "original_size": 2866918
     },
     {
       "id": 153,
       "title": "Alam Mo Ba Girl",
       "artist": "Hev Abi",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hev%20Abi%20-%20Alam%20Mo%20Ba%20Girl.mp3",
+      "url": "audio/153.opus",
       "duration": 223.54,
-      "size": 3577866
+      "size": 464950,
+      "format": "opus",
+      "original_size": 3577866
     },
     {
       "id": 154,
       "title": "Define",
       "artist": "Hilera",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hilera%20-%20Define.mp3",
+      "url": "audio/154.opus",
       "duration": 195.19,
-      "size": 3124287
+      "size": 358643,
+      "format": "opus",
+      "original_size": 3124287
     },
     {
       "id": 155,
       "title": "Manila",
       "artist": "Hotdog",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hotdog%20-%20Manila.mp3",
+      "url": "audio/155.opus",
       "duration": 191.83,
-      "size": 3070371
+      "size": 388007,
+      "format": "opus",
+      "original_size": 3070371
     },
     {
       "id": 156,
       "title": "Stars",
       "artist": "Hum",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Hum%20-%20Stars.mp3",
+      "url": "audio/156.opus",
       "duration": 309.82,
-      "size": 4958385
+      "size": 580978,
+      "format": "opus",
+      "original_size": 4958385
     },
     {
       "id": 157,
       "title": "Balang Araw",
       "artist": "I Belong to the Zoo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/I%20Belong%20to%20the%20Zoo%20-%20Balang%20Araw.mp3",
+      "url": "audio/157.opus",
       "duration": 292.27,
-      "size": 4677517
+      "size": 619119,
+      "format": "opus",
+      "original_size": 4677517
     },
     {
       "id": 158,
       "title": "Sana",
       "artist": "I Belong to the Zoo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/I%20Belong%20to%20the%20Zoo%20-%20Sana.mp3",
+      "url": "audio/158.opus",
       "duration": 285.05,
-      "size": 4561742
+      "size": 556031,
+      "format": "opus",
+      "original_size": 4561742
     },
     {
       "id": 159,
       "title": "It Was A Good Day",
       "artist": "Ice Cube",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ice%20Cube%20%20-%20It%20Was%20A%20Good%20Day.mp3",
+      "url": "audio/159.opus",
       "duration": 266.05,
-      "size": 4257886
+      "size": 527928,
+      "format": "opus",
+      "original_size": 4257886
     },
     {
       "id": 160,
       "title": "Until We Rich",
       "artist": "Ice Cube Ft. Krayzie Bone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ice%20Cube%20Ft.%20Krayzie%20Bone%20-%20Until%20We%20Rich.mp3",
+      "url": "audio/160.opus",
       "duration": 254.86,
-      "size": 4078999
+      "size": 477484,
+      "format": "opus",
+      "original_size": 4078999
     },
     {
       "id": 161,
       "title": "Megalomaniac",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20%20-%20Megalomaniac.mp3",
+      "url": "audio/161.opus",
       "duration": 294.92,
-      "size": 4719731
+      "size": 555485,
+      "format": "opus",
+      "original_size": 4719731
     },
     {
       "id": 162,
       "title": "Anna Molly",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Anna%20Molly.mp3",
+      "url": "audio/162.opus",
       "duration": 229.24,
-      "size": 3668888
+      "size": 414247,
+      "format": "opus",
+      "original_size": 3668888
     },
     {
       "id": 163,
       "title": "Are You In",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Are%20You%20In.mp3",
+      "url": "audio/163.opus",
       "duration": 212.73,
-      "size": 3404738
+      "size": 409302,
+      "format": "opus",
+      "original_size": 3404738
     },
     {
       "id": 164,
       "title": "Drive",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Drive.mp3",
+      "url": "audio/164.opus",
       "duration": 233.87,
-      "size": 3742960
+      "size": 464765,
+      "format": "opus",
+      "original_size": 3742960
     },
     {
       "id": 165,
       "title": "Pardon Me",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Pardon%20Me.mp3",
+      "url": "audio/165.opus",
       "duration": 223.72,
-      "size": 3580792
+      "size": 425369,
+      "format": "opus",
+      "original_size": 3580792
     },
     {
       "id": 166,
       "title": "Stellar",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Stellar.mp3",
+      "url": "audio/166.opus",
       "duration": 201.8,
-      "size": 3230031
+      "size": 394513,
+      "format": "opus",
+      "original_size": 3230031
     },
     {
       "id": 167,
       "title": "Talk Shows On Mute",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Talk%20Shows%20On%20Mute.mp3",
+      "url": "audio/167.opus",
       "duration": 230.34,
-      "size": 3686536
+      "size": 451686,
+      "format": "opus",
+      "original_size": 3686536
     },
     {
       "id": 168,
       "title": "Warning",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Warning.mp3",
+      "url": "audio/168.opus",
       "duration": 283.05,
-      "size": 4529884
+      "size": 555509,
+      "format": "opus",
+      "original_size": 4529884
     },
     {
       "id": 169,
       "title": "Wish You Were Here",
       "artist": "Incubus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Incubus%20-%20Wish%20You%20Were%20Here.mp3",
+      "url": "audio/169.opus",
       "duration": 212.93,
-      "size": 3408082
+      "size": 404393,
+      "format": "opus",
+      "original_size": 3408082
     },
     {
       "id": 170,
       "title": "Para sa Sarili",
       "artist": "JRLDM",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/JRLDM%20-%20Para%20sa%20Sarili.mp3",
+      "url": "audio/170.opus",
       "duration": 258.66,
-      "size": 4139510
+      "size": 553359,
+      "format": "opus",
+      "original_size": 4139510
     },
     {
       "id": 171,
       "title": "Acid Na Blue",
       "artist": "JRLDM Ft. Ghuddist, Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/JRLDM%20Ft.%20Ghuddist%2C%20Kiyo%20-%20Acid%20Na%20Blue.mp3",
+      "url": "audio/171.opus",
       "duration": 223.31,
-      "size": 3574105
+      "size": 448964,
+      "format": "opus",
+      "original_size": 3574105
     },
     {
       "id": 172,
       "title": "Join Us For A Bite",
       "artist": "JT Music",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/JT%20Music%20-%20Join%20Us%20For%20A%20Bite.mp3",
+      "url": "audio/172.opus",
       "duration": 229.44,
-      "size": 3672325
+      "size": 463792,
+      "format": "opus",
+      "original_size": 3672325
     },
     {
       "id": 173,
       "title": "I Want You Back",
       "artist": "Jackson 5",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Jackson%205%20-%20I%20Want%20You%20Back.mp3",
+      "url": "audio/173.opus",
       "duration": 173.55,
-      "size": 2777892
+      "size": 342043,
+      "format": "opus",
+      "original_size": 2777892
     },
     {
       "id": 174,
       "title": "You're Beautiful",
       "artist": "James Blunt",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/James%20Blunt%20-%20You%27re%20Beautiful.mp3",
+      "url": "audio/174.opus",
       "duration": 202.13,
-      "size": 3235047
+      "size": 397053,
+      "format": "opus",
+      "original_size": 3235047
     },
     {
       "id": 175,
       "title": "Just Like Me",
       "artist": "Jamie Foxx",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Jamie%20Foxx%20-%20Just%20Like%20Me.mp3",
+      "url": "audio/175.opus",
       "duration": 206.17,
-      "size": 3299923
+      "size": 410144,
+      "format": "opus",
+      "original_size": 3299923
     },
     {
       "id": 176,
       "title": "ANTOXIC LIVE",
       "artist": "Janine Berdin",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Janine%20Berdin%20-%20ANTOXIC%20LIVE.mp3",
+      "url": "audio/176.opus",
       "duration": 278.87,
-      "size": 4463104
+      "size": 521213,
+      "format": "opus",
+      "original_size": 4463104
     },
     {
       "id": 177,
       "title": "What if I miss you for the rest of my life LIVE",
       "artist": "Janine Berdin",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Janine%20Berdin%20-%20What%20if%20I%20miss%20you%20for%20the%20rest%20of%20my%20life%20LIVE.mp3",
+      "url": "audio/177.opus",
       "duration": 219.24,
-      "size": 3508913
+      "size": 439578,
+      "format": "opus",
+      "original_size": 3508913
     },
     {
       "id": 178,
       "title": "The Remedy",
       "artist": "Jason Mraz",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Jason%20Mraz%20-%20The%20Remedy.mp3",
+      "url": "audio/178.opus",
       "duration": 251.58,
-      "size": 4026243
+      "size": 487557,
+      "format": "opus",
+      "original_size": 4026243
     },
     {
       "id": 179,
       "title": "03' Bonnie & Clyde",
       "artist": "Jay-Z & Beyoncé",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Jay-Z%20%26%20Beyonc%C3%A9%20-%2003%27%20Bonnie%20%26%20Clyde.mp3",
+      "url": "audio/179.opus",
       "duration": 206.01,
-      "size": 3297416
+      "size": 387897,
+      "format": "opus",
+      "original_size": 3297416
     },
     {
       "id": 180,
       "title": "Bakit Ngayon Ka Lang",
       "artist": "Juan Thugs N Harmony",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Juan%20Thugs%20N%20Harmony%20-%20Bakit%20Ngayon%20Ka%20Lang.mp3",
+      "url": "audio/180.opus",
       "duration": 295.73,
-      "size": 4732687
+      "size": 641163,
+      "format": "opus",
+      "original_size": 4732687
     },
     {
       "id": 181,
       "title": "Lucid Dreams",
       "artist": "Juice WRLD",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Juice%20WRLD%20-%20Lucid%20Dreams.mp3",
+      "url": "audio/181.opus",
       "duration": 230.1,
-      "size": 3682681
+      "size": 472672,
+      "format": "opus",
+      "original_size": 3682681
     },
     {
       "id": 182,
       "title": "90Nice",
       "artist": "Juss Rye Ft. Sak Maestro",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Juss%20Rye%20Ft.%20Sak%20Maestro%20-%2090Nice.mp3",
+      "url": "audio/182.opus",
       "duration": 214.68,
-      "size": 3436085
+      "size": 399253,
+      "format": "opus",
+      "original_size": 3436085
     },
     {
       "id": 183,
       "title": "Love Yourself",
       "artist": "Justin Bieber",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Justin%20Bieber%20-%20Love%20Yourself.mp3",
+      "url": "audio/183.opus",
       "duration": 231.54,
-      "size": 3705669
+      "size": 473739,
+      "format": "opus",
+      "original_size": 3705669
     },
     {
       "id": 184,
       "title": "A.I.D.S.",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20A.I.D.S..mp3",
+      "url": "audio/184.opus",
       "duration": 232.71,
-      "size": 3724477
+      "size": 421837,
+      "format": "opus",
+      "original_size": 3724477
     },
     {
       "id": 185,
       "title": "Agimat",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Agimat.mp3",
+      "url": "audio/185.opus",
       "duration": 260.27,
-      "size": 4165517
+      "size": 490667,
+      "format": "opus",
+      "original_size": 4165517
     },
     {
       "id": 186,
       "title": "Ambisyoso",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Ambisyoso.mp3",
+      "url": "audio/186.opus",
       "duration": 249.52,
-      "size": 3993225
+      "size": 481202,
+      "format": "opus",
+      "original_size": 3993225
     },
     {
       "id": 187,
       "title": "Chiksilog",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Chiksilog.mp3",
+      "url": "audio/187.opus",
       "duration": 288.44,
-      "size": 4615984
+      "size": 556172,
+      "format": "opus",
+      "original_size": 4615984
     },
     {
       "id": 188,
       "title": "Director's Cut (Live)",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Director%27s%20Cut%20%28Live%29.mp3",
+      "url": "audio/188.opus",
       "duration": 301.6,
-      "size": 4826728
+      "size": 606012,
+      "format": "opus",
+      "original_size": 4826728
     },
     {
       "id": 189,
       "title": "Director's Cut",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Director%27s%20Cut.mp3",
+      "url": "audio/189.opus",
       "duration": 290.13,
-      "size": 4643244
+      "size": 551411,
+      "format": "opus",
+      "original_size": 4643244
     },
     {
       "id": 190,
       "title": "Girlfriend",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Girlfriend.mp3",
+      "url": "audio/190.opus",
       "duration": 301.58,
-      "size": 4826310
+      "size": 586173,
+      "format": "opus",
+      "original_size": 4826310
     },
     {
       "id": 191,
       "title": "Halik",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Halik.mp3",
+      "url": "audio/191.opus",
       "duration": 222.73,
-      "size": 3564909
+      "size": 435920,
+      "format": "opus",
+      "original_size": 3564909
     },
     {
       "id": 192,
       "title": "Hanggang Tingin",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Hanggang%20Tingin.mp3",
+      "url": "audio/192.opus",
       "duration": 289.41,
-      "size": 4631448
+      "size": 534818,
+      "format": "opus",
+      "original_size": 4631448
     },
     {
       "id": 193,
       "title": "Huling Sayaw",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Huling%20Sayaw.mp3",
+      "url": "audio/193.opus",
       "duration": 295.45,
-      "size": 4728508
+      "size": 594596,
+      "format": "opus",
+      "original_size": 4728508
     },
     {
       "id": 194,
       "title": "Ikaw",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Ikaw.mp3",
+      "url": "audio/194.opus",
       "duration": 234.92,
-      "size": 3759678
+      "size": 450367,
+      "format": "opus",
+      "original_size": 3759678
     },
     {
       "id": 195,
       "title": "Martyr Nyebera",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Martyr%20Nyebera.mp3",
+      "url": "audio/195.opus",
       "duration": 325.28,
-      "size": 5205724
+      "size": 591215,
+      "format": "opus",
+      "original_size": 5205724
     },
     {
       "id": 196,
       "title": "Narda",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Narda.mp3",
+      "url": "audio/196.opus",
       "duration": 288.37,
-      "size": 4615241
+      "size": 561390,
+      "format": "opus",
+      "original_size": 4615241
     },
     {
       "id": 197,
       "title": "Petix",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Petix.mp3",
+      "url": "audio/197.opus",
       "duration": 240.47,
-      "size": 3848611
+      "size": 452469,
+      "format": "opus",
+      "original_size": 3848611
     },
     {
       "id": 198,
       "title": "Seksi! Seksi!",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Seksi%21%20Seksi%21.mp3",
+      "url": "audio/198.opus",
       "duration": 250.78,
-      "size": 4013380
+      "size": 456168,
+      "format": "opus",
+      "original_size": 4013380
     },
     {
       "id": 199,
       "title": "Tagpuan",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Tagpuan.mp3",
+      "url": "audio/199.opus",
       "duration": 255.51,
-      "size": 4089448
+      "size": 507536,
+      "format": "opus",
+      "original_size": 4089448
     },
     {
       "id": 200,
       "title": "Unang Tikim",
       "artist": "Kamikazee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kamikazee%20-%20Unang%20Tikim.mp3",
+      "url": "audio/200.opus",
       "duration": 265.52,
-      "size": 4249434
+      "size": 472659,
+      "format": "opus",
+      "original_size": 4249434
     },
     {
       "id": 201,
       "title": "Family Business",
       "artist": "Kanye West",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kanye%20West%20-%20Family%20Business.mp3",
+      "url": "audio/201.opus",
       "duration": 278.89,
-      "size": 4463429
+      "size": 539727,
+      "format": "opus",
+      "original_size": 4463429
     },
     {
       "id": 202,
       "title": "Bittersweet Poetry",
       "artist": "Kanye West Ft. John Mayer",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kanye%20West%20Ft.%20John%20Mayer%20-%20Bittersweet%20Poetry.mp3",
+      "url": "audio/202.opus",
       "duration": 242.08,
-      "size": 3874524
+      "size": 488271,
+      "format": "opus",
+      "original_size": 3874524
     },
     {
       "id": 203,
       "title": "Terrified",
       "artist": "Katherine McPhee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Katherine%20McPhee%20-%20Terrified.mp3",
+      "url": "audio/203.opus",
       "duration": 229.34,
-      "size": 3670653
+      "size": 455811,
+      "format": "opus",
+      "original_size": 3670653
     },
     {
       "id": 204,
       "title": "Bahala Na",
       "artist": "Kenaniah",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kenaniah%20-%20Bahala%20Na.mp3",
+      "url": "audio/204.opus",
       "duration": 229.41,
-      "size": 3671907
+      "size": 447217,
+      "format": "opus",
+      "original_size": 3671907
     },
     {
       "id": 205,
       "title": "Humble",
       "artist": "Kendrick Lamar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kendrick%20Lamar%20-%20Humble.mp3",
+      "url": "audio/205.opus",
       "duration": 185.54,
-      "size": 2969643
+      "size": 358495,
+      "format": "opus",
+      "original_size": 2969643
     },
     {
       "id": 206,
       "title": "Pursuit of Happiness (Steve Aoki Remix)",
       "artist": "Kid Cudi",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kid%20Cudi%20-%20Pursuit%20of%20Happiness%20%28Steve%20Aoki%20Remix%29.mp3",
+      "url": "audio/206.opus",
       "duration": 383.14,
-      "size": 6131504
+      "size": 707732,
+      "format": "opus",
+      "original_size": 6131504
     },
     {
       "id": 207,
       "title": "Free",
       "artist": "Kidwolf",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kidwolf%20-%20%20Free.mp3",
+      "url": "audio/207.opus",
       "duration": 232.87,
-      "size": 3726985
+      "size": 446789,
+      "format": "opus",
+      "original_size": 3726985
     },
     {
       "id": 208,
       "title": "Bette Davis Eyes",
       "artist": "Kim Carnes",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kim%20Carnes%20-%20Bette%20Davis%20Eyes.mp3",
+      "url": "audio/208.opus",
       "duration": 213.65,
-      "size": 3419367
+      "size": 394014,
+      "format": "opus",
+      "original_size": 3419367
     },
     {
       "id": 209,
       "title": "Use Somebody",
       "artist": "Kings of Leon",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kings%20of%20Leon%20-%20Use%20Somebody.mp3",
+      "url": "audio/209.opus",
       "duration": 232.86,
-      "size": 3726985
+      "size": 451688,
+      "format": "opus",
+      "original_size": 3726985
     },
     {
       "id": 210,
       "title": "Eba",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Eba.mp3",
+      "url": "audio/210.opus",
       "duration": 230.41,
-      "size": 3687789
+      "size": 438846,
+      "format": "opus",
+      "original_size": 3687789
     },
     {
       "id": 211,
       "title": "Glasshouse",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Glasshouse.mp3",
+      "url": "audio/211.opus",
       "duration": 220.78,
-      "size": 3533470
+      "size": 447812,
+      "format": "opus",
+      "original_size": 3533470
     },
     {
       "id": 212,
       "title": "Ikaw Lang",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Ikaw%20Lang.mp3",
+      "url": "audio/212.opus",
       "duration": 250.22,
-      "size": 4004603
+      "size": 501237,
+      "format": "opus",
+      "original_size": 4004603
     },
     {
       "id": 213,
       "title": "Nandito na",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Nandito%20na.mp3",
+      "url": "audio/213.opus",
       "duration": 213.55,
-      "size": 3418206
+      "size": 430625,
+      "format": "opus",
+      "original_size": 3418206
     },
     {
       "id": 214,
       "title": "Pantalan Pt. 1",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Pantalan%20Pt.%201.mp3",
+      "url": "audio/214.opus",
       "duration": 270.86,
-      "size": 4334697
+      "size": 528780,
+      "format": "opus",
+      "original_size": 4334697
     },
     {
       "id": 215,
       "title": "Puyat",
       "artist": "Kiyo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20-%20Puyat.mp3",
+      "url": "audio/215.opus",
       "duration": 264.73,
-      "size": 4236988
+      "size": 518895,
+      "format": "opus",
+      "original_size": 4236988
     },
     {
       "id": 216,
       "title": "Urong Sulong",
       "artist": "Kiyo Ft. Alisson Shore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20Ft.%20Alisson%20Shore%20-%20Urong%20Sulong.mp3",
+      "url": "audio/216.opus",
       "duration": 268.14,
-      "size": 4291323
+      "size": 525776,
+      "format": "opus",
+      "original_size": 4291323
     },
     {
       "id": 217,
       "title": "Ano Na",
       "artist": "Kiyo Ft. Calvin",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20Ft.%20Calvin%20-%20Ano%20Na.mp3",
+      "url": "audio/217.opus",
       "duration": 162.01,
-      "size": 2593154
+      "size": 339479,
+      "format": "opus",
+      "original_size": 2593154
     },
     {
       "id": 218,
       "title": "G",
       "artist": "Kiyo Ft. Space Moses",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20Ft.%20Space%20Moses%20-%20G.mp3",
+      "url": "audio/218.opus",
       "duration": 309.1,
-      "size": 4946683
+      "size": 634200,
+      "format": "opus",
+      "original_size": 4946683
     },
     {
       "id": 219,
       "title": "Dantay",
       "artist": "Kiyo Ft. YZKK",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kiyo%20Ft.%20YZKK%20-%20Dantay.mp3",
+      "url": "audio/219.opus",
       "duration": 286.95,
-      "size": 4592253
+      "size": 580262,
+      "format": "opus",
+      "original_size": 4592253
     },
     {
       "id": 220,
       "title": "One Look",
       "artist": "Kjwan",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Kjwan%20-%20One%20Look.mp3",
+      "url": "audio/220.opus",
       "duration": 208.19,
-      "size": 3332106
+      "size": 404764,
+      "format": "opus",
+      "original_size": 3332106
     },
     {
       "id": 221,
       "title": "Here To Own It",
       "artist": "LDP",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/LDP%20-%20Here%20To%20Own%20It.mp3",
+      "url": "audio/221.opus",
       "duration": 273.0,
-      "size": 4369063
+      "size": 516453,
+      "format": "opus",
+      "original_size": 4369063
     },
     {
       "id": 222,
       "title": "Three Years in the Making",
       "artist": "LDP",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/LDP%20-%20Three%20Years%20in%20the%20Making.mp3",
+      "url": "audio/222.opus",
       "duration": 241.58,
-      "size": 3866258
+      "size": 452127,
+      "format": "opus",
+      "original_size": 3866258
     },
     {
       "id": 223,
       "title": "XO Tour Llif3",
       "artist": "Lil Uzi Vert",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Lil%20Uzi%20Vert%20-%20XO%20Tour%20Llif3.mp3",
+      "url": "audio/223.opus",
       "duration": 180.18,
-      "size": 2883961
+      "size": 373457,
+      "format": "opus",
+      "original_size": 2883961
     },
     {
       "id": 224,
       "title": "In The End",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20%20-%20In%20The%20End.mp3",
+      "url": "audio/224.opus",
       "duration": 218.22,
-      "size": 3492603
+      "size": 412196,
+      "format": "opus",
+      "original_size": 3492603
     },
     {
       "id": 225,
       "title": "Points Of Authority",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20%20-%20Points%20Of%20Authority.mp3",
+      "url": "audio/225.opus",
       "duration": 200.24,
-      "size": 3204954
+      "size": 345083,
+      "format": "opus",
+      "original_size": 3204954
     },
     {
       "id": 226,
       "title": "Waiting For The End",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20%20-%20Waiting%20For%20The%20End.mp3",
+      "url": "audio/226.opus",
       "duration": 234.29,
-      "size": 3749647
+      "size": 453042,
+      "format": "opus",
+      "original_size": 3749647
     },
     {
       "id": 227,
       "title": "Somewhere I Belong",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20-%20%20Somewhere%20I%20Belong.mp3",
+      "url": "audio/227.opus",
       "duration": 213.11,
-      "size": 3411100
+      "size": 400832,
+      "format": "opus",
+      "original_size": 3411100
     },
     {
       "id": 228,
       "title": "One Step Closer",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20-%20One%20Step%20Closer.mp3",
+      "url": "audio/228.opus",
       "duration": 157.33,
-      "size": 2518247
+      "size": 270542,
+      "format": "opus",
+      "original_size": 2518247
     },
     {
       "id": 229,
       "title": "Papercut",
       "artist": "Linkin Park",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Linkin%20Park%20-%20Papercut.mp3",
+      "url": "audio/229.opus",
       "duration": 184.81,
-      "size": 2958033
+      "size": 325792,
+      "format": "opus",
+      "original_size": 2958033
     },
     {
       "id": 230,
       "title": "Stay",
       "artist": "Lisa Loeb",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Lisa%20Loeb%20-%20Stay.mp3",
+      "url": "audio/230.opus",
       "duration": 187.22,
-      "size": 2996903
+      "size": 382719,
+      "format": "opus",
+      "original_size": 2996903
     },
     {
       "id": 231,
       "title": "Fallen",
       "artist": "Lola Amour",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Lola%20Amour%20-%20Fallen.mp3",
+      "url": "audio/231.opus",
       "duration": 291.92,
-      "size": 4672083
+      "size": 604392,
+      "format": "opus",
+      "original_size": 4672083
     },
     {
       "id": 232,
       "title": "Raining in Manila",
       "artist": "Lola Amour",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Lola%20Amour%20-%20Raining%20in%20Manila.mp3",
+      "url": "audio/232.opus",
       "duration": 292.55,
-      "size": 4682114
+      "size": 580894,
+      "format": "opus",
+      "original_size": 4682114
     },
     {
       "id": 233,
       "title": "Balewala",
       "artist": "Loonie",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20-%20Balewala.mp3",
+      "url": "audio/233.opus",
       "duration": 301.55,
-      "size": 4825799
+      "size": 564243,
+      "format": "opus",
+      "original_size": 4825799
     },
     {
       "id": 234,
       "title": "Colt 45",
       "artist": "Loonie",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20-%20Colt%2045.mp3",
+      "url": "audio/234.opus",
       "duration": 246.25,
-      "size": 3941073
+      "size": 491773,
+      "format": "opus",
+      "original_size": 3941073
     },
     {
       "id": 235,
       "title": "Tugmang Preso",
       "artist": "Loonie",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20-%20Tugmang%20Preso.mp3",
+      "url": "audio/235.opus",
       "duration": 414.22,
-      "size": 6628550
+      "size": 838853,
+      "format": "opus",
+      "original_size": 6628550
     },
     {
       "id": 236,
       "title": "XXXX",
       "artist": "Loonie Ft. Hev Abi",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20Ft.%20Hev%20Abi%20-%20XXXX.mp3",
+      "url": "audio/236.opus",
       "duration": 184.46,
-      "size": 2952599
+      "size": 377342,
+      "format": "opus",
+      "original_size": 2952599
     },
     {
       "id": 237,
       "title": "XXX",
       "artist": "Loonie Ft. Hi C",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20Ft.%20Hi%20C%20-%20%20XXX.mp3",
+      "url": "audio/237.opus",
       "duration": 246.8,
-      "size": 3949850
+      "size": 471882,
+      "format": "opus",
+      "original_size": 3949850
     },
     {
       "id": 238,
       "title": "Pamanggulo",
       "artist": "Loonie Ft. JRLDM",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20Ft.%20JRLDM%20-%20Pamanggulo.mp3",
+      "url": "audio/238.opus",
       "duration": 313.62,
-      "size": 5018896
+      "size": 693175,
+      "format": "opus",
+      "original_size": 5018896
     },
     {
       "id": 239,
       "title": "Tao Lang",
       "artist": "Loonie Ft. Quest",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loonie%20Ft.%20Quest%20-%20Tao%20Lang.mp3",
+      "url": "audio/239.opus",
       "duration": 253.43,
-      "size": 4055918
+      "size": 456453,
+      "format": "opus",
+      "original_size": 4055918
     },
     {
       "id": 240,
       "title": "Puno",
       "artist": "Luci J",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Luci%20J%20-%20Puno.mp3",
+      "url": "audio/240.opus",
       "duration": 270.84,
-      "size": 4334697
+      "size": 528497,
+      "format": "opus",
+      "original_size": 4334697
     },
     {
       "id": 241,
       "title": "The Show Goes On",
       "artist": "Lupe Fiasco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Lupe%20Fiasco%20-%20The%20Show%20Goes%20On.mp3",
+      "url": "audio/241.opus",
       "duration": 232.27,
-      "size": 3717465
+      "size": 451926,
+      "format": "opus",
+      "original_size": 3717465
     },
     {
       "id": 242,
       "title": "Paper Planes",
       "artist": "M.I.A.",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/M.I.A.%20-%20Paper%20Planes.mp3",
+      "url": "audio/242.opus",
       "duration": 204.34,
-      "size": 3270573
+      "size": 385169,
+      "format": "opus",
+      "original_size": 3270573
     },
     {
       "id": 243,
       "title": "Crushmate",
       "artist": "MKKL",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/MKKL%20-%20Crushmate.mp3",
+      "url": "audio/243.opus",
       "duration": 169.64,
-      "size": 2715616
+      "size": 360532,
+      "format": "opus",
+      "original_size": 2715616
     },
     {
       "id": 244,
       "title": "Bloody Valentine",
       "artist": "Machine Gun Kelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Machine%20Gun%20Kelly%20-%20Bloody%20Valentine.mp3",
+      "url": "audio/244.opus",
       "duration": 212.51,
-      "size": 3401487
+      "size": 385178,
+      "format": "opus",
+      "original_size": 3401487
     },
     {
       "id": 245,
       "title": "White Walls",
       "artist": "Macklemore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Macklemore%20-%20White%20Walls.mp3",
+      "url": "audio/245.opus",
       "duration": 219.03,
-      "size": 3505559
+      "size": 442765,
+      "format": "opus",
+      "original_size": 3505559
     },
     {
       "id": 246,
       "title": "Imahe",
       "artist": "Magnus Haven",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Magnus%20Haven%20-%20Imahe.mp3",
+      "url": "audio/246.opus",
       "duration": 320.76,
-      "size": 5133510
+      "size": 654929,
+      "format": "opus",
+      "original_size": 5133510
     },
     {
       "id": 247,
       "title": "Porque",
       "artist": "Maldita",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Maldita%20-%20Porque.mp3",
+      "url": "audio/247.opus",
       "duration": 295.51,
-      "size": 4729251
+      "size": 646375,
+      "format": "opus",
+      "original_size": 4729251
     },
     {
       "id": 248,
       "title": "Silver Skies",
       "artist": "Manila Grey",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Manila%20Grey%20-%20Silver%20Skies.mp3",
+      "url": "audio/248.opus",
       "duration": 188.86,
-      "size": 3022723
+      "size": 356102,
+      "format": "opus",
+      "original_size": 3022723
     },
     {
       "id": 249,
       "title": "She Will Be Loved",
       "artist": "Maroon 5",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Maroon%205%20-%20She%20Will%20Be%20Loved.mp3",
+      "url": "audio/249.opus",
       "duration": 257.71,
-      "size": 4124464
+      "size": 539765,
+      "format": "opus",
+      "original_size": 4124464
     },
     {
       "id": 250,
       "title": "This Love",
       "artist": "Maroon 5",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Maroon%205%20-%20This%20Love.mp3",
+      "url": "audio/250.opus",
       "duration": 204.78,
-      "size": 3277678
+      "size": 389240,
+      "format": "opus",
+      "original_size": 3277678
     },
     {
       "id": 251,
       "title": "Won't Go Home Without You",
       "artist": "Maroon 5",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Maroon%205%20-%20Won%27t%20Go%20Home%20Without%20You.mp3",
+      "url": "audio/251.opus",
       "duration": 231.38,
-      "size": 3703161
+      "size": 474590,
+      "format": "opus",
+      "original_size": 3703161
     },
     {
       "id": 252,
       "title": "Bent",
       "artist": "Matchbox 20",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Matchbox%2020%20-%20Bent.mp3",
+      "url": "audio/252.opus",
       "duration": 233.55,
-      "size": 3737945
+      "size": 447720,
+      "format": "opus",
+      "original_size": 3737945
     },
     {
       "id": 253,
       "title": "Bakit Part 2",
       "artist": "Mayonnaise",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Mayonnaise%20-%20Bakit%20Part%202.mp3",
+      "url": "audio/253.opus",
       "duration": 275.37,
-      "size": 4407097
+      "size": 529433,
+      "format": "opus",
+      "original_size": 4407097
     },
     {
       "id": 254,
       "title": "December",
       "artist": "Neck Deep",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Neck%20Deep%20-%20December.mp3",
+      "url": "audio/254.opus",
       "duration": 218.94,
-      "size": 3504212
+      "size": 465028,
+      "format": "opus",
+      "original_size": 3504212
     },
     {
       "id": 255,
       "title": "Wish You Were Here",
       "artist": "Neck Deep",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Neck%20Deep%20-%20Wish%20You%20Were%20Here.mp3",
+      "url": "audio/255.opus",
       "duration": 248.25,
-      "size": 3973262
+      "size": 531200,
+      "format": "opus",
+      "original_size": 3973262
     },
     {
       "id": 256,
       "title": "Line Without a Hook",
       "artist": "Ricky Montgomery",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ricky%20Montgomery%20-%20Line%20Without%20a%20Hook.mp3",
+      "url": "audio/256.opus",
       "duration": 249.68,
-      "size": 3996249
+      "size": 489400,
+      "format": "opus",
+      "original_size": 3996249
     },
     {
       "id": 257,
       "title": "อูโน่หลาวทอง x เเมวในคอ l Live session",
       "artist": "ย้าย่ายะ (YAYAYA)",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/%E0%B8%A2%E0%B9%89%E0%B8%B2%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B8%B0%20%28YAYAYA%29%20-%20%E0%B8%AD%E0%B8%B9%E0%B9%82%E0%B8%99%E0%B9%88%E0%B8%AB%E0%B8%A5%E0%B8%B2%E0%B8%A7%E0%B8%97%E0%B8%AD%E0%B8%87%20x%20%E0%B9%80%E0%B9%80%E0%B8%A1%E0%B8%A7%E0%B9%83%E0%B8%99%E0%B8%84%E0%B8%AD%20l%20Live%20session.mp3",
+      "url": "audio/257.opus",
       "duration": 248.27,
-      "size": 3973266
+      "size": 458595,
+      "format": "opus",
+      "original_size": 3973266
     },
     {
       "id": 258,
       "title": "Kagome",
       "artist": "Loki",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Loki%20-%20Kagome.mp3",
+      "url": "audio/258.opus",
       "duration": 220.58,
-      "size": 3530544
+      "size": 502127,
+      "format": "opus",
+      "original_size": 3530544
     },
     {
       "id": 259,
       "title": "Jopay",
       "artist": "Mayonnaise",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Mayonnaise%20-%20Jopay.mp3",
+      "url": "audio/259.opus",
       "duration": 271.26,
-      "size": 4341060
+      "size": 542095,
+      "format": "opus",
+      "original_size": 4341060
     },
     {
       "id": 260,
       "title": "Beat It",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Beat%20It.mp3",
+      "url": "audio/260.opus",
       "duration": 256.96,
-      "size": 4112343
+      "size": 476374,
+      "format": "opus",
+      "original_size": 4112343
     },
     {
       "id": 261,
       "title": "Billie Jean",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Billie%20Jean.mp3",
+      "url": "audio/261.opus",
       "duration": 293.3,
-      "size": 4694142
+      "size": 532566,
+      "format": "opus",
+      "original_size": 4694142
     },
     {
       "id": 262,
       "title": "Black or White",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Black%20or%20White.mp3",
+      "url": "audio/262.opus",
       "duration": 198.51,
-      "size": 3177368
+      "size": 381284,
+      "format": "opus",
+      "original_size": 3177368
     },
     {
       "id": 263,
       "title": "Man in the Mirror",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Man%20in%20the%20Mirror.mp3",
+      "url": "audio/263.opus",
       "duration": 318.93,
-      "size": 5103835
+      "size": 599870,
+      "format": "opus",
+      "original_size": 5103835
     },
     {
       "id": 264,
       "title": "Remember The Time",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Remember%20The%20Time.mp3",
+      "url": "audio/264.opus",
       "duration": 240.47,
-      "size": 3848611
+      "size": 447965,
+      "format": "opus",
+      "original_size": 3848611
     },
     {
       "id": 265,
       "title": "Smooth Criminal",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20Smooth%20Criminal.mp3",
+      "url": "audio/265.opus",
       "duration": 239.53,
-      "size": 3833564
+      "size": 430364,
+      "format": "opus",
+      "original_size": 3833564
     },
     {
       "id": 266,
       "title": "You Are Not Alone",
       "artist": "Michael Jackson",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Michael%20Jackson%20-%20You%20Are%20Not%20Alone.mp3",
+      "url": "audio/266.opus",
       "duration": 295.99,
-      "size": 4736774
+      "size": 596872,
+      "format": "opus",
+      "original_size": 4736774
     },
     {
       "id": 267,
       "title": "Bow Chicka Wow Wow",
       "artist": "Mike Posner",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Mike%20Posner%20-%20Bow%20Chicka%20Wow%20Wow.mp3",
+      "url": "audio/267.opus",
       "duration": 223.25,
-      "size": 3573176
+      "size": 428327,
+      "format": "opus",
+      "original_size": 3573176
     },
     {
       "id": 268,
       "title": "Please Don't Go",
       "artist": "Mike Posner",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Mike%20Posner%20-%20Please%20Don%27t%20Go.mp3",
+      "url": "audio/268.opus",
       "duration": 195.0,
-      "size": 3120944
+      "size": 374499,
+      "format": "opus",
+      "original_size": 3120944
     },
     {
       "id": 269,
       "title": "Sa Hindi Pag-alala",
       "artist": "Munimuni",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Munimuni%20-%20Sa%20Hindi%20Pag-alala.mp3",
+      "url": "audio/269.opus",
       "duration": 250.5,
-      "size": 4009200
+      "size": 568975,
+      "format": "opus",
+      "original_size": 4009200
     },
     {
       "id": 270,
       "title": "Disenchanted",
       "artist": "My Chemical Romance",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/My%20Chemical%20Romance%20-%20Disenchanted.mp3",
+      "url": "audio/270.opus",
       "duration": 295.01,
-      "size": 4721403
+      "size": 583434,
+      "format": "opus",
+      "original_size": 4721403
     },
     {
       "id": 271,
       "title": "Famous Last Words",
       "artist": "My Chemical Romance",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/My%20Chemical%20Romance%20-%20Famous%20Last%20Words.mp3",
+      "url": "audio/271.opus",
       "duration": 261.69,
-      "size": 4187994
+      "size": 480525,
+      "format": "opus",
+      "original_size": 4187994
     },
     {
       "id": 272,
       "title": "Helena",
       "artist": "My Chemical Romance",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/My%20Chemical%20Romance%20-%20Helena.mp3",
+      "url": "audio/272.opus",
       "duration": 210.42,
-      "size": 3368051
+      "size": 386191,
+      "format": "opus",
+      "original_size": 3368051
     },
     {
       "id": 273,
       "title": "Welcome To The Black Parade",
       "artist": "My Chemical Romance",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/My%20Chemical%20Romance%20-%20Welcome%20To%20The%20Black%20Parade.mp3",
+      "url": "audio/273.opus",
       "duration": 314.7,
-      "size": 5036451
+      "size": 587453,
+      "format": "opus",
+      "original_size": 5036451
     },
     {
       "id": 274,
       "title": "Go On Girl",
       "artist": "Ne-Yo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ne-Yo%20-%20Go%20On%20Girl.mp3",
+      "url": "audio/274.opus",
       "duration": 263.31,
-      "size": 4214000
+      "size": 546561,
+      "format": "opus",
+      "original_size": 4214000
     },
     {
       "id": 275,
       "title": "I'm In Love",
       "artist": "Ne-Yo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ne-Yo%20-%20I%27m%20In%20Love.mp3",
+      "url": "audio/275.opus",
       "duration": 254.08,
-      "size": 4066367
+      "size": 517725,
+      "format": "opus",
+      "original_size": 4066367
     },
     {
       "id": 276,
       "title": "Mad",
       "artist": "Ne-Yo",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ne-Yo%20-%20Mad.mp3",
+      "url": "audio/276.opus",
       "duration": 255.48,
-      "size": 4088937
+      "size": 512423,
+      "format": "opus",
+      "original_size": 4088937
     },
     {
       "id": 277,
       "title": "Dilemma",
       "artist": "Nelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nelly%20-%20Dilemma.mp3",
+      "url": "audio/277.opus",
       "duration": 289.04,
-      "size": 4625690
+      "size": 565407,
+      "format": "opus",
+      "original_size": 4625690
     },
     {
       "id": 278,
       "title": "Just A Dream",
       "artist": "Nelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nelly%20-%20Just%20A%20Dream.mp3",
+      "url": "audio/278.opus",
       "duration": 240.88,
-      "size": 3855391
+      "size": 468349,
+      "format": "opus",
+      "original_size": 3855391
     },
     {
       "id": 279,
       "title": "My Place",
       "artist": "Nelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nelly%20-%20My%20Place.mp3",
+      "url": "audio/279.opus",
       "duration": 336.76,
-      "size": 5389208
+      "size": 642060,
+      "format": "opus",
+      "original_size": 5389208
     },
     {
       "id": 280,
       "title": "N Dey Say",
       "artist": "Nelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nelly%20-%20N%20Dey%20Say.mp3",
+      "url": "audio/280.opus",
       "duration": 222.21,
-      "size": 3556550
+      "size": 402290,
+      "format": "opus",
+      "original_size": 3556550
     },
     {
       "id": 281,
       "title": "Ride Wit Me",
       "artist": "Nelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nelly%20-%20Ride%20Wit%20Me.mp3",
+      "url": "audio/281.opus",
       "duration": 291.78,
-      "size": 4669483
+      "size": 538621,
+      "format": "opus",
+      "original_size": 4669483
     },
     {
       "id": 282,
       "title": "Someday We'll Know",
       "artist": "New Radicals",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/New%20Radicals%20-%20Someday%20We%27ll%20Know.mp3",
+      "url": "audio/282.opus",
       "duration": 227.78,
-      "size": 3645483
+      "size": 433545,
+      "format": "opus",
+      "original_size": 3645483
     },
     {
       "id": 283,
       "title": "You Get What You Give",
       "artist": "New Radicals",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/New%20Radicals%20-%20You%20Get%20What%20You%20Give.mp3",
+      "url": "audio/283.opus",
       "duration": 277.41,
-      "size": 4439605
+      "size": 513094,
+      "format": "opus",
+      "original_size": 4439605
     },
     {
       "id": 284,
       "title": "Far Away",
       "artist": "Nickelback",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nickelback%20-%20Far%20Away.mp3",
+      "url": "audio/284.opus",
       "duration": 238.65,
-      "size": 3819447
+      "size": 462493,
+      "format": "opus",
+      "original_size": 3819447
     },
     {
       "id": 285,
       "title": "How You Remind Me",
       "artist": "Nickelback",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nickelback%20-%20How%20You%20Remind%20Me.mp3",
+      "url": "audio/285.opus",
       "duration": 224.17,
-      "size": 3587804
+      "size": 411534,
+      "format": "opus",
+      "original_size": 3587804
     },
     {
       "id": 286,
       "title": "Photograph",
       "artist": "Nickelback",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nickelback%20-%20Photograph.mp3",
+      "url": "audio/286.opus",
       "duration": 259.87,
-      "size": 4159154
+      "size": 491311,
+      "format": "opus",
+      "original_size": 4159154
     },
     {
       "id": 287,
       "title": "Rockstar",
       "artist": "Nickelback",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nickelback%20-%20Rockstar.mp3",
+      "url": "audio/287.opus",
       "duration": 255.65,
-      "size": 4091538
+      "size": 483340,
+      "format": "opus",
+      "original_size": 4091538
     },
     {
       "id": 288,
       "title": "Savin' Me",
       "artist": "Nickelback",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nickelback%20-%20Savin%27%20Me.mp3",
+      "url": "audio/288.opus",
       "duration": 217.85,
-      "size": 3486751
+      "size": 418929,
+      "format": "opus",
+      "original_size": 3486751
     },
     {
       "id": 289,
       "title": "We Made It",
       "artist": "Nik Makino Ft. Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Nik%20Makino%20Ft.%20Flow%20G%20-%20We%20Made%20It.mp3",
+      "url": "audio/289.opus",
       "duration": 236.86,
-      "size": 3790932
+      "size": 505996,
+      "format": "opus",
+      "original_size": 3790932
     },
     {
       "id": 290,
       "title": "Kanlungan",
       "artist": "Noel Cabangon",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Noel%20Cabangon%20-%20Kanlungan.mp3",
+      "url": "audio/290.opus",
       "duration": 279.83,
-      "size": 4478475
+      "size": 574095,
+      "format": "opus",
+      "original_size": 4478475
     },
     {
       "id": 291,
       "title": "Pauwi Nako",
       "artist": "O.C. Dawgs",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/O.C.%20Dawgs%20-%20%20Pauwi%20Nako.mp3",
+      "url": "audio/291.opus",
       "duration": 347.86,
-      "size": 5566934
+      "size": 697775,
+      "format": "opus",
+      "original_size": 5566934
     },
     {
       "id": 292,
       "title": "Akala Ko Nung Una",
       "artist": "O.C. Dawgs",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/O.C.%20Dawgs%20-%20Akala%20Ko%20Nung%20Una.mp3",
+      "url": "audio/292.opus",
       "duration": 301.81,
-      "size": 4830072
+      "size": 644657,
+      "format": "opus",
+      "original_size": 4830072
     },
     {
       "id": 293,
       "title": "Hugot",
       "artist": "O.C. Dawgs",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/O.C.%20Dawgs%20-%20Hugot.mp3",
+      "url": "audio/293.opus",
       "duration": 445.52,
-      "size": 7129683
+      "size": 899827,
+      "format": "opus",
+      "original_size": 7129683
     },
     {
       "id": 294,
       "title": "Champagne Supernova",
       "artist": "Oasis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Oasis%20-%20Champagne%20Supernova.mp3",
+      "url": "audio/294.opus",
       "duration": 449.38,
-      "size": 7191123
+      "size": 934209,
+      "format": "opus",
+      "original_size": 7191123
     },
     {
       "id": 295,
       "title": "Don't Go Away",
       "artist": "Oasis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Oasis%20-%20Don%27t%20Go%20Away.mp3",
+      "url": "audio/295.opus",
       "duration": 288.67,
-      "size": 4619745
+      "size": 587581,
+      "format": "opus",
+      "original_size": 4619745
     },
     {
       "id": 296,
       "title": "Don't Look Back In Anger",
       "artist": "Oasis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Oasis%20-%20Don%27t%20Look%20Back%20In%20Anger.mp3",
+      "url": "audio/296.opus",
       "duration": 296.77,
-      "size": 4749406
+      "size": 571994,
+      "format": "opus",
+      "original_size": 4749406
     },
     {
       "id": 297,
       "title": "Wonderwall",
       "artist": "Oasis",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Oasis%20-%20Wonderwall.mp3",
+      "url": "audio/297.opus",
       "duration": 258.77,
-      "size": 4141600
+      "size": 519308,
+      "format": "opus",
+      "original_size": 4141600
     },
     {
       "id": 298,
       "title": "Night Changes",
       "artist": "One Direction",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/One%20Direction%20-%20Night%20Changes.mp3",
+      "url": "audio/298.opus",
       "duration": 240.26,
-      "size": 3845267
+      "size": 485080,
+      "format": "opus",
+      "original_size": 3845267
     },
     {
       "id": 299,
       "title": "American Girls",
       "artist": "One Ok Rock",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/One%20Ok%20Rock%20-%20American%20Girls.mp3",
+      "url": "audio/299.opus",
       "duration": 163.31,
-      "size": 2614052
+      "size": 300058,
+      "format": "opus",
+      "original_size": 2614052
     },
     {
       "id": 300,
       "title": "Pagsubok",
       "artist": "Orient Pearl",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Orient%20Pearl%20-%20Pagsubok.mp3",
+      "url": "audio/300.opus",
       "duration": 224.75,
-      "size": 3597092
+      "size": 445325,
+      "format": "opus",
+      "original_size": 3597092
     },
     {
       "id": 301,
       "title": "Innocent",
       "artist": "Our Lady Peace",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Our%20Lady%20Peace%20-%20Innocent.mp3",
+      "url": "audio/301.opus",
       "duration": 222.45,
-      "size": 3560312
+      "size": 406502,
+      "format": "opus",
+      "original_size": 3560312
     },
     {
       "id": 302,
       "title": "Fireflies",
       "artist": "Owl City",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Owl%20City%20-%20Fireflies.mp3",
+      "url": "audio/302.opus",
       "duration": 224.08,
-      "size": 3586550
+      "size": 461676,
+      "format": "opus",
+      "original_size": 3586550
     },
     {
       "id": 303,
       "title": "Vanilla Twilight",
       "artist": "Owl City",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Owl%20City%20-%20Vanilla%20Twilight.mp3",
+      "url": "audio/303.opus",
       "duration": 222.64,
-      "size": 3563563
+      "size": 468047,
+      "format": "opus",
+      "original_size": 3563563
     },
     {
       "id": 304,
       "title": "To The Bone",
       "artist": "Pamungkas",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Pamungkas%20%20-%20To%20The%20Bone.mp3",
+      "url": "audio/304.opus",
       "duration": 348.02,
-      "size": 5569442
+      "size": 670219,
+      "format": "opus",
+      "original_size": 5569442
     },
     {
       "id": 305,
       "title": "New Perspective",
       "artist": "Panic! At The Disco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Panic%21%20At%20The%20Disco%20-%20New%20Perspective.mp3",
+      "url": "audio/305.opus",
       "duration": 231.08,
-      "size": 3698656
+      "size": 445288,
+      "format": "opus",
+      "original_size": 3698656
     },
     {
       "id": 306,
       "title": "This is Gospel",
       "artist": "Panic! At The Disco",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Panic%21%20At%20The%20Disco%20-%20This%20is%20Gospel.mp3",
+      "url": "audio/306.opus",
       "duration": 187.34,
-      "size": 2998575
+      "size": 338783,
+      "format": "opus",
+      "original_size": 2998575
     },
     {
       "id": 307,
       "title": "Brighter",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20Brighter.mp3",
+      "url": "audio/307.opus",
       "duration": 224.24,
-      "size": 3588733
+      "size": 442526,
+      "format": "opus",
+      "original_size": 3588733
     },
     {
       "id": 308,
       "title": "Decode",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20Decode.mp3",
+      "url": "audio/308.opus",
       "duration": 250.14,
-      "size": 4003256
+      "size": 469797,
+      "format": "opus",
+      "original_size": 4003256
     },
     {
       "id": 309,
       "title": "Misery Business",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20Misery%20Business.mp3",
+      "url": "audio/309.opus",
       "duration": 209.89,
-      "size": 3359181
+      "size": 389723,
+      "format": "opus",
+      "original_size": 3359181
     },
     {
       "id": 310,
       "title": "Pressure",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20Pressure.mp3",
+      "url": "audio/310.opus",
       "duration": 185.13,
-      "size": 2963466
+      "size": 347038,
+      "format": "opus",
+      "original_size": 2963466
     },
     {
       "id": 311,
       "title": "Still Into You",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20Still%20Into%20You.mp3",
+      "url": "audio/311.opus",
       "duration": 216.53,
-      "size": 3465435
+      "size": 410274,
+      "format": "opus",
+      "original_size": 3465435
     },
     {
       "id": 312,
       "title": "That's What You Get",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20That%27s%20What%20You%20Get.mp3",
+      "url": "audio/312.opus",
       "duration": 219.68,
-      "size": 3516008
+      "size": 418535,
+      "format": "opus",
+      "original_size": 3516008
     },
     {
       "id": 313,
       "title": "The Only Exception",
       "artist": "Paramore",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Paramore%20-%20The%20Only%20Exception.mp3",
+      "url": "audio/313.opus",
       "duration": 267.84,
-      "size": 4286632
+      "size": 540403,
+      "format": "opus",
+      "original_size": 4286632
     },
     {
       "id": 314,
       "title": "Akala",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Akala.mp3",
+      "url": "audio/314.opus",
       "duration": 182.49,
-      "size": 2920834
+      "size": 361105,
+      "format": "opus",
+      "original_size": 2920834
     },
     {
       "id": 315,
       "title": "Alumni Homecoming",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Alumni%20Homecoming.mp3",
+      "url": "audio/315.opus",
       "duration": 281.12,
-      "size": 4499048
+      "size": 562441,
+      "format": "opus",
+      "original_size": 4499048
     },
     {
       "id": 316,
       "title": "Bagsakan",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Bagsakan.mp3",
+      "url": "audio/316.opus",
       "duration": 207.98,
-      "size": 3328763
+      "size": 382066,
+      "format": "opus",
+      "original_size": 3328763
     },
     {
       "id": 317,
       "title": "Choco Latte",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Choco%20Latte.mp3",
+      "url": "audio/317.opus",
       "duration": 212.0,
-      "size": 3393128
+      "size": 412095,
+      "format": "opus",
+      "original_size": 3393128
     },
     {
       "id": 318,
       "title": "Gitara",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Gitara.mp3",
+      "url": "audio/318.opus",
       "duration": 242.88,
-      "size": 3887156
+      "size": 565807,
+      "format": "opus",
+      "original_size": 3887156
     },
     {
       "id": 319,
       "title": "Halaga",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Halaga.mp3",
+      "url": "audio/319.opus",
       "duration": 352.18,
-      "size": 5635897
+      "size": 697863,
+      "format": "opus",
+      "original_size": 5635897
     },
     {
       "id": 320,
       "title": "Maniwala Ka Sana",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Maniwala%20Ka%20Sana.mp3",
+      "url": "audio/320.opus",
       "duration": 196.07,
-      "size": 3138173
+      "size": 389876,
+      "format": "opus",
+      "original_size": 3138173
     },
     {
       "id": 321,
       "title": "Pangarap Lang Kita (Ver 1)",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Pangarap%20Lang%20Kita%20%28Ver%201%29.mp3",
+      "url": "audio/321.opus",
       "duration": 194.95,
-      "size": 3120108
+      "size": 410130,
+      "format": "opus",
+      "original_size": 3120108
     },
     {
       "id": 322,
       "title": "Pangarap Lang Kita (Ver 2)",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Pangarap%20Lang%20Kita%20%28Ver%202%29.mp3",
+      "url": "audio/322.opus",
       "duration": 208.6,
-      "size": 3338701
+      "size": 425655,
+      "format": "opus",
+      "original_size": 3338701
     },
     {
       "id": 323,
       "title": "Para Sayo",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Para%20Sayo.mp3",
+      "url": "audio/323.opus",
       "duration": 252.96,
-      "size": 4048488
+      "size": 500043,
+      "format": "opus",
+      "original_size": 4048488
     },
     {
       "id": 324,
       "title": "Saan Man Patungo",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Saan%20Man%20Patungo.mp3",
+      "url": "audio/324.opus",
       "duration": 261.64,
-      "size": 4187576
+      "size": 496092,
+      "format": "opus",
+      "original_size": 4187576
     },
     {
       "id": 325,
       "title": "Sampip",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Sampip.mp3",
+      "url": "audio/325.opus",
       "duration": 247.21,
-      "size": 3956444
+      "size": 500944,
+      "format": "opus",
+      "original_size": 3956444
     },
     {
       "id": 326,
       "title": "Sayang",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Sayang.mp3",
+      "url": "audio/326.opus",
       "duration": 180.2,
-      "size": 2884379
+      "size": 331475,
+      "format": "opus",
+      "original_size": 2884379
     },
     {
       "id": 327,
       "title": "Sige Na Naman",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Sige%20Na%20Naman.mp3",
+      "url": "audio/327.opus",
       "duration": 210.84,
-      "size": 3374645
+      "size": 383812,
+      "format": "opus",
+      "original_size": 3374645
     },
     {
       "id": 328,
       "title": "Silvertoes",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Silvertoes.mp3",
+      "url": "audio/328.opus",
       "duration": 223.75,
-      "size": 3581210
+      "size": 429327,
+      "format": "opus",
+      "original_size": 3581210
     },
     {
       "id": 329,
       "title": "Sorry Na",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Sorry%20Na.mp3",
+      "url": "audio/329.opus",
       "duration": 250.93,
-      "size": 4016212
+      "size": 487594,
+      "format": "opus",
+      "original_size": 4016212
     },
     {
       "id": 330,
       "title": "Tatlong Araw",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Tatlong%20Araw.mp3",
+      "url": "audio/330.opus",
       "duration": 136.16,
-      "size": 2179793
+      "size": 275477,
+      "format": "opus",
+      "original_size": 2179793
     },
     {
       "id": 331,
       "title": "The Ordertaker",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20The%20Ordertaker.mp3",
+      "url": "audio/331.opus",
       "duration": 245.39,
-      "size": 3927187
+      "size": 432118,
+      "format": "opus",
+      "original_size": 3927187
     },
     {
       "id": 332,
       "title": "This Guy's In Love With You, Pare",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20This%20Guy%27s%20In%20Love%20With%20You%2C%20Pare.mp3",
+      "url": "audio/332.opus",
       "duration": 191.77,
-      "size": 3069535
+      "size": 378408,
+      "format": "opus",
+      "original_size": 3069535
     },
     {
       "id": 333,
       "title": "Wag Mo Na Sana",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Wag%20Mo%20Na%20Sana.mp3",
+      "url": "audio/333.opus",
       "duration": 178.49,
-      "size": 2856887
+      "size": 354684,
+      "format": "opus",
+      "original_size": 2856887
     },
     {
       "id": 334,
       "title": "Wala Lang Yun",
       "artist": "Parokya Ni Edgar",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20-%20Wala%20Lang%20Yun.mp3",
+      "url": "audio/334.opus",
       "duration": 185.09,
-      "size": 2962630
+      "size": 393072,
+      "format": "opus",
+      "original_size": 2962630
     },
     {
       "id": 335,
       "title": "Kaleidoscope World",
       "artist": "Parokya Ni Edgar Ft. Francis M.",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Parokya%20Ni%20Edgar%20Ft.%20Francis%20M.%20-%20Kaleidoscope%20World.mp3",
+      "url": "audio/335.opus",
       "duration": 283.45,
-      "size": 4536247
+      "size": 553942,
+      "format": "opus",
+      "original_size": 4536247
     },
     {
       "id": 336,
       "title": "Together in Electric Dreams",
       "artist": "Philip Oakey & Giorgio Moroder",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Philip%20Oakey%20%26%20Giorgio%20Moroder%20-%20Together%20in%20Electric%20Dreams.mp3",
+      "url": "audio/336.opus",
       "duration": 230.42,
-      "size": 3687696
+      "size": 465064,
+      "format": "opus",
+      "original_size": 3687696
     },
     {
       "id": 337,
       "title": "Here Comes Your Man",
       "artist": "Pixies",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Pixies%20-%20Here%20Comes%20Your%20Man.mp3",
+      "url": "audio/337.opus",
       "duration": 201.8,
-      "size": 3230124
+      "size": 387044,
+      "format": "opus",
+      "original_size": 3230124
     },
     {
       "id": 338,
       "title": "Candy Paint",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20Candy%20Paint.mp3",
+      "url": "audio/338.opus",
       "duration": 219.13,
-      "size": 3507138
+      "size": 452189,
+      "format": "opus",
+      "original_size": 3507138
     },
     {
       "id": 339,
       "title": "Circles",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20Circles.mp3",
+      "url": "audio/339.opus",
       "duration": 215.35,
-      "size": 3446952
+      "size": 426476,
+      "format": "opus",
+      "original_size": 3446952
     },
     {
       "id": 340,
       "title": "Goodbyes",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20Goodbyes.mp3",
+      "url": "audio/340.opus",
       "duration": 175.04,
-      "size": 2801623
+      "size": 355979,
+      "format": "opus",
+      "original_size": 2801623
     },
     {
       "id": 341,
       "title": "Psycho",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20Psycho.mp3",
+      "url": "audio/341.opus",
       "duration": 220.78,
-      "size": 3533563
+      "size": 447707,
+      "format": "opus",
+      "original_size": 3533563
     },
     {
       "id": 342,
       "title": "Sunflower",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20Sunflower.mp3",
+      "url": "audio/342.opus",
       "duration": 158.08,
-      "size": 2530460
+      "size": 333852,
+      "format": "opus",
+      "original_size": 2530460
     },
     {
       "id": 343,
       "title": "White Iverson",
       "artist": "Post Malone",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20-%20White%20Iverson.mp3",
+      "url": "audio/343.opus",
       "duration": 256.53,
-      "size": 4105656
+      "size": 519328,
+      "format": "opus",
+      "original_size": 4105656
     },
     {
       "id": 344,
       "title": "I Had Some Help",
       "artist": "Post Malone Ft. Morgan Wallen",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Post%20Malone%20Ft.%20Morgan%20Wallen%20-%20I%20Had%20Some%20Help.mp3",
+      "url": "audio/344.opus",
       "duration": 178.26,
-      "size": 2853125
+      "size": 370836,
+      "format": "opus",
+      "original_size": 2853125
     },
     {
       "id": 345,
       "title": "Nasan Ka",
       "artist": "Pupil",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Pupil%20-%20Nasan%20Ka.mp3",
+      "url": "audio/345.opus",
       "duration": 185.06,
-      "size": 2962212
+      "size": 369035,
+      "format": "opus",
+      "original_size": 2962212
     },
     {
       "id": 346,
       "title": "Manila Girl",
       "artist": "Put3Ska",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Put3Ska%20-%20Manila%20Girl.mp3",
+      "url": "audio/346.opus",
       "duration": 177.19,
-      "size": 2836407
+      "size": 335602,
+      "format": "opus",
+      "original_size": 2836407
     },
     {
       "id": 347,
       "title": "Bohemian Rhapsody",
       "artist": "Queen",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Queen%20-%20Bohemian%20Rhapsody.mp3",
+      "url": "audio/347.opus",
       "duration": 359.45,
-      "size": 5752415
+      "size": 709742,
+      "format": "opus",
+      "original_size": 5752415
     },
     {
       "id": 348,
       "title": "Don't Stop Me Now",
       "artist": "Queen",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Queen%20-%20Don%27t%20Stop%20Me%20Now.mp3",
+      "url": "audio/348.opus",
       "duration": 211.95,
-      "size": 3392292
+      "size": 417869,
+      "format": "opus",
+      "original_size": 3392292
     },
     {
       "id": 349,
       "title": "Under Pressure",
       "artist": "Queen",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Queen%20-%20Under%20Pressure.mp3",
+      "url": "audio/349.opus",
       "duration": 248.88,
-      "size": 3983194
+      "size": 455619,
+      "format": "opus",
+      "original_size": 3983194
     },
     {
       "id": 350,
       "title": "Locked Away",
       "artist": "R. City Ft. Adam Levine",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/R.%20City%20Ft.%20Adam%20Levine%20-%20Locked%20Away.mp3",
+      "url": "audio/350.opus",
       "duration": 226.43,
-      "size": 3624167
+      "size": 439539,
+      "format": "opus",
+      "original_size": 3624167
     },
     {
       "id": 351,
       "title": "Ignition",
       "artist": "R. Kelly",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/R.%20Kelly%20-%20Ignition.mp3",
+      "url": "audio/351.opus",
       "duration": 218.41,
-      "size": 3495528
+      "size": 431042,
+      "format": "opus",
+      "original_size": 3495528
     },
     {
       "id": 352,
       "title": "Chinita",
       "artist": "Raf Davis Ft. Nik Makino & M$TRYO",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Raf%20Davis%20Ft.%20Nik%20Makino%20%26%20M%24TRYO%20-%20Chinita.mp3",
+      "url": "audio/352.opus",
       "duration": 253.93,
-      "size": 4063953
+      "size": 536588,
+      "format": "opus",
+      "original_size": 4063953
     },
     {
       "id": 353,
       "title": "Scar Tissue",
       "artist": "Red Hot Chili Peppers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Red%20Hot%20Chili%20Peppers%20-%20Scar%20Tissue.mp3",
+      "url": "audio/353.opus",
       "duration": 220.76,
-      "size": 3533470
+      "size": 460632,
+      "format": "opus",
+      "original_size": 3533470
     },
     {
       "id": 354,
       "title": "Under The Bridge",
       "artist": "Red Hot Chili Peppers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Red%20Hot%20Chili%20Peppers%20-%20Under%20The%20Bridge.mp3",
+      "url": "audio/354.opus",
       "duration": 264.64,
-      "size": 4235223
+      "size": 553645,
+      "format": "opus",
+      "original_size": 4235223
     },
     {
       "id": 355,
       "title": "Cat And Mouse",
       "artist": "Red Jumpsuit Apparatus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Red%20Jumpsuit%20Apparatus%20-%20Cat%20And%20Mouse.mp3",
+      "url": "audio/355.opus",
       "duration": 208.91,
-      "size": 3343716
+      "size": 410011,
+      "format": "opus",
+      "original_size": 3343716
     },
     {
       "id": 356,
       "title": "Face Down",
       "artist": "Red Jumpsuit Apparatus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Red%20Jumpsuit%20Apparatus%20-%20Face%20Down.mp3",
+      "url": "audio/356.opus",
       "duration": 192.12,
-      "size": 3075061
+      "size": 346446,
+      "format": "opus",
+      "original_size": 3075061
     },
     {
       "id": 357,
       "title": "False Pretense",
       "artist": "Red Jumpsuit Apparatus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Red%20Jumpsuit%20Apparatus%20-%20False%20Pretense.mp3",
+      "url": "audio/357.opus",
       "duration": 149.63,
-      "size": 2395042
+      "size": 265254,
+      "format": "opus",
+      "original_size": 2395042
     },
     {
       "id": 358,
       "title": "214",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20214.mp3",
+      "url": "audio/358.opus",
       "duration": 273.86,
-      "size": 4382856
+      "size": 567621,
+      "format": "opus",
+      "original_size": 4382856
     },
     {
       "id": 359,
       "title": "Awit Ng Kabataan",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20Awit%20Ng%20Kabataan.mp3",
+      "url": "audio/359.opus",
       "duration": 278.62,
-      "size": 4458924
+      "size": 539807,
+      "format": "opus",
+      "original_size": 4458924
     },
     {
       "id": 360,
       "title": "Elesi",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20Elesi.mp3",
+      "url": "audio/360.opus",
       "duration": 296.89,
-      "size": 4751496
+      "size": 598440,
+      "format": "opus",
+      "original_size": 4751496
     },
     {
       "id": 361,
       "title": "Hinahanap  Hanap Kita",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20Hinahanap%20%20Hanap%20Kita.mp3",
+      "url": "audio/361.opus",
       "duration": 361.12,
-      "size": 5779164
+      "size": 705801,
+      "format": "opus",
+      "original_size": 5779164
     },
     {
       "id": 362,
       "title": "Kisapmata",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20Kisapmata.mp3",
+      "url": "audio/362.opus",
       "duration": 278.58,
-      "size": 4458413
+      "size": 563130,
+      "format": "opus",
+      "original_size": 4458413
     },
     {
       "id": 363,
       "title": "Ulan",
       "artist": "Rivermaya",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rivermaya%20-%20Ulan.mp3",
+      "url": "audio/363.opus",
       "duration": 268.77,
-      "size": 4301354
+      "size": 554332,
+      "format": "opus",
+      "original_size": 4301354
     },
     {
       "id": 364,
       "title": "Deadma (Version 2)",
       "artist": "Rocksteddy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Rocksteddy%20-%20Deadma%20%28Version%202%29.mp3",
+      "url": "audio/364.opus",
       "duration": 266.69,
-      "size": 4268242
+      "size": 530889,
+      "format": "opus",
+      "original_size": 4268242
     },
     {
       "id": 365,
       "title": "Alaala",
       "artist": "Ron Henley",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ron%20Henley%20-%20Alaala.mp3",
+      "url": "audio/365.opus",
       "duration": 278.66,
-      "size": 4459760
+      "size": 550521,
+      "format": "opus",
+      "original_size": 4459760
     },
     {
       "id": 366,
       "title": "Langit",
       "artist": "Ron Henley",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ron%20Henley%20-%20Langit.mp3",
+      "url": "audio/366.opus",
       "duration": 260.2,
-      "size": 4164263
+      "size": 490761,
+      "format": "opus",
+      "original_size": 4164263
     },
     {
       "id": 367,
       "title": "Hagdan",
       "artist": "Ron Henley Ft. Kat Agarrado",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ron%20Henley%20Ft.%20Kat%20Agarrado%20-%20Hagdan.mp3",
+      "url": "audio/367.opus",
       "duration": 252.96,
-      "size": 4048488
+      "size": 495849,
+      "format": "opus",
+      "original_size": 4048488
     },
     {
       "id": 368,
       "title": "Biglang Liko",
       "artist": "Ron Henley Ft. Pow Chavez",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Ron%20Henley%20Ft.%20Pow%20Chavez%20-%20Biglang%20Liko.mp3",
+      "url": "audio/368.opus",
       "duration": 274.2,
-      "size": 4388289
+      "size": 515511,
+      "format": "opus",
+      "original_size": 4388289
     },
     {
       "id": 369,
       "title": "Betamax",
       "artist": "Sandwich",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sandwich%20-%20Betamax.mp3",
+      "url": "audio/369.opus",
       "duration": 245.05,
-      "size": 3921754
+      "size": 445620,
+      "format": "opus",
+      "original_size": 3921754
     },
     {
       "id": 370,
       "title": "Sa Atin ang Gabi",
       "artist": "Schizophrenia",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Schizophrenia%20-%20Sa%20Atin%20ang%20Gabi.mp3",
+      "url": "audio/370.opus",
       "duration": 290.84,
-      "size": 4654436
+      "size": 558818,
+      "format": "opus",
+      "original_size": 4654436
     },
     {
       "id": 371,
       "title": "Younger",
       "artist": "Seinabo Sey",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Seinabo%20Sey%20-%20Younger.mp3",
+      "url": "audio/371.opus",
       "duration": 354.5,
-      "size": 5673096
+      "size": 675719,
+      "format": "opus",
+      "original_size": 5673096
     },
     {
       "id": 372,
       "title": "Nadarang",
       "artist": "Shanti Dope",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Shanti%20Dope%20-%20Nadarang.mp3",
+      "url": "audio/372.opus",
       "duration": 228.65,
-      "size": 3659368
+      "size": 488278,
+      "format": "opus",
+      "original_size": 3659368
     },
     {
       "id": 373,
       "title": "Kamusta",
       "artist": "Shanti Dope Ft. Flow G",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Shanti%20Dope%20Ft.%20Flow%20G%20-%20Kamusta.mp3",
+      "url": "audio/373.opus",
       "duration": 295.52,
-      "size": 4729344
+      "size": 534879,
+      "format": "opus",
+      "original_size": 4729344
     },
     {
       "id": 374,
       "title": "Shantidope",
       "artist": "Shanti Dope Ft. Gloc 9",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Shanti%20Dope%20Ft.%20Gloc%209%20-%20Shantidope.mp3",
+      "url": "audio/374.opus",
       "duration": 208.89,
-      "size": 3343391
+      "size": 423823,
+      "format": "opus",
+      "original_size": 3343391
     },
     {
       "id": 375,
       "title": "14",
       "artist": "Silent Sanctuary",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Silent%20Sanctuary%20-%2014.mp3",
+      "url": "audio/375.opus",
       "duration": 375.12,
-      "size": 6002865
+      "size": 773317,
+      "format": "opus",
+      "original_size": 6002865
     },
     {
       "id": 376,
       "title": "Kundiman",
       "artist": "Silent Sanctuary",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Silent%20Sanctuary%20-%20Kundiman.mp3",
+      "url": "audio/376.opus",
       "duration": 359.21,
-      "size": 5748746
+      "size": 712000,
+      "format": "opus",
+      "original_size": 5748746
     },
     {
       "id": 377,
       "title": "Rebound",
       "artist": "Silent Sanctuary",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Silent%20Sanctuary%20-%20Rebound.mp3",
+      "url": "audio/377.opus",
       "duration": 281.29,
-      "size": 4501556
+      "size": 563914,
+      "format": "opus",
+      "original_size": 4501556
     },
     {
       "id": 378,
       "title": "My Heroine",
       "artist": "Silverstein",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Silverstein%20-%20My%20Heroine.mp3",
+      "url": "audio/378.opus",
       "duration": 209.75,
-      "size": 3357091
+      "size": 436349,
+      "format": "opus",
+      "original_size": 3357091
     },
     {
       "id": 379,
       "title": "Addicted",
       "artist": "Simple Plan",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Simple%20Plan%20-%20Addicted.mp3",
+      "url": "audio/379.opus",
       "duration": 236.7,
-      "size": 3788425
+      "size": 443649,
+      "format": "opus",
+      "original_size": 3788425
     },
     {
       "id": 380,
       "title": "Perfect",
       "artist": "Simple Plan",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Simple%20Plan%20-%20Perfect.mp3",
+      "url": "audio/380.opus",
       "duration": 274.16,
-      "size": 4387778
+      "size": 540952,
+      "format": "opus",
+      "original_size": 4387778
     },
     {
       "id": 381,
       "title": "Welcome To My Life",
       "artist": "Simple Plan",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Simple%20Plan%20-%20Welcome%20To%20My%20Life.mp3",
+      "url": "audio/381.opus",
       "duration": 223.03,
-      "size": 3569507
+      "size": 429611,
+      "format": "opus",
+      "original_size": 3569507
     },
     {
       "id": 382,
       "title": "Jet Lag",
       "artist": "Simple Plan Ft. Natasha Bedingfield",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Simple%20Plan%20Ft.%20Natasha%20Bedingfield%20%20-%20Jet%20Lag.mp3",
+      "url": "audio/382.opus",
       "duration": 209.61,
-      "size": 3354676
+      "size": 396058,
+      "format": "opus",
+      "original_size": 3354676
     },
     {
       "id": 383,
       "title": "Testing",
       "artist": "Skusta Clee",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Skusta%20Clee%20-%20Testing.mp3",
+      "url": "audio/383.opus",
       "duration": 183.88,
-      "size": 2943404
+      "size": 346247,
+      "format": "opus",
+      "original_size": 2943404
     },
     {
       "id": 384,
       "title": "Di Naging (Tayo)",
       "artist": "Sleep Alley",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sleep%20Alley%20-%20Di%20Naging%20%28Tayo%29.mp3",
+      "url": "audio/384.opus",
       "duration": 240.09,
-      "size": 3842759
+      "size": 481738,
+      "format": "opus",
+      "original_size": 3842759
     },
     {
       "id": 385,
       "title": "All Star",
       "artist": "Smash Mouth",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Smash%20Mouth%20-%20All%20Star.mp3",
+      "url": "audio/385.opus",
       "duration": 201.6,
-      "size": 3226780
+      "size": 365144,
+      "format": "opus",
+      "original_size": 3226780
     },
     {
       "id": 386,
       "title": "Pwede Ba",
       "artist": "Soapdish",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Soapdish%20-%20Pwede%20Ba.mp3",
+      "url": "audio/386.opus",
       "duration": 274.83,
-      "size": 4398320
+      "size": 546607,
+      "format": "opus",
+      "original_size": 4398320
     },
     {
       "id": 387,
       "title": "Kiss Me Thru the Phone",
       "artist": "Soulja Boy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Soulja%20Boy%20-%20Kiss%20Me%20Thru%20the%20Phone.mp3",
+      "url": "audio/387.opus",
       "duration": 196.08,
-      "size": 3138498
+      "size": 369260,
+      "format": "opus",
+      "original_size": 3138498
     },
     {
       "id": 388,
       "title": "True",
       "artist": "Spandau Ballet",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spandau%20Ballet%20-%20True.mp3",
+      "url": "audio/388.opus",
       "duration": 317.37,
-      "size": 5079176
+      "size": 646238,
+      "format": "opus",
+      "original_size": 5079176
     },
     {
       "id": 389,
       "title": "Nothing's Gonna Stop Us Now",
       "artist": "Starship",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Starship%20-%20Nothing%27s%20Gonna%20Stop%20Us%20Now.mp3",
+      "url": "audio/389.opus",
       "duration": 267.66,
-      "size": 4283799
+      "size": 505336,
+      "format": "opus",
+      "original_size": 4283799
     },
     {
       "id": 390,
       "title": "Lamanloob",
       "artist": "Stick Figgas",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Stick%20Figgas%20-%20Lamanloob.mp3",
+      "url": "audio/390.opus",
       "duration": 295.23,
-      "size": 4724653
+      "size": 542141,
+      "format": "opus",
+      "original_size": 4724653
     },
     {
       "id": 391,
       "title": "Ubasan",
       "artist": "Stick Figgas",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Stick%20Figgas%20-%20Ubasan.mp3",
+      "url": "audio/391.opus",
       "duration": 303.86,
-      "size": 4862673
+      "size": 563909,
+      "format": "opus",
+      "original_size": 4862673
     },
     {
       "id": 392,
       "title": "Cool And Calm",
       "artist": "Sticky Fingers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sticky%20Fingers%20-%20Cool%20And%20Calm.mp3",
+      "url": "audio/392.opus",
       "duration": 199.2,
-      "size": 3188328
+      "size": 409183,
+      "format": "opus",
+      "original_size": 3188328
     },
     {
       "id": 393,
       "title": "Sad Songs",
       "artist": "Sticky Fingers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sticky%20Fingers%20-%20Sad%20Songs.mp3",
+      "url": "audio/393.opus",
       "duration": 188.41,
-      "size": 3015711
+      "size": 359641,
+      "format": "opus",
+      "original_size": 3015711
     },
     {
       "id": 394,
       "title": "Saves The Day",
       "artist": "Sticky Fingers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sticky%20Fingers%20-%20Saves%20The%20Day.mp3",
+      "url": "audio/394.opus",
       "duration": 227.25,
-      "size": 3637216
+      "size": 456422,
+      "format": "opus",
+      "original_size": 3637216
     },
     {
       "id": 395,
       "title": "Plush",
       "artist": "Stone Temple Pilots",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Stone%20Temple%20Pilots%20-%20Plush.mp3",
+      "url": "audio/395.opus",
       "duration": 313.95,
-      "size": 5024330
+      "size": 560131,
+      "format": "opus",
+      "original_size": 5024330
     },
     {
       "id": 396,
       "title": "Santeria",
       "artist": "Sublime",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sublime%20-%20Santeria.mp3",
+      "url": "audio/396.opus",
       "duration": 183.53,
-      "size": 2937553
+      "size": 374648,
+      "format": "opus",
+      "original_size": 2937553
     },
     {
       "id": 397,
       "title": "What I Got",
       "artist": "Sublime",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sublime%20-%20What%20I%20Got.mp3",
+      "url": "audio/397.opus",
       "duration": 171.43,
-      "size": 2743945
+      "size": 330491,
+      "format": "opus",
+      "original_size": 2743945
     },
     {
       "id": 398,
       "title": "Every Morning",
       "artist": "Sugar Ray",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugar%20Ray%20-%20Every%20Morning.mp3",
+      "url": "audio/398.opus",
       "duration": 220.06,
-      "size": 3522185
+      "size": 437130,
+      "format": "opus",
+      "original_size": 3522185
     },
     {
       "id": 399,
       "title": "Someday",
       "artist": "Sugar Ray",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugar%20Ray%20-%20Someday.mp3",
+      "url": "audio/399.opus",
       "duration": 242.86,
-      "size": 3886738
+      "size": 487811,
+      "format": "opus",
+      "original_size": 3886738
     },
     {
       "id": 400,
       "title": "When It's Over",
       "artist": "Sugar Ray",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugar%20Ray%20-%20When%20It%27s%20Over.mp3",
+      "url": "audio/400.opus",
       "duration": 218.28,
-      "size": 3493763
+      "size": 410518,
+      "format": "opus",
+      "original_size": 3493763
     },
     {
       "id": 401,
       "title": "Burnout",
       "artist": "Sugarfree",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugarfree%20-%20Burnout.mp3",
+      "url": "audio/401.opus",
       "duration": 212.18,
-      "size": 3396054
+      "size": 437290,
+      "format": "opus",
+      "original_size": 3396054
     },
     {
       "id": 402,
       "title": "Dear Kuya",
       "artist": "Sugarfree",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugarfree%20-%20Dear%20Kuya.mp3",
+      "url": "audio/402.opus",
       "duration": 257.77,
-      "size": 4125300
+      "size": 482201,
+      "format": "opus",
+      "original_size": 4125300
     },
     {
       "id": 403,
       "title": "Kung Ayaw Mo Na Sa Akin",
       "artist": "Sugarfree",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Sugarfree%20-%20Kung%20Ayaw%20Mo%20Na%20Sa%20Akin.mp3",
+      "url": "audio/403.opus",
       "duration": 233.78,
-      "size": 3741706
+      "size": 454790,
+      "format": "opus",
+      "original_size": 3741706
     },
     {
       "id": 404,
       "title": "ATWA",
       "artist": "System Of A Down",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/System%20Of%20A%20Down%20-%20ATWA.mp3",
+      "url": "audio/404.opus",
       "duration": 177.77,
-      "size": 2845602
+      "size": 344947,
+      "format": "opus",
+      "original_size": 2845602
     },
     {
       "id": 405,
       "title": "Chop Suey!",
       "artist": "System Of A Down",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/System%20Of%20A%20Down%20-%20Chop%20Suey%21.mp3",
+      "url": "audio/405.opus",
       "duration": 208.63,
-      "size": 3339118
+      "size": 385451,
+      "format": "opus",
+      "original_size": 3339118
     },
     {
       "id": 406,
       "title": "Prison Song",
       "artist": "System Of A Down",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/System%20Of%20A%20Down%20-%20Prison%20Song.mp3",
+      "url": "audio/406.opus",
       "duration": 204.72,
-      "size": 3276425
+      "size": 352824,
+      "format": "opus",
+      "original_size": 3276425
     },
     {
       "id": 407,
       "title": "Toxicity",
       "artist": "System Of A Down",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/System%20Of%20A%20Down%20-%20Toxicity.mp3",
+      "url": "audio/407.opus",
       "duration": 224.4,
-      "size": 3591566
+      "size": 424739,
+      "format": "opus",
+      "original_size": 3591566
     },
     {
       "id": 408,
       "title": "Westside",
       "artist": "TQ",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/TQ%20-%20Westside.mp3",
+      "url": "audio/408.opus",
       "duration": 309.17,
-      "size": 4947936
+      "size": 591347,
+      "format": "opus",
+      "original_size": 4947936
     },
     {
       "id": 409,
       "title": "Make Damn Sure",
       "artist": "Taking Back Sunday",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Taking%20Back%20Sunday%20-%20Make%20Damn%20Sure.mp3",
+      "url": "audio/409.opus",
       "duration": 212.8,
-      "size": 3405992
+      "size": 397400,
+      "format": "opus",
+      "original_size": 3405992
     },
     {
       "id": 410,
       "title": "High End",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20%20High%20End.mp3",
+      "url": "audio/410.opus",
       "duration": 258.6,
-      "size": 4138674
+      "size": 504646,
+      "format": "opus",
+      "original_size": 4138674
     },
     {
       "id": 411,
       "title": "Disney",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20Disney.mp3",
+      "url": "audio/411.opus",
       "duration": 230.62,
-      "size": 3691040
+      "size": 439982,
+      "format": "opus",
+      "original_size": 3691040
     },
     {
       "id": 412,
       "title": "Iglap",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20Iglap.mp3",
+      "url": "audio/412.opus",
       "duration": 265.01,
-      "size": 4241167
+      "size": 508559,
+      "format": "opus",
+      "original_size": 4241167
     },
     {
       "id": 413,
       "title": "Linda Blair",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20Linda%20Blair.mp3",
+      "url": "audio/413.opus",
       "duration": 235.31,
-      "size": 3765948
+      "size": 461872,
+      "format": "opus",
+      "original_size": 3765948
     },
     {
       "id": 414,
       "title": "Picture Picture",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20Picture%20Picture.mp3",
+      "url": "audio/414.opus",
       "duration": 242.46,
-      "size": 3880469
+      "size": 483314,
+      "format": "opus",
+      "original_size": 3880469
     },
     {
       "id": 415,
       "title": "Stranded",
       "artist": "Tanya Markova",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Tanya%20Markova%20-%20Stranded.mp3",
+      "url": "audio/415.opus",
       "duration": 280.06,
-      "size": 4481912
+      "size": 569719,
+      "format": "opus",
+      "original_size": 4481912
     },
     {
       "id": 416,
       "title": "7 Years",
       "artist": "Techy Romantics",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Techy%20Romantics%20-%207%20Years.mp3",
+      "url": "audio/416.opus",
       "duration": 307.62,
-      "size": 4922859
+      "size": 636459,
+      "format": "opus",
+      "original_size": 4922859
     },
     {
       "id": 417,
       "title": "Out Of My Mind",
       "artist": "Techy Romantics",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Techy%20Romantics%20-%20Out%20Of%20My%20Mind.mp3",
+      "url": "audio/417.opus",
       "duration": 233.41,
-      "size": 3735855
+      "size": 502584,
+      "format": "opus",
+      "original_size": 3735855
     },
     {
       "id": 418,
       "title": "In My Foreign",
       "artist": "The Americanos",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Americanos%20-%20In%20My%20Foreign.mp3",
+      "url": "audio/418.opus",
       "duration": 218.24,
-      "size": 3493020
+      "size": 426740,
+      "format": "opus",
+      "original_size": 3493020
     },
     {
       "id": 419,
       "title": "The Apl Song",
       "artist": "The Black Eyed Peas",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Black%20Eyed%20Peas%20-%20The%20Apl%20Song.mp3",
+      "url": "audio/419.opus",
       "duration": 174.01,
-      "size": 2785416
+      "size": 343493,
+      "format": "opus",
+      "original_size": 2785416
     },
     {
       "id": 420,
       "title": "Ale",
       "artist": "The Bloomfields",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Bloomfields%20-%20Ale.mp3",
+      "url": "audio/420.opus",
       "duration": 225.66,
-      "size": 3611628
+      "size": 434072,
+      "format": "opus",
+      "original_size": 3611628
     },
     {
       "id": 421,
       "title": "Babaero",
       "artist": "The Bloomfields",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Bloomfields%20-%20Babaero.mp3",
+      "url": "audio/421.opus",
       "duration": 297.52,
-      "size": 4761527
+      "size": 563700,
+      "format": "opus",
+      "original_size": 4761527
     },
     {
       "id": 422,
       "title": "Bakit Labis Kitang Mahal",
       "artist": "The Boyfriends",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Boyfriends%20-%20Bakit%20Labis%20Kitang%20Mahal.mp3",
+      "url": "audio/422.opus",
       "duration": 223.91,
-      "size": 3583625
+      "size": 421030,
+      "format": "opus",
+      "original_size": 3583625
     },
     {
       "id": 423,
       "title": "Dahil Mahal Kita",
       "artist": "The Boyfriends",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Boyfriends%20-%20Dahil%20Mahal%20Kita.mp3",
+      "url": "audio/423.opus",
       "duration": 198.29,
-      "size": 3173607
+      "size": 375691,
+      "format": "opus",
+      "original_size": 3173607
     },
     {
       "id": 424,
       "title": "Sumayaw Sumunod",
       "artist": "The Boyfriends",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Boyfriends%20-%20Sumayaw%20Sumunod.mp3",
+      "url": "audio/424.opus",
       "duration": 202.13,
-      "size": 3235140
+      "size": 389458,
+      "format": "opus",
+      "original_size": 3235140
     },
     {
       "id": 425,
       "title": "Video Killed The Radio Star",
       "artist": "The Buggles",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Buggles%20-%20Video%20Killed%20The%20Radio%20Star.mp3",
+      "url": "audio/425.opus",
       "duration": 197.91,
-      "size": 3167755
+      "size": 391742,
+      "format": "opus",
+      "original_size": 3167755
     },
     {
       "id": 426,
       "title": "Something Just Like This",
       "artist": "The Chainsmokers & Coldplay",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Chainsmokers%20%26%20Coldplay%20-%20Something%20Just%20Like%20This.mp3",
+      "url": "audio/426.opus",
       "duration": 247.13,
-      "size": 3955283
+      "size": 471438,
+      "format": "opus",
+      "original_size": 3955283
     },
     {
       "id": 427,
       "title": "Roses",
       "artist": "The Chainsmokers",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Chainsmokers%20-%20Roses.mp3",
+      "url": "audio/427.opus",
       "duration": 230.69,
-      "size": 3692387
+      "size": 453545,
+      "format": "opus",
+      "original_size": 3692387
     },
     {
       "id": 428,
       "title": "Best of My Love",
       "artist": "The Emotions",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Emotions%20-%20Best%20of%20My%20Love.mp3",
+      "url": "audio/428.opus",
       "duration": 222.13,
-      "size": 3555203
+      "size": 403832,
+      "format": "opus",
+      "original_size": 3555203
     },
     {
       "id": 429,
       "title": "There She Goes",
       "artist": "The La's",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20La%27s%20-%20There%20She%20Goes.mp3",
+      "url": "audio/429.opus",
       "duration": 171.64,
-      "size": 2747381
+      "size": 359105,
+      "format": "opus",
+      "original_size": 2747381
     },
     {
       "id": 430,
       "title": "Big Poppa",
       "artist": "The Notorious B.I.G.",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Notorious%20B.I.G.%20-%20Big%20Poppa.mp3",
+      "url": "audio/430.opus",
       "duration": 249.85,
-      "size": 3998751
+      "size": 480507,
+      "format": "opus",
+      "original_size": 3998751
     },
     {
       "id": 431,
       "title": "Mo Money Mo Problems",
       "artist": "The Notorious B.I.G. Ft. Puff Daddy",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Notorious%20B.I.G.%20Ft.%20Puff%20Daddy%20-%20Mo%20Money%20Mo%20Problems.mp3",
+      "url": "audio/431.opus",
       "duration": 257.4,
-      "size": 4119448
+      "size": 476415,
+      "format": "opus",
+      "original_size": 4119448
     },
     {
       "id": 432,
       "title": "Your Love",
       "artist": "The Outfield",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Outfield%20-%20Your%20Love.mp3",
+      "url": "audio/432.opus",
       "duration": 252.47,
-      "size": 4040454
+      "size": 484467,
+      "format": "opus",
+      "original_size": 4040454
     },
     {
       "id": 433,
       "title": "Friends of P",
       "artist": "The Rentals",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Rentals%20-%20Friends%20of%20P.mp3",
+      "url": "audio/433.opus",
       "duration": 212.6,
-      "size": 3402648
+      "size": 374922,
+      "format": "opus",
+      "original_size": 3402648
     },
     {
       "id": 434,
       "title": "High",
       "artist": "The Speaks",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Speaks%20-%20High.mp3",
+      "url": "audio/434.opus",
       "duration": 265.87,
-      "size": 4254960
+      "size": 600744,
+      "format": "opus",
+      "original_size": 4254960
     },
     {
       "id": 435,
       "title": "All That I've Got",
       "artist": "The Used",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Used%20-%20All%20That%20I%27ve%20Got.mp3",
+      "url": "audio/435.opus",
       "duration": 238.72,
-      "size": 3820607
+      "size": 470720,
+      "format": "opus",
+      "original_size": 3820607
     },
     {
       "id": 436,
       "title": "Blue And Yellow",
       "artist": "The Used",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Used%20-%20Blue%20And%20Yellow.mp3",
+      "url": "audio/436.opus",
       "duration": 201.5,
-      "size": 3225109
+      "size": 393678,
+      "format": "opus",
+      "original_size": 3225109
     },
     {
       "id": 437,
       "title": "Buried Myself Alive",
       "artist": "The Used",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/The%20Used%20-%20Buried%20Myself%20Alive.mp3",
+      "url": "audio/437.opus",
       "duration": 216.13,
-      "size": 3459073
+      "size": 410691,
+      "format": "opus",
+      "original_size": 3459073
     },
     {
       "id": 438,
       "title": "Kahit Ayaw Mo Na",
       "artist": "This Band",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/This%20Band%20-%20Kahit%20Ayaw%20Mo%20Na.mp3",
+      "url": "audio/438.opus",
       "duration": 255.72,
-      "size": 4092792
+      "size": 550985,
+      "format": "opus",
+      "original_size": 4092792
     },
     {
       "id": 439,
       "title": "If We Ever Meet Again",
       "artist": "Timbaland Ft. Katy Perry",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Timbaland%20Ft.%20Katy%20Perry%20-%20If%20We%20Ever%20Meet%20Again.mp3",
+      "url": "audio/439.opus",
       "duration": 256.17,
-      "size": 4099804
+      "size": 501958,
+      "format": "opus",
+      "original_size": 4099804
     },
     {
       "id": 440,
       "title": "711",
       "artist": "Toneejay",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Toneejay%20-%20711.mp3",
+      "url": "audio/440.opus",
       "duration": 223.35,
-      "size": 3574940
+      "size": 449111,
+      "format": "opus",
+      "original_size": 3574940
     },
     {
       "id": 441,
       "title": "Africa",
       "artist": "Toto",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Toto%20-%20Africa.mp3",
+      "url": "audio/441.opus",
       "duration": 271.37,
-      "size": 4343149
+      "size": 524525,
+      "format": "opus",
+      "original_size": 4343149
     },
     {
       "id": 442,
       "title": "Reinventing Your Exit",
       "artist": "Underoath",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Underoath%20-%20Reinventing%20Your%20Exit.mp3",
+      "url": "audio/442.opus",
       "duration": 272.53,
-      "size": 4361540
+      "size": 507284,
+      "format": "opus",
+      "original_size": 4361540
     },
     {
       "id": 443,
       "title": "Endless A Silent Whisper",
       "artist": "Urbandub",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Urbandub%20-%20Endless%20A%20Silent%20Whisper.mp3",
+      "url": "audio/443.opus",
       "duration": 239.58,
-      "size": 3834493
+      "size": 469480,
+      "format": "opus",
+      "original_size": 3834493
     },
     {
       "id": 444,
       "title": "Evidence",
       "artist": "Urbandub",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Urbandub%20-%20Evidence.mp3",
+      "url": "audio/444.opus",
       "duration": 265.64,
-      "size": 4251198
+      "size": 551151,
+      "format": "opus",
+      "original_size": 4251198
     },
     {
       "id": 445,
       "title": "First Of Summer",
       "artist": "Urbandub",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Urbandub%20-%20First%20Of%20Summer.mp3",
+      "url": "audio/445.opus",
       "duration": 206.82,
-      "size": 3310279
+      "size": 379813,
+      "format": "opus",
+      "original_size": 3310279
     },
     {
       "id": 446,
       "title": "Guillotine",
       "artist": "Urbandub",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Urbandub%20-%20Guillotine.mp3",
+      "url": "audio/446.opus",
       "duration": 203.24,
-      "size": 3253112
+      "size": 372378,
+      "format": "opus",
+      "original_size": 3253112
     },
     {
       "id": 447,
       "title": "The Fight Is Over",
       "artist": "Urbandub",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Urbandub%20-%20The%20Fight%20Is%20Over.mp3",
+      "url": "audio/447.opus",
       "duration": 265.67,
-      "size": 4251941
+      "size": 509534,
+      "format": "opus",
+      "original_size": 4251941
     },
     {
       "id": 448,
       "title": "Burn",
       "artist": "Usher",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Usher%20-%20Burn.mp3",
+      "url": "audio/448.opus",
       "duration": 258.67,
-      "size": 4140021
+      "size": 535275,
+      "format": "opus",
+      "original_size": 4140021
     },
     {
       "id": 449,
       "title": "Confessions Part II",
       "artist": "Usher",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Usher%20-%20Confessions%20Part%20II.mp3",
+      "url": "audio/449.opus",
       "duration": 305.71,
-      "size": 4892766
+      "size": 624298,
+      "format": "opus",
+      "original_size": 4892766
     },
     {
       "id": 450,
       "title": "I Don't Mind",
       "artist": "Usher",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Usher%20-%20I%20Don%27t%20Mind.mp3",
+      "url": "audio/450.opus",
       "duration": 253.21,
-      "size": 4052668
+      "size": 499716,
+      "format": "opus",
+      "original_size": 4052668
     },
     {
       "id": 451,
       "title": "Love in This Club",
       "artist": "Usher",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Usher%20-%20Love%20in%20This%20Club.mp3",
+      "url": "audio/451.opus",
       "duration": 259.72,
-      "size": 4156647
+      "size": 493140,
+      "format": "opus",
+      "original_size": 4156647
     },
     {
       "id": 452,
       "title": "U Got It Bad",
       "artist": "Usher",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Usher%20-%20U%20Got%20It%20Bad.mp3",
+      "url": "audio/452.opus",
       "duration": 247.84,
-      "size": 3966475
+      "size": 527251,
+      "format": "opus",
+      "original_size": 3966475
     },
     {
       "id": 453,
       "title": "Awitin Mo At Isasayaw Ko",
       "artist": "VST & Company",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/VST%20%26%20Company%20-%20Awitin%20Mo%20At%20Isasayaw%20Ko.mp3",
+      "url": "audio/453.opus",
       "duration": 537.01,
-      "size": 8593283
+      "size": 1031767,
+      "format": "opus",
+      "original_size": 8593283
     },
     {
       "id": 454,
       "title": "Ikaw Ang Aking Mahal",
       "artist": "VST & Company",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/VST%20%26%20Company%20-%20Ikaw%20Ang%20Aking%20Mahal.mp3",
+      "url": "audio/454.opus",
       "duration": 206.47,
-      "size": 3304521
+      "size": 392795,
+      "format": "opus",
+      "original_size": 3304521
     },
     {
       "id": 455,
       "title": "Tayo'y Magsayawan",
       "artist": "VST & Company",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/VST%20%26%20Company%20-%20Tayo%27y%20Magsayawan.mp3",
+      "url": "audio/455.opus",
       "duration": 191.77,
-      "size": 3069628
+      "size": 379488,
+      "format": "opus",
+      "original_size": 3069628
     },
     {
       "id": 456,
       "title": "Everything You Want",
       "artist": "Vertical Horizon",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Vertical%20Horizon%20-%20Everything%20You%20Want.mp3",
+      "url": "audio/456.opus",
       "duration": 257.07,
-      "size": 4114015
+      "size": 458607,
+      "format": "opus",
+      "original_size": 4114015
     },
     {
       "id": 457,
       "title": "Goodbye",
       "artist": "Viktoria Ft. LDP",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Viktoria%20Ft.%20LDP%20-%20Goodbye.mp3",
+      "url": "audio/457.opus",
       "duration": 262.0,
-      "size": 4193009
+      "size": 494322,
+      "format": "opus",
+      "original_size": 4193009
     },
     {
       "id": 458,
       "title": "Shut Up And Dance",
       "artist": "Walk The Moon",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Walk%20The%20Moon%20-%20Shut%20Up%20And%20Dance.mp3",
+      "url": "audio/458.opus",
       "duration": 199.27,
-      "size": 3189582
+      "size": 374029,
+      "format": "opus",
+      "original_size": 3189582
     },
     {
       "id": 459,
       "title": "Beverly Hills",
       "artist": "Weezer",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Weezer%20-%20Beverly%20Hills.mp3",
+      "url": "audio/459.opus",
       "duration": 196.09,
-      "size": 3138498
+      "size": 359974,
+      "format": "opus",
+      "original_size": 3138498
     },
     {
       "id": 460,
       "title": "Island In The Sun",
       "artist": "Weezer",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Weezer%20-%20Island%20In%20The%20Sun.mp3",
+      "url": "audio/460.opus",
       "duration": 210.37,
-      "size": 3367215
+      "size": 421882,
+      "format": "opus",
+      "original_size": 3367215
     },
     {
       "id": 461,
       "title": "Pork And Beans",
       "artist": "Weezer",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Weezer%20-%20Pork%20And%20Beans.mp3",
+      "url": "audio/461.opus",
       "duration": 190.08,
-      "size": 3042460
+      "size": 355332,
+      "format": "opus",
+      "original_size": 3042460
     },
     {
       "id": 462,
       "title": "A Little Respect",
       "artist": "Wheatus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wheatus%20-%20A%20Little%20Respect.mp3",
+      "url": "audio/462.opus",
       "duration": 199.53,
-      "size": 3193669
+      "size": 383986,
+      "format": "opus",
+      "original_size": 3193669
     },
     {
       "id": 463,
       "title": "Teenage Dirtbag",
       "artist": "Wheatus",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wheatus%20-%20Teenage%20Dirtbag.mp3",
+      "url": "audio/463.opus",
       "duration": 241.67,
-      "size": 3867837
+      "size": 453567,
+      "format": "opus",
+      "original_size": 3867837
     },
     {
       "id": 464,
       "title": "Black And Yellow",
       "artist": "Wiz Khalifa",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wiz%20Khalifa%20-%20Black%20And%20Yellow.mp3",
+      "url": "audio/464.opus",
       "duration": 231.07,
-      "size": 3698145
+      "size": 425983,
+      "format": "opus",
+      "original_size": 3698145
     },
     {
       "id": 465,
       "title": "Cameras",
       "artist": "Wiz Khalifa",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wiz%20Khalifa%20-%20Cameras.mp3",
+      "url": "audio/465.opus",
       "duration": 269.18,
-      "size": 4307948
+      "size": 483732,
+      "format": "opus",
+      "original_size": 4307948
     },
     {
       "id": 466,
       "title": "No Sleep",
       "artist": "Wiz Khalifa",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wiz%20Khalifa%20-%20No%20Sleep.mp3",
+      "url": "audio/466.opus",
       "duration": 192.03,
-      "size": 3073807
+      "size": 369260,
+      "format": "opus",
+      "original_size": 3073807
     },
     {
       "id": 467,
       "title": "Roll Up",
       "artist": "Wiz Khalifa",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wiz%20Khalifa%20-%20Roll%20Up.mp3",
+      "url": "audio/467.opus",
       "duration": 231.09,
-      "size": 3698563
+      "size": 426907,
+      "format": "opus",
+      "original_size": 3698563
     },
     {
       "id": 468,
       "title": "Young Wild and Free",
       "artist": "Wiz Khalifa",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Wiz%20Khalifa%20-%20Young%20Wild%20and%20Free.mp3",
+      "url": "audio/468.opus",
       "duration": 207.89,
-      "size": 3327509
+      "size": 410207,
+      "format": "opus",
+      "original_size": 3327509
     },
     {
       "id": 469,
       "title": "Clarity",
       "artist": "Zedd",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Zedd%20-%20Clarity.mp3",
+      "url": "audio/469.opus",
       "duration": 275.42,
-      "size": 4407840
+      "size": 504592,
+      "format": "opus",
+      "original_size": 4407840
     },
     {
       "id": 470,
       "title": "The Kill",
       "artist": "Thirty Seconds To Mars",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Thirty%20Seconds%20To%20Mars%20-%20The%20Kill.mp3",
+      "url": "audio/470.opus",
       "duration": 231.61,
-      "size": 3706923
+      "size": 450251,
+      "format": "opus",
+      "original_size": 3706923
     },
     {
       "id": 471,
       "title": "The Ghost of You",
       "artist": "My Chemical Romance",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/My%20Chemical%20Romance%20-%20The%20Ghost%20of%20You.mp3",
+      "url": "audio/471.opus",
       "duration": 195.14,
-      "size": 3123452
+      "size": 360433,
+      "format": "opus",
+      "original_size": 3123452
     },
     {
       "id": 472,
       "title": "Voices",
       "artist": "Saosin",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Saosin%20-%20Voices.mp3",
+      "url": "audio/472.opus",
       "duration": 217.98,
-      "size": 3488748
+      "size": 406669,
+      "format": "opus",
+      "original_size": 3488748
     },
     {
       "id": 473,
       "title": "Una",
       "artist": "Spongecola",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spongecola%20-%20Una.mp3",
+      "url": "audio/473.opus",
       "duration": 279.12,
-      "size": 4467190
+      "size": 536258,
+      "format": "opus",
+      "original_size": 4467190
     },
     {
       "id": 474,
       "title": "Lunes",
       "artist": "Spongecola",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spongecola%20-%20Lunes.mp3",
+      "url": "audio/474.opus",
       "duration": 206.41,
-      "size": 3303592
+      "size": 387079,
+      "format": "opus",
+      "original_size": 3303592
     },
     {
       "id": 475,
       "title": "Movie",
       "artist": "Spongecola",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spongecola%20-%20Movie.mp3",
+      "url": "audio/475.opus",
       "duration": 274.91,
-      "size": 4399481
+      "size": 523340,
+      "format": "opus",
+      "original_size": 4399481
     },
     {
       "id": 476,
       "title": "Gemini",
       "artist": "Spongecola",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spongecola%20-%20Gemini.mp3",
+      "url": "audio/476.opus",
       "duration": 212.69,
-      "size": 3404320
+      "size": 411631,
+      "format": "opus",
+      "original_size": 3404320
     },
     {
       "id": 477,
       "title": "KLSP",
       "artist": "Spongecola",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Spongecola%20-%20KLSP.mp3",
+      "url": "audio/477.opus",
       "duration": 216.51,
-      "size": 3465342,
-      "youtube_id": "BN634wbjGrM"
+      "size": 405583,
+      "youtube_id": "BN634wbjGrM",
+      "format": "opus",
+      "original_size": 3465342
     },
     {
       "id": 478,
       "title": "Ating Araw",
       "artist": "Dicta License",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dicta%20License%20-%20Ating%20Araw.mp3",
+      "url": "audio/478.opus",
       "duration": 221.86,
-      "size": 3550606
+      "size": 414694,
+      "format": "opus",
+      "original_size": 3550606
     },
     {
       "id": 479,
       "title": "Criminal",
       "artist": "Dicta License",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dicta%20License%20-%20Criminal.mp3",
+      "url": "audio/479.opus",
       "duration": 225.71,
-      "size": 3612464
+      "size": 411351,
+      "format": "opus",
+      "original_size": 3612464
     },
     {
       "id": 480,
       "title": "Burning Streets of Love and Hate",
       "artist": "Dicta Lincense",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/Dicta%20Lincense%20-%20Burning%20Streets%20of%20Love%20and%20Hate.mp3",
+      "url": "audio/480.opus",
       "duration": 214.7,
-      "size": 3436503
+      "size": 395155,
+      "format": "opus",
+      "original_size": 3436503
     }
   ]
 }
