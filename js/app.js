@@ -88,28 +88,39 @@ async function loadTrack(url) {
   const arrayBuffer = await res.arrayBuffer();
   let buffer;
   if (url.toLowerCase().endsWith('.opus')) {
-    if (!opusDecoder) {
-      const lib = window['ogg-opus-decoder'];
-      if (!lib || !lib.OggOpusDecoder) throw new Error('Opus decoder library not loaded');
-      opusDecoder = new lib.OggOpusDecoder();
-      await opusDecoder.ready;
+    // Try native decodeAudioData first (Chrome/Firefox/Edge support Ogg Opus natively)
+    let nativeFailed = false;
+    try {
+      buffer = await audioCtx.decodeAudioData(arrayBuffer.slice(0));
+      console.log('Native decodeAudioData succeeded:', buffer.numberOfChannels, 'ch,', buffer.length, 'samples,', buffer.sampleRate, 'Hz');
+    } catch (nativeErr) {
+      nativeFailed = true;
+      console.warn('Native decodeAudioData failed, trying WASM decoder:', nativeErr && nativeErr.message);
     }
-    console.log('Fetched .opus:', arrayBuffer.byteLength, 'bytes');
-    const head = new Uint8Array(arrayBuffer.slice(0, 4));
-    console.log('Magic bytes:', Array.from(head).map(b => b.toString(16).padStart(2,'0')).join(' '), String.fromCharCode(...head));
-    await opusDecoder.reset();
-    const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
-    console.log('Opus decode result:', 'channels=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errors=' + (result.errors ? result.errors.length : 0));
-    if (result.errors && result.errors.length) console.log('Decode errors:', JSON.stringify(result.errors.slice(0, 3)));
-    const channelData = result.channelData;
-    const samplesDecoded = result.samplesDecoded;
-    const sampleRate = result.sampleRate || 48000;
-    if (!channelData || channelData.length === 0 || !samplesDecoded) {
-      throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples, sr=' + sampleRate + ')');
-    }
-    buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
-    for (let ch = 0; ch < channelData.length; ch++) {
-      buffer.copyToChannel(channelData[ch], ch);
+    if (nativeFailed) {
+      if (!opusDecoder) {
+        const lib = window['ogg-opus-decoder'];
+        if (!lib || !lib.OggOpusDecoder) throw new Error('Opus decoder library not loaded');
+        opusDecoder = new lib.OggOpusDecoder();
+        await opusDecoder.ready;
+      }
+      console.log('Fetched .opus:', arrayBuffer.byteLength, 'bytes');
+      const head = new Uint8Array(arrayBuffer.slice(0, 4));
+      console.log('Magic bytes:', Array.from(head).map(b => b.toString(16).padStart(2,'0')).join(' '), String.fromCharCode(...head));
+      await opusDecoder.reset();
+      const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
+      console.log('WASM Opus decode result:', 'channels=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errors=' + (result.errors ? result.errors.length : 0));
+      if (result.errors && result.errors.length) console.log('Decode errors:', JSON.stringify(result.errors.slice(0, 3)));
+      const channelData = result.channelData;
+      const samplesDecoded = result.samplesDecoded;
+      const sampleRate = result.sampleRate || 48000;
+      if (!channelData || channelData.length === 0 || !samplesDecoded) {
+        throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples, sr=' + sampleRate + ')');
+      }
+      buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
+      for (let ch = 0; ch < channelData.length; ch++) {
+        buffer.copyToChannel(channelData[ch], ch);
+      }
     }
   } else {
     // Native decode (MP3, etc.) via Web Audio
