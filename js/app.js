@@ -17,6 +17,7 @@ let playbackOffset = 0;
 let playbackStartCtx = 0;
 const bufferCache = new Map();
 let progressTimer = null;
+let progressRaf = null;
 const RANTS_LIST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rants';
 const RANT_POST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant';
 const RANT_PIN_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant/pin';
@@ -36,6 +37,7 @@ const state = {
   wallTotal: 0,
   wallLoading: false,
   lyricsCache: null,
+  coverCache: new Map(),
 };
 
 function loadSettings() {
@@ -163,7 +165,8 @@ function getCurrentTime() {
 
 function startProgressLoop() {
   stopProgressLoop();
-  progressTimer = setInterval(() => {
+  function tick() {
+    if (!isPlaying) { progressRaf = null; return; }
     const cur = getCurrentTime();
     const dur = currentBuffer ? currentBuffer.duration : 0;
     const pct = dur ? (cur / dur) * 100 : 0;
@@ -171,11 +174,13 @@ function startProgressLoop() {
     if (progressFillEl) progressFillEl.style.width = pct + '%';
     if (progressThumbEl) progressThumbEl.style.left = pct + '%';
     syncLyrics(cur);
-  }, 250);
+    progressRaf = requestAnimationFrame(tick);
+  }
+  progressRaf = requestAnimationFrame(tick);
 }
 
 function stopProgressLoop() {
-  if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
+  if (progressRaf) { cancelAnimationFrame(progressRaf); progressRaf = null; }
 }
 
 /* ---------- Data ---------- */
@@ -212,7 +217,9 @@ function updateStorageIndicator() {
 /* ---------- Playlist ---------- */
 function renderPlaylist() {
   const list = $('#track-list');
+  if (!list) return;
   list.innerHTML = '';
+  const frag = document.createDocumentFragment();
   state.filtered.forEach((t) => {
     const li = document.createElement('li');
     li.dataset.id = t.id;
@@ -225,8 +232,19 @@ function renderPlaylist() {
         <div class="ta">${escapeHtml(t.artist)}</div>
       </div>
       <div class="td">#${t.id}<br>${fmtTime(t.duration)}</div>`;
-    li.addEventListener('click', () => playById(t.id));
-    list.appendChild(li);
+    frag.appendChild(li);
+  });
+  list.appendChild(frag);
+}
+
+// Event delegation for playlist clicks (single listener instead of N)
+const trackListEl = $('#track-list');
+if (trackListEl) {
+  trackListEl.addEventListener('click', (e) => {
+    const li = e.target.closest('li[data-id]');
+    if (!li) return;
+    const id = parseInt(li.dataset.id, 10);
+    if (!isNaN(id)) playById(id);
   });
 }
 
@@ -264,6 +282,8 @@ async function playIndex(idx) {
     console.error('Failed to load track:', e && e.message, src);
     const np = $('#np-title'); if (np) np.textContent = 'Playback error: ' + (e && e.message ? e.message : 'unknown');
     updateVinyl(false);
+    // auto-skip to next track after 2s
+    setTimeout(() => { if (state.index === idx) nextTrack(); }, 2000);
   }
 }
 
@@ -298,16 +318,26 @@ async function fetchCover(t) {
   fb.style.background = grad;
   const label = $('#vinyl-label');
   if (label) label.style.background = grad;
+  // cache check
+  const cacheKey = t.title + '|' + t.artist;
+  if (state.coverCache.has(cacheKey)) {
+    const url = state.coverCache.get(cacheKey);
+    if (url) { img.src = url; img.onload = () => img.classList.add('loaded'); }
+    return;
+  }
   try {
     const q = encodeURIComponent(`${t.artist} ${t.title}`);
     const res = await fetchWithTimeout(`https://itunes.apple.com/search?term=${q}&media=music&limit=1`, 6000);
     const data = await res.json().catch(() => ({}));
     if (data.results && data.results[0] && data.results[0].artworkUrl100) {
       const url = data.results[0].artworkUrl100.replace('100x100bb', '600x600bb');
+      state.coverCache.set(cacheKey, url);
       img.src = url;
       img.onload = () => img.classList.add('loaded');
+    } else {
+      state.coverCache.set(cacheKey, null);
     }
-  } catch (e) { /* keep fallback */ }
+  } catch (e) { state.coverCache.set(cacheKey, null); /* keep fallback */ }
 }
 
 function hashStr(s) { let h = 0; for (let i=0;i<s.length;i++){ h = ((h<<5)-h) + s.charCodeAt(i); h |= 0; } return Math.abs(h); }
@@ -957,6 +987,16 @@ function initRantForm() {
     }
   });
 }
+
+/* ---------- Keyboard shortcuts ---------- */
+document.addEventListener('keydown', (e) => {
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return;
+  if (e.code === 'Space') { e.preventDefault(); if (playBtn) playBtn.click(); }
+  else if (e.code === 'ArrowRight') { e.preventDefault(); nextTrack(); }
+  else if (e.code === 'ArrowLeft') { e.preventDefault(); prevTrack(); }
+  else if (e.code === 'ArrowUp') { e.preventDefault(); if (volumeSlider) { volumeSlider.value = Math.min(1, parseFloat(volumeSlider.value) + 0.05); volumeSlider.dispatchEvent(new Event('input')); } }
+  else if (e.code === 'ArrowDown') { e.preventDefault(); if (volumeSlider) { volumeSlider.value = Math.max(0, parseFloat(volumeSlider.value) - 0.05); volumeSlider.dispatchEvent(new Event('input')); } }
+});
 
 /* ---------- Sync lyrics view (mirror) ---------- */
 

@@ -164,8 +164,26 @@ git push
 - GitHub Pages has a 1 GB site limit; 480 tracks at 16 kbps ≈ 288 MB.
 - The rant wall and song requests still use Cloudflare Workers (allowed in strict environments).
 
+## Upgrade bitrate (when audio sounds garbled)
+
+If Opus at 16 kbps sounds garbled on complex music, upgrade to 32 kbps:
+
+```powershell
+.\encode-opus.ps1 -Bitrate 32 -Force
+```
+Re-downloads all tracks from R2, re-encodes at 32 kbps, overwrites every `.opus` file, updates `tracks.json`. Takes ~30-60 min.
+
+Then commit and push:
+```powershell
+git add audio/ data/tracks.json
+git commit -m "Upgrade to Opus 32kbps"
+git push
+```
+
+Size impact: 480 tracks at 32 kbps ≈ 346 MB (well within 1 GB GitHub Pages limit).
+
 ## Notes
 
 - All scripts require `ffmpeg` and `node` on PATH (for yt-dlp).
 - After any player change, refresh https://sensesvoid.github.io/jamukot/ to see updates (~1 min after push).
-- Storage usage is shown in the top bar of the player (X.XX / 9.5 GB).
+- Storage usage is shown in the top bar of the player.

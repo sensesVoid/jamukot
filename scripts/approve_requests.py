@@ -233,8 +233,10 @@ def download_and_compress(url, workdir):
         raise RuntimeError("Download produced no file")
     source = candidates[0]
     output = os.path.join(workdir, "out.opus")
+    tmp_output = output + ".tmp"
     run_cmd(["ffmpeg", "-y", "-i", source, "-c:a", "libopus", "-b:a", "16k",
-             "-vbr", "on", "-application", "audio", output])
+             "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_output])
+    os.replace(tmp_output, output)
     return output
 
 

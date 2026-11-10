@@ -42,12 +42,18 @@ def download(url, dest):
 
 
 def encode(src, dst):
+    tmp_dst = dst + ".tmp"
     r = subprocess.run(
-        ["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", BITRATE, "-vbr", "on", "-application", "audio", dst],
+        ["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", BITRATE, "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_dst],
         capture_output=True, text=True,
     )
     if r.returncode != 0:
+        try:
+            os.remove(tmp_dst)
+        except OSError:
+            pass
         raise RuntimeError((r.stderr or "")[-500:])
+    os.replace(tmp_dst, dst)
 
 
 def main():
@@ -56,9 +62,15 @@ def main():
     ap.add_argument("--bitrate", default=BITRATE, help="Opus bitrate (default 16k)")
     ap.add_argument("--limit", type=int, default=0, help="Max tracks to encode (0 = all)")
     ap.add_argument("--skip-existing", action="store_true", help="Skip tracks whose .opus file already exists")
+    ap.add_argument("--force", action="store_true", help="Re-encode even if .opus exists (re-downloads from R2)")
     args = ap.parse_args()
 
-    BITRATE = args.bitrate
+    # normalize bitrate: append 'k' if bare number
+    br = args.bitrate
+    if br.isdigit():
+        br = br + "k"
+    BITRATE = br
+    args.bitrate = br
 
     os.makedirs(AUDIO_DIR, exist_ok=True)
     data = json.load(open(TRACKS, encoding="utf-8"))
@@ -69,15 +81,17 @@ def main():
     failed = 0
     total_saved = 0
 
+    attempted = 0
     for i, t in enumerate(tracks):
-        if args.limit and done >= args.limit:
+        if args.limit and attempted >= args.limit:
             break
+        attempted += 1
         tid = t["id"]
         filename = f"{tid}.opus"
         dst = os.path.join(AUDIO_DIR, filename)
         rel_url = "audio/" + filename
 
-        if args.skip_existing and os.path.exists(dst):
+        if args.skip_existing and os.path.exists(dst) and not args.force:
             t["url"] = rel_url
             t["format"] = "opus"
             skipped += 1
@@ -86,10 +100,19 @@ def main():
         mp3_tmp = os.path.join(AUDIO_DIR, f".tmp_{tid}.mp3")
         try:
             src_url = t["url"]
-            # if already a relative opus path, skip download
-            if not src_url.startswith("http"):
+            # if already converted and not forcing, skip
+            if not src_url.startswith("http") and not args.force:
                 print(f"[{i+1}/{len(tracks)}] id={tid} already local, skipping download")
+                skipped += 1
                 continue
+            # if force and url is relative, reconstruct R2 URL from metadata
+            if args.force and not src_url.startswith("http"):
+                artist = sanitize(t.get("artist", "Unknown"))
+                title = sanitize(t.get("title", "track"))
+                filename = f"{artist} - {title}.mp3"
+                from urllib.parse import quote
+                src_url = "https://jamukot-audio.originragnarok05.workers.dev/" + quote(filename, safe="")
+                print(f"[{i+1}/{len(tracks)}] id={tid} (force) reconstructing R2 URL...")
             print(f"[{i+1}/{len(tracks)}] id={tid} downloading {t['title']} - {t['artist']}...")
             size = download(src_url, mp3_tmp)
             encode(mp3_tmp, dst)

@@ -136,8 +136,10 @@ def main():
 
     # encode to Opus
     opus_path = os.path.join(AUDIO_DIR, f"{new_id}.opus")
+    tmp_opus = opus_path + ".tmp"
     run(["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", args.bitrate,
-         "-vbr", "on", "-application", "audio", opus_path])
+         "-vbr", "on", "-application", "audio", "-f", "ogg", tmp_opus])
+    os.replace(tmp_opus, opus_path)
     try:
         os.remove(src)
     except OSError:
