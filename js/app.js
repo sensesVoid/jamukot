@@ -94,7 +94,13 @@ async function loadTrack(url) {
       opusDecoder = new lib.OggOpusDecoder();
       await opusDecoder.ready;
     }
-    const { channelData, samplesDecoded, sampleRate } = await opusDecoder.decode(new Uint8Array(arrayBuffer));
+    const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
+    const channelData = result.channelData;
+    const samplesDecoded = result.samplesDecoded;
+    const sampleRate = result.sampleRate || 48000;
+    if (!channelData || channelData.length === 0 || !samplesDecoded) {
+      throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples)');
+    }
     buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
     for (let ch = 0; ch < channelData.length; ch++) {
       buffer.copyToChannel(channelData[ch], ch);
