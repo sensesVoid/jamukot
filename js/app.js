@@ -94,8 +94,10 @@ async function loadTrack(url) {
       opusDecoder = new lib.OggOpusDecoder();
       await opusDecoder.ready;
     }
+    console.log('Fetched .opus:', arrayBuffer.byteLength, 'bytes');
     const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
     console.log('Opus decode result:', 'channels=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errors=' + (result.errors ? result.errors.length : 0));
+    if (result.errors && result.errors.length) console.log('Decode errors:', JSON.stringify(result.errors.slice(0, 3)));
     const channelData = result.channelData;
     const samplesDecoded = result.samplesDecoded;
     const sampleRate = result.sampleRate || 48000;
