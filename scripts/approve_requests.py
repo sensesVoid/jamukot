@@ -17,7 +17,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
 REQUESTS = os.path.join(BASE, "data", "requests.json")
-LIMIT_BYTES = int(9.5 * 1024 * 1024 * 1024)
+LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)  # 900 MB (GitHub Pages ~1 GB limit)
 
 
 def load_env():
@@ -232,12 +232,13 @@ def download_and_compress(url, workdir):
     if not candidates:
         raise RuntimeError("Download produced no file")
     source = candidates[0]
-    output = os.path.join(workdir, "out.mp3")
-    run_cmd(["ffmpeg", "-y", "-i", source, "-vn", "-map", "a", "-b:a", "128k", "-ar", "44100", output])
+    output = os.path.join(workdir, "out.opus")
+    run_cmd(["ffmpeg", "-y", "-i", source, "-c:a", "libopus", "-b:a", "16k",
+             "-vbr", "on", "-application", "audio", output])
     return output
 
 
-def process_one(req, tracks_data, s3, workdir):
+def process_one(req, tracks_data, workdir):
     youtube_url = str(req.get("youtube_url") or "")
     video_id = extract_youtube_id(youtube_url)
     if not video_id:
@@ -258,28 +259,30 @@ def process_one(req, tracks_data, s3, workdir):
         raise StorageLimitError(f"Storage limit reached ({total / 1e9:.2f} GB / 9.5 GB).")
     check_capacity(total, 0)
 
-    mp3 = download_and_compress(youtube_url, workdir)
-    size = os.path.getsize(mp3)
+    opus = download_and_compress(youtube_url, workdir)
+    size = os.path.getsize(opus)
     check_capacity(total, size)
-    duration = duration_of(mp3)
+    duration = duration_of(opus)
 
-    filename = unique_filename(sanitize(f"{artist} - {title}"), tracks)
-    print(f"Uploading to R2: {filename}")
-    s3.upload_file(mp3, BUCKET, filename, ExtraArgs={"ContentType": "audio/mpeg"})
-
-    url = PUBLIC_URL.rstrip("/") + "/" + quote(filename, safe="")
     new_id = max((int(t.get("id", 0) or 0) for t in tracks), default=0) + 1
+    os.makedirs(os.path.join(BASE, "audio"), exist_ok=True)
+    opus_dest = os.path.join(BASE, "audio", f"{new_id}.opus")
+    import shutil
+    shutil.copy2(opus, opus_dest)
+
+    rel_url = f"audio/{new_id}.opus"
     tracks.append({
         "id": new_id,
         "title": title,
         "artist": artist,
-        "url": url,
+        "url": rel_url,
         "duration": duration,
         "size": size,
         "youtube_id": video_id,
+        "format": "opus",
     })
     write_json(TRACKS, tracks_data)
-    print(f"ADDED: {artist} - {title} ({duration}s, {size / 1e6:.1f} MB)")
+    print(f"ADDED: {artist} - {title} ({duration}s, {size / 1e3:.0f} KB)")
     return "added"
 
 
@@ -353,13 +356,12 @@ def main():
         ]
         write_json(REQUESTS, queue)
 
-    s3 = make_s3()
     workdir = tempfile.mkdtemp(prefix="jamukot-req-")
     try:
         result = run_batch(
             pending,
             data,
-            lambda req, tracks_data: process_one(req, tracks_data, s3, workdir),
+            lambda req, tracks_data: process_one(req, tracks_data, workdir),
             on_change=save_queue,
         )
     finally:
@@ -374,7 +376,7 @@ def main():
         print("Storage limit reached; remaining requests were kept.")
 
     if args.push:
-        subprocess.run(["git", "add", "data/tracks.json", "data/requests.json"], cwd=BASE, check=True)
+        subprocess.run(["git", "add", "data/tracks.json", "data/requests.json", "audio/"], cwd=BASE, check=True)
         changed = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=BASE)
         if changed.returncode == 0:
             print("No changes to commit.")

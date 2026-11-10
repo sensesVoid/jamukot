@@ -1,43 +1,21 @@
 #!/usr/bin/env python3
-"""Replace an existing track with a new one (delete old from R2, add new)."""
+"""Replace an existing track with a new one (delete old, download + encode new to Opus)."""
 import argparse, json, os, sys, subprocess, glob, time
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from urllib.parse import quote, unquote
-import boto3
-from botocore.config import Config
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
-LIMIT_BYTES = int(9.5 * 1024 * 1024 * 1024)
+AUDIO_DIR = os.path.join(BASE, "audio")
+LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)
 
-def load_env():
-    env = {}
-    env_path = os.path.join(BASE, ".env")
-    if os.path.exists(env_path):
-        with open(env_path) as f:
-            for line in f:
-                line = line.strip()
-                if line and "=" in line and not line.startswith("#"):
-                    k, v = line.split("=", 1)
-                    env[k.strip()] = v.strip()
-    return env
-
-ENV = load_env()
-ACCESS_KEY = ENV.get("Access_Key_ID") or ENV.get("R2_ACCESS_KEY_ID")
-SECRET_KEY = ENV.get("Secret_Access_Key") or ENV.get("R2_SECRET_ACCESS_KEY")
-BUCKET = ENV.get("R2_BUCKET", "jamukot-audio")
-PUBLIC_URL = ENV.get("R2_PUBLIC_URL", "https://jamukot-audio.originragnarok05.workers.dev")
-ACCOUNT_ID = ENV.get("R2_ACCOUNT_ID", "5eaa981f4ddcdefe09597a949285c222")
-
-s3 = boto3.client("s3", endpoint_url=f"https://{ACCOUNT_ID}.r2.cloudflarestorage.com",
-    aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY,
-    config=Config(signature_version="s3v4"), region_name="auto")
 
 def sanitize(s):
     import re
     s = re.sub(r'[\\/:*?"<>|]', "", s)
     s = re.sub(r"\s+", " ", s).strip()
-    return s[:120] or "track"
+    return s[:80] or "track"
+
 
 def find_ytdlp():
     import shutil
@@ -61,28 +39,39 @@ def find_ytdlp():
             continue
     raise SystemExit("yt-dlp not found")
 
+
 def run(cmd):
     print(">", " ".join(cmd))
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
-        print(r.stdout); print(r.stderr)
-        raise SystemExit(f"Command failed")
+        print(r.stdout)
+        print(r.stderr)
+        raise SystemExit(f"Command failed: {' '.join(cmd)}")
+    return r
+
 
 def duration_of(path):
-    r = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=noprint_wrappers=1:nokey=1", path],
-        capture_output=True, text=True)
+    r = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", path],
+        capture_output=True, text=True,
+    )
     try:
         return round(float(r.stdout.strip()), 2)
     except ValueError:
         return 0.0
 
+
 def load_tracks():
     with open(TRACKS, encoding="utf-8") as f:
         return json.load(f)
 
+
 def save_tracks(data):
     with open(TRACKS, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -93,6 +82,7 @@ def main():
     ap.add_argument("url")
     ap.add_argument("--new-title", required=True)
     ap.add_argument("--new-artist", required=True)
+    ap.add_argument("--bitrate", default="16k")
     ap.add_argument("--push", action="store_true")
     args = ap.parse_args()
 
@@ -121,13 +111,14 @@ def main():
 
     new_title = sanitize(args.new_title)
     new_artist = sanitize(args.new_artist)
-    new_filename = f"{new_artist} - {new_title}.mp3"
 
-    # download + compress
+    # download + encode
     tmp_base = os.path.join(BASE, ".download")
     for f in glob.glob(tmp_base + "*"):
-        try: os.remove(f)
-        except OSError: pass
+        try:
+            os.remove(f)
+        except OSError:
+            pass
     cmd = find_ytdlp() + ["-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
            "--js-runtimes", "node", "--remote-components", "ejs:github"]
     cookies = os.environ.get("YOUTUBE_COOKIES_FILE")
@@ -139,49 +130,79 @@ def main():
     if not cands:
         raise SystemExit("Download produced no file")
     src = cands[0]
-    tmp_mp3 = os.path.join(BASE, ".compressed.mp3")
-    run(["ffmpeg", "-y", "-i", src, "-vn", "-map", "a", "-b:a", "128k", "-ar", "44100", tmp_mp3])
-    try: os.remove(src)
-    except OSError: pass
+    opus_path = os.path.join(AUDIO_DIR, f"{old['id']}.opus")
+    os.makedirs(AUDIO_DIR, exist_ok=True)
+    run(["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", args.bitrate,
+         "-vbr", "on", "-application", "audio", opus_path])
+    try:
+        os.remove(src)
+    except OSError:
+        pass
 
-    size = os.path.getsize(tmp_mp3)
+    size = os.path.getsize(opus_path)
     total = sum(t.get("size", 0) for t in tracks) - old.get("size", 0)
     if total + size > LIMIT_BYTES:
-        os.remove(tmp_mp3)
-        print(f"Would exceed 9.5 GB limit. Delete a song first.")
+        os.remove(opus_path)
+        print(f"Would exceed 0.9 GB limit. Delete a song first.")
         sys.exit(1)
 
-    dur = duration_of(tmp_mp3)
+    dur = duration_of(opus_path)
 
-    # delete old from R2
-    old_key = unquote(old["url"].rsplit("/", 1)[-1])
-    try:
-        s3.delete_object(Bucket=BUCKET, Key=old_key)
-        print(f"Deleted old from R2: {old_key}")
-    except Exception as e:
-        print(f"R2 delete warning: {e}")
+    # remove old file (if local opus)
+    old_url = old.get("url", "")
+    if not old_url.startswith("http"):
+        old_path = os.path.join(BASE, old_url)
+        try:
+            os.remove(old_path)
+            print(f"Deleted old: {old_path}")
+        except OSError:
+            pass
+    else:
+        # legacy R2 track — try to delete from R2
+        try:
+            import boto3
+            from botocore.config import Config
+            env = {}
+            env_path = os.path.join(BASE, ".env")
+            if os.path.exists(env_path):
+                with open(env_path, encoding="utf-8") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and "=" in line and not line.startswith("#"):
+                            k, v = line.split("=", 1)
+                            env[k.strip()] = v.strip()
+            access = env.get("Access_Key_ID") or env.get("R2_ACCESS_KEY_ID")
+            secret = env.get("Secret_Access_Key") or env.get("R2_SECRET_ACCESS_KEY")
+            bucket = env.get("R2_BUCKET", "jamukot-audio")
+            account = env.get("R2_ACCOUNT_ID", "5eaa981f4ddcdefe097a949285c222")
+            s3 = boto3.client("s3", endpoint_url=f"https://{account}.r2.cloudflarestorage.com",
+                aws_access_key_id=access, aws_secret_access_key=secret,
+                config=Config(signature_version="s3v4"), region_name="auto")
+            key = unquote(old_url.rsplit("/", 1)[-1])
+            s3.delete_object(Bucket=bucket, Key=key)
+            print(f"Deleted old from R2: {key}")
+        except Exception as e:
+            print(f"R2 delete warning: {e}")
 
-    # upload new
-    print(f"Uploading to R2: {new_filename}")
-    s3.upload_file(tmp_mp3, BUCKET, new_filename, ExtraArgs={"ContentType": "audio/mpeg"})
-    os.remove(tmp_mp3)
+    rel_url = f"audio/{old['id']}.opus"
 
-    new_url = PUBLIC_URL.rstrip("/") + "/" + quote(new_filename, safe="")
-
-    # update entry
+    # update entry (keep same id)
     old["title"] = new_title
     old["artist"] = new_artist
-    old["url"] = new_url
+    old["url"] = rel_url
     old["duration"] = dur
     old["size"] = size
+    old["format"] = "opus"
     save_tracks(data)
-    print(f"Replaced: {new_artist} - {new_title} ({dur}s, {size/1e6:.1f} MB)")
+    print(f"Replaced: {new_artist} - {new_title} ({dur}s, {size/1e3:.0f} KB)")
 
     if args.push:
-        subprocess.run(["git", "add", "data/tracks.json"], cwd=BASE, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=BASE, check=True)
         subprocess.run(["git", "commit", "-m", f"Replace track: {old['artist']} - {old['title']} -> {new_artist} - {new_title}"], cwd=BASE, check=True)
         subprocess.run(["git", "push"], cwd=BASE, check=True)
         print("Pushed.")
 
+
 if __name__ == "__main__":
     main()
+PY

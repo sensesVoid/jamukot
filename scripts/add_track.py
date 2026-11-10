@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""Download a YouTube video, compress to 128kbps MP3, upload to Cloudflare R2, update tracks.json."""
-import argparse, json, os, re, subprocess, sys, time, glob
+"""Download a YouTube video, compress to Opus (16 kbps), save to audio/, update tracks.json."""
+import argparse, json, os, re, subprocess, sys, time, glob, tempfile
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from urllib.parse import quote
-import boto3
-from botocore.config import Config
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACKS = os.path.join(BASE, "data", "tracks.json")
-LIMIT_BYTES = int(9.5 * 1024 * 1024 * 1024)  # 9.5 GB
+AUDIO_DIR = os.path.join(BASE, "audio")
+LIMIT_BYTES = int(0.9 * 1024 * 1024 * 1024)  # 900 MB (GitHub Pages ~1 GB limit)
+
 
 def load_env():
     env = {}
     env_path = os.path.join(BASE, ".env")
     if os.path.exists(env_path):
-        with open(env_path) as f:
+        with open(env_path, encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if line and "=" in line and not line.startswith("#"):
@@ -22,21 +22,12 @@ def load_env():
                     env[k.strip()] = v.strip()
     return env
 
-ENV = load_env()
-ACCESS_KEY = ENV.get("Access_Key_ID") or ENV.get("R2_ACCESS_KEY_ID")
-SECRET_KEY = ENV.get("Secret_Access_Key") or ENV.get("R2_SECRET_ACCESS_KEY")
-BUCKET = ENV.get("R2_BUCKET", "jamukot-audio")
-PUBLIC_URL = ENV.get("R2_PUBLIC_URL", "https://jamukot-audio.originragnarok05.workers.dev")
-ACCOUNT_ID = ENV.get("R2_ACCOUNT_ID", "5eaa981f4ddcdefe09597a949285c222")
-
-s3 = boto3.client("s3", endpoint_url=f"https://{ACCOUNT_ID}.r2.cloudflarestorage.com",
-    aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY,
-    config=Config(signature_version="s3v4"), region_name="auto")
 
 def sanitize(s):
     s = re.sub(r'[\\/:*?"<>|]', "", s)
     s = re.sub(r"\s+", " ", s).strip()
-    return s[:120] or "track"
+    return s[:80] or "track"
+
 
 def find_ytdlp():
     import shutil
@@ -49,8 +40,7 @@ def find_ytdlp():
         return [sys.executable, "-m", "yt_dlp"]
     except Exception:
         pass
-    candidates = ["python3", "python", "py"]
-    for c in candidates:
+    for c in ("python3", "python", "py"):
         exe = shutil.which(c)
         if not exe:
             continue
@@ -61,21 +51,28 @@ def find_ytdlp():
             continue
     raise SystemExit("yt-dlp not found. Install with: python -m pip install yt-dlp")
 
+
 def run(cmd):
     print(">", " ".join(cmd))
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
-        print(r.stdout); print(r.stderr)
+        print(r.stdout)
+        print(r.stderr)
         raise SystemExit(f"Command failed: {' '.join(cmd)}")
     return r
 
+
 def duration_of(path):
-    r = subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","default=noprint_wrappers=1:nokey=1", path],
-        capture_output=True, text=True)
+    r = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", path],
+        capture_output=True, text=True,
+    )
     try:
         return round(float(r.stdout.strip()), 2)
     except ValueError:
         return 0.0
+
 
 def load_tracks():
     if os.path.exists(TRACKS):
@@ -83,31 +80,45 @@ def load_tracks():
             return json.load(f)
     return {"tracks": []}
 
+
+def save_tracks(data):
+    with open(TRACKS, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("url")
     ap.add_argument("--title", required=True)
     ap.add_argument("--artist", required=True)
+    ap.add_argument("--bitrate", default="16k", help="Opus bitrate (default 16k)")
     ap.add_argument("--push", action="store_true")
     args = ap.parse_args()
 
     title = sanitize(args.title)
     artist = sanitize(args.artist)
-    filename = f"{artist} - {title}.mp3"
 
     data = load_tracks()
     tracks = data.setdefault("tracks", [])
 
-    # storage limit check
+    # storage limit check (based on Opus file sizes)
     total = sum(t.get("size", 0) for t in tracks)
     if total >= LIMIT_BYTES:
-        print(f"Storage limit reached ({total/1e9:.2f} GB / 9.5 GB). Delete a song first.")
+        print(f"Storage limit reached ({total/1e9:.2f} GB / 0.9 GB). Delete a song first.")
         sys.exit(1)
+
+    # determine new id
+    new_id = max((t.get("id", 0) for t in tracks), default=0) + 1
+
+    os.makedirs(AUDIO_DIR, exist_ok=True)
 
     tmp_base = os.path.join(BASE, ".download")
     for f in glob.glob(tmp_base + "*"):
-        try: os.remove(f)
-        except OSError: pass
+        try:
+            os.remove(f)
+        except OSError:
+            pass
 
     # download
     cmd = find_ytdlp() + ["-f", "bestaudio", "-o", tmp_base + ".%(ext)s", "--no-playlist",
@@ -123,49 +134,47 @@ def main():
         raise SystemExit("Download produced no file")
     src = cands[0]
 
-    tmp_mp3 = os.path.join(BASE, ".compressed.mp3")
-    run(["ffmpeg", "-y", "-i", src, "-vn", "-map", "a", "-b:a", "128k", "-ar", "44100", tmp_mp3])
-    try: os.remove(src)
-    except OSError: pass
+    # encode to Opus
+    opus_path = os.path.join(AUDIO_DIR, f"{new_id}.opus")
+    run(["ffmpeg", "-y", "-i", src, "-c:a", "libopus", "-b:a", args.bitrate,
+         "-vbr", "on", "-application", "audio", opus_path])
+    try:
+        os.remove(src)
+    except OSError:
+        pass
 
-    size = os.path.getsize(tmp_mp3)
+    size = os.path.getsize(opus_path)
     if total + size > LIMIT_BYTES:
-        os.remove(tmp_mp3)
-        print(f"Adding this track would exceed the 9.5 GB limit ({(total+size)/1e9:.2f} GB). Delete a song first.")
+        os.remove(opus_path)
+        print(f"Adding this track would exceed the 0.9 GB limit ({(total+size)/1e9:.2f} GB). Delete a song first.")
         sys.exit(1)
 
-    dur = duration_of(tmp_mp3)
+    dur = duration_of(opus_path)
 
-    # upload to R2
-    key = filename
-    print(f"Uploading to R2: {filename}")
-    s3.upload_file(tmp_mp3, BUCKET, key, ExtraArgs={"ContentType": "audio/mpeg"})
-    os.remove(tmp_mp3)
-
-    url = PUBLIC_URL.rstrip("/") + "/" + quote(filename, safe="")
+    rel_url = f"audio/{new_id}.opus"
 
     # update tracks.json
-    if not any(t.get("url") == url for t in tracks):
-        new_id = (max((t.get("id", 0) for t in tracks), default=0) + 1)
-        tracks.append({
-            "id": new_id,
-            "title": title,
-            "artist": artist,
-            "url": url,
-            "duration": dur,
-            "size": size,
-        })
-    with open(TRACKS, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    tracks.append({
+        "id": new_id,
+        "title": title,
+        "artist": artist,
+        "url": rel_url,
+        "duration": dur,
+        "size": size,
+        "format": "opus",
+    })
+    save_tracks(data)
 
-    print(f"Added: {artist} - {title} ({dur}s, {size/1e6:.1f} MB) -> {url}")
+    print(f"Added: {artist} - {title} ({dur}s, {size/1e3:.0f} KB) -> {rel_url}")
 
     if args.push:
         print("Committing and pushing...")
-        subprocess.run(["git", "add", "data/tracks.json"], cwd=BASE, check=True)
+        subprocess.run(["git", "add", "-A"], cwd=BASE, check=True)
         subprocess.run(["git", "commit", "-m", f"Add track: {artist} - {title}"], cwd=BASE, check=True)
         subprocess.run(["git", "push"], cwd=BASE, check=True)
         print("Pushed. Site will redeploy automatically.")
 
+
 if __name__ == "__main__":
     main()
+PY
