@@ -108,12 +108,31 @@ async function loadTrack(url) {
       const head = new Uint8Array(arrayBuffer.slice(0, 4));
       console.log('Magic bytes:', Array.from(head).map(b => b.toString(16).padStart(2,'0')).join(' '), String.fromCharCode(...head));
       await opusDecoder.reset();
-      const result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
-      console.log('WASM Opus decode result:', 'channels=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errors=' + (result.errors ? result.errors.length : 0));
-      if (result.errors && result.errors.length) console.log('Decode errors:', JSON.stringify(result.errors.slice(0, 3)));
-      const channelData = result.channelData;
-      const samplesDecoded = result.samplesDecoded;
-      const sampleRate = result.sampleRate || 48000;
+      let result;
+      try {
+        result = await opusDecoder.decodeFile(new Uint8Array(arrayBuffer));
+        console.log('decodeFile result:', 'ch=' + (result.channelData ? result.channelData.length : 'null'), 'samples=' + result.samplesDecoded, 'sr=' + result.sampleRate, 'errs=' + (result.errors ? result.errors.length : 0));
+      } catch (e) {
+        console.warn('decodeFile threw:', e && e.message);
+        result = null;
+      }
+      if (!result || !result.channelData || result.channelData.length === 0 || !result.samplesDecoded) {
+        console.log('Trying streaming decode...');
+        try {
+          const r1 = await opusDecoder.decode(new Uint8Array(arrayBuffer));
+          console.log('decode result:', 'ch=' + (r1.channelData ? r1.channelData.length : 'null'), 'samples=' + r1.samplesDecoded, 'sr=' + r1.sampleRate, 'errs=' + (r1.errors ? r1.errors.length : 0));
+          const r2 = await opusDecoder.flush();
+          console.log('flush result:', 'ch=' + (r2.channelData ? r2.channelData.length : 'null'), 'samples=' + r2.samplesDecoded, 'sr=' + r2.sampleRate, 'errs=' + (r2.errors ? r2.errors.length : 0));
+          if (r1.channelData && r1.channelData.length > 0 && r1.samplesDecoded) result = r1;
+          else if (r2.channelData && r2.channelData.length > 0 && r2.samplesDecoded) result = r2;
+        } catch (e) {
+          console.warn('Streaming decode threw:', e && e.message);
+        }
+      }
+      if (result && result.errors && result.errors.length) console.log('Decode errors:', JSON.stringify(result.errors.slice(0, 3)));
+      const channelData = result ? result.channelData : null;
+      const samplesDecoded = result ? result.samplesDecoded : 0;
+      const sampleRate = (result && result.sampleRate) || 48000;
       if (!channelData || channelData.length === 0 || !samplesDecoded) {
         throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples, sr=' + sampleRate + ')');
       }
