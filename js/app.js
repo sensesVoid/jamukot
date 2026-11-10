@@ -99,12 +99,12 @@ async function loadTrack(url) {
       console.warn('Native decodeAudioData failed, trying WASM decoder:', nativeErr && nativeErr.message);
     }
     if (nativeFailed) {
-      if (!opusDecoder) {
-        const lib = window['ogg-opus-decoder'];
-        if (!lib || !lib.OggOpusDecoder) throw new Error('Opus decoder library not loaded');
-        opusDecoder = new lib.OggOpusDecoder();
-        await opusDecoder.ready;
-      }
+      // Create a fresh decoder for each file
+      const lib = window['ogg-opus-decoder'];
+      if (!lib || !lib.OggOpusDecoder) throw new Error('Opus decoder library not loaded');
+      opusDecoder = new lib.OggOpusDecoder();
+      await opusDecoder.ready;
+      console.log('Decoder ready. V defined:', !!opusDecoder.V);
       console.log('Fetched .opus:', arrayBuffer.byteLength, 'bytes');
       const head = new Uint8Array(arrayBuffer.slice(0, 4));
       console.log('Magic bytes:', Array.from(head).map(b => b.toString(16).padStart(2,'0')).join(' '), String.fromCharCode(...head));
