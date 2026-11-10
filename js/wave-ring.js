@@ -21,11 +21,11 @@
       const f0 = Math.exp(logMin + (i / count) * logRange);
       const f1 = Math.exp(logMin + ((i + 1) / count) * logRange);
       const bin0 = Math.max(0, Math.floor(f0 / binWidth));
-      const bin1 = Math.min(n - 1, Math.ceil(f1 / binWidth));
+      const bin1 = Math.min(n, Math.ceil(f1 / binWidth));
 
       let sum = 0;
       let cnt = 0;
-      for (let b = bin0; b <= bin1; b++) {
+      for (let b = bin0; b < bin1; b++) {
         sum += data[b];
         cnt++;
       }
@@ -90,6 +90,7 @@
       this._setupResizeObserver();
       this._setupVisibilityHandler();
       this._checkReducedMotion();
+    this.resize();
     }
 
     _setupResizeObserver() {
@@ -123,7 +124,7 @@
       if (typeof matchMedia !== 'undefined') {
         const mediaQuery = matchMedia('(prefers-reduced-motion: reduce)');
         this.reducedMotion = mediaQuery.matches;
-        mediaQuery.addEventListener('change', (e) => {
+        this._reducedMotionHandler = (e) => {
           this.reducedMotion = e.matches;
           if (this.playing) {
             if (this.reducedMotion) {
@@ -133,7 +134,8 @@
               this._scheduleFrame();
             }
           }
-        });
+        };
+        mediaQuery.addEventListener('change', this._reducedMotionHandler);
       }
     }
 
@@ -199,6 +201,7 @@
     }
 
     drawResting() {
+      if (!this._size) this.resize();
       for (let i = 0; i < this.barCount; i++) {
         this.levels[i] = 0.07 + 0.03 * (0.5 + 0.5 * Math.sin(i * 0.55));
       }
@@ -270,6 +273,10 @@
       if (this.visibilityHandler && typeof document !== 'undefined') {
         document.removeEventListener('visibilitychange', this.visibilityHandler);
         this.visibilityHandler = null;
+      }
+      if (this._reducedMotionHandler && typeof matchMedia !== 'undefined') {
+        matchMedia('(prefers-reduced-motion: reduce)').removeEventListener('change', this._reducedMotionHandler);
+        this._reducedMotionHandler = null;
       }
       this.analyser = null;
       this.freq = null;

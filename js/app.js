@@ -540,7 +540,9 @@ function nextTrack() {
   } else {
     next = state.index + 1;
     if (next >= state.tracks.length) {
-      if (state.repeat === 1) next = 0; else {
+      if (state.repeat === 1) {
+        next = 0;
+      } else {
         if (waveRing) waveRing.stop();
         return;
       }
