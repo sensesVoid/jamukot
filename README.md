@@ -4,81 +4,99 @@
 
 **Live site:** https://sensesvoid.github.io/jamukot/
 
-A static music player hosted on **GitHub Pages** (`github.io`). Features:
+A static, self-hosted music player on **GitHub Pages**. All audio is compressed to **Opus (16 kbps)** and stored directly in the repo — no external storage needed. Works in strict network environments where only GitHub and Cloudflare are allowed.
+
+### Features
 - Playlist with search, shuffle, repeat, seek, volume
 - Vinyl/CD spin animation with tonearm + cover art
-- Synced lyrics (karaoke-style) via [LRCLIB](https://lrclib.net)
-- Add tracks from YouTube via a GitHub Actions workflow (download → compress to 128kbps MP3 → commit to `AudioFile/`)
+- Synced lyrics (karaoke-style) — offline-capable via pre-fetched `data/lyrics.json`
+- Beat-synced frequency visualizer (canvas)
+- Song request form (floating button → modal → Cloudflare Worker queue)
+- Work Rant/Confession wall (Cloudflare KV backend, 200-char limit, 3 posts/day)
+- Storage indicator (MB / 780 MB)
+
+### Versions
+- **v2.0** (current): Opus on GitHub Pages — https://github.com/sensesVoid/jamukot/releases/tag/v2.0
+- **v1.0**: MP3 on Cloudflare R2 — https://github.com/sensesVoid/jamukot/releases/tag/v1.0
 
 ## Structure
 ```
 .
 ├── index.html
 ├── css/style.css
-├── js/app.js
-├── data/tracks.json          # track metadata
-├── AudioFile/                # compressed mp3s
+├── js/
+│   ├── app.js
+│   └── lib/ogg-opus-decoder.min.js   # vendored Opus decoder (no CDN)
+├── audio/                            # Opus files (16 kbps)
+├── data/
+│   ├── tracks.json                   # track metadata
+│   └── lyrics.json                   # pre-fetched lyrics (offline)
 ├── scripts/
-│   ├── gen_tracks.py         # regenerate tracks.json from AudioFile
-│   └── add_track.py          # download + compress + register (used by CI)
+│   ├── encode_opus.py                # bulk MP3 → Opus migration
+│   ├── add_track.py                  # download → Opus → register
+│   ├── delete_track.py               # remove track + file
+│   ├── replace_track.py              # replace track
+│   ├── approve_requests.py           # bulk-approve song requests
+│   └── fetch_lyrics.py               # fetch lyrics from LRCLIB
+├── encode-opus.ps1                   # PowerShell wrapper
+├── fetch-lyrics.ps1
+├── add-track.ps1 / delete-track.ps1 / replace-track.ps1
+├── worker/                           # Cloudflare Worker (dispatch + requests + rants)
 └── .github/workflows/
-    ├── add-track.yml         # manual dispatch: YouTube -> mp3 -> commit
-    └── pages.yml             # deploy to GitHub Pages
+    ├── pages.yml                     # deploy to GitHub Pages
+    └── add-track.yml                 # CI track addition
 ```
 
 ## Setup
-1. Create repo `sensesVoid/jamukot` and push this folder.
+1. Clone the repo.
 2. Enable GitHub Pages: Settings → Pages → Source = "GitHub Actions".
-3. (Optional) In the player, open Settings and store a PAT (scopes `repo`, `workflow`) to dispatch the Add Track workflow from the UI.
+3. (Optional) Deploy the Cloudflare Worker for song requests and rant wall:
+   ```bash
+   cd worker
+   npx wrangler deploy
+   npx wrangler secret put GITHUB_TOKEN      # PAT with repo+workflow scopes
+   npx wrangler secret put RANT_ADMIN_TOKEN  # any secret string for pinning rants
+   ```
 
-## Add a track (easiest: one command, no setup)
-
+## Add a track
 ```powershell
 .\add-track.ps1 "https://youtube.com/watch?v=..." "Song title" "Artist name"
 ```
-That's it — it downloads, compresses to 128 kbps, commits, and pushes. The site redeploys automatically; refresh after ~1 min.
+Downloads, compresses to Opus (16 kbps), saves to `audio/<id>.opus`, updates `tracks.json`, commits, and pushes.
 
 Or in any shell:
 ```bash
 python scripts/add_track.py "URL" --title "Song" --artist "Artist" --push
 ```
 
-## Add a track (in-browser, no terminal)
-
-Open the player → **Add Track** → paste URL/title/artist → click **Add track**.
-- If you deployed the Cloudflare Worker (see below) and set its URL in Settings, it's a true 1-click dispatch.
-- Otherwise it copies the inputs to your clipboard and opens the GitHub Actions page for you to confirm.
-
-### Optional: deploy the 1-click worker (one-time)
-```bash
-cd worker
-npm i -g wrangler
-npx wrangler login
-npx wrangler secret put GITHUB_TOKEN   # PAT with repo+workflow scopes
-npx wrangler deploy
-```
-Paste the printed `https://...workers.dev` URL into the player's Settings → Worker URL.
-
-> **YouTube bot protection:** headless CI runners are often blocked by YouTube.
-> To make the workflow succeed, export your browser cookies to a Netscape
-> `cookies.txt` and store its full contents in a repo secret named
-> `YOUTUBE_COOKIES` (Settings → Secrets and variables → Actions). The workflow
-> writes that secret to a file and passes it to yt-dlp automatically.
-> Without it, use the local method below (which uses your browser cookies).
-
-## Add a track (CLI / local)
-```bash
-pip install yt-dlp
-python scripts/add_track.py "https://youtube.com/watch?v=..." --title "Song" --artist "Artist"
+## Delete a track
+```powershell
+.\delete-track.ps1 <id> -Push
 ```
 
-## Regenerate metadata
-```bash
-python scripts/gen_tracks.py
+## Replace a track
+```powershell
+.\replace-track.ps1 <id> "URL" "New title" "New artist" -Push
+```
+
+## Song requests
+Visitors can click the floating button (bottom-right) to request a song. Requests queue in `data/requests.json` via the Cloudflare Worker. Approve in bulk:
+```powershell
+.\approve-requests.ps1 -DryRun   # preview
+.\approve-requests.ps1 -Push     # approve all, encode to Opus, commit, push
+```
+
+## Rant wall
+Visitors can post rants (alias + message, 200-char limit, 3/day). To pin a post, triple-click the "Rant Wall" title and enter the admin token.
+
+## Lyrics (offline)
+```powershell
+.\fetch-lyrics.ps1               # fetch all
+.\fetch-lyrics.ps1 -Limit 50     # fetch a batch
 ```
 
 ## Compression profile
-MP3, 128 kbps, 44.1 kHz, stereo (via ffmpeg `-b:a 128k`).
+Opus, 16 kbps, VBR, 48 kHz, stereo (via ffmpeg `-c:a libopus -b:a 16k`). Each 3-minute track ≈ 360 KB.
 
-## Lyrics
-Fetched at runtime from LRCLIB (free, no key). Synced LRC when available, otherwise plain lyrics.
+## Strict environment
+All audio and lyrics are served from GitHub Pages. Only the song-request and rant-wall features use Cloudflare Workers (also allowed in strict environments). Fonts fall back to system fonts if Google Fonts is blocked.
