@@ -108,6 +108,8 @@ async function loadTrack(url) {
       console.log('Fetched .opus:', arrayBuffer.byteLength, 'bytes');
       const head = new Uint8Array(arrayBuffer.slice(0, 4));
       console.log('Magic bytes:', Array.from(head).map(b => b.toString(16).padStart(2,'0')).join(' '), String.fromCharCode(...head));
+      console.log('WebAssembly available:', typeof WebAssembly !== 'undefined');
+      console.log('AudioContext state:', audioCtx.state, 'sampleRate:', audioCtx.sampleRate);
       await opusDecoder.reset();
       let result;
       try {
