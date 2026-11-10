@@ -137,7 +137,8 @@ async function loadTrack(url) {
       const samplesDecoded = result ? result.samplesDecoded : 0;
       const sampleRate = (result && result.sampleRate) || 48000;
       if (!channelData || channelData.length === 0 || !samplesDecoded) {
-        throw new Error('Opus decode produced no audio (' + (channelData ? channelData.length : 0) + ' ch, ' + samplesDecoded + ' samples, sr=' + sampleRate + ')');
+        const libOk = !!(window['ogg-opus-decoder'] && window['ogg-opus-decoder'].OggOpusDecoder);
+        throw new Error('Opus no audio (' + (channelData ? channelData.length : 0) + 'ch,' + samplesDecoded + 'smp,sr' + sampleRate + ') fetched=' + arrayBuffer.byteLength + 'B magic=' + Array.from(new Uint8Array(arrayBuffer.slice(0,4))).map(b=>b.toString(16).padStart(2,'0')).join('') + ' wasmLib=' + libOk);
       }
       buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
       for (let ch = 0; ch < channelData.length; ch++) {
