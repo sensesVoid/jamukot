@@ -4,25 +4,31 @@
       "id": 1,
       "title": "Kaibigan",
       "artist": "1096 Gang",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/1096%20Gang%20-%20Kaibigan.mp3",
+      "url": "audio/1.opus",
       "duration": 294.85,
-      "size": 4718895
+      "size": 598779,
+      "format": "opus",
+      "original_size": 4718895
     },
     {
       "id": 2,
       "title": "Mood",
       "artist": "24kGoldn",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/24kGoldn%20-%20Mood.mp3",
+      "url": "audio/2.opus",
       "duration": 144.75,
-      "size": 2317301
+      "size": 305411,
+      "format": "opus",
+      "original_size": 2317301
     },
     {
       "id": 3,
       "title": "Changes",
       "artist": "2Pac",
-      "url": "https://jamukot-audio.originragnarok05.workers.dev/2Pac%20-%20Changes.mp3",
+      "url": "audio/3.opus",
       "duration": 268.77,
-      "size": 4301261
+      "size": 503421,
+      "format": "opus",
+      "original_size": 4301261
     },
     {
       "id": 4,

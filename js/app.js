@@ -3,8 +3,20 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-const audio = $('#audio');
+const audio = $('#audio'); // kept for backward compat, not used for playback
 const REQUEST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/request';
+// Web Audio + Opus decoder state
+let audioCtx = null;
+let gainNode = null;
+let analyser = null;
+let opusDecoder = null;
+let currentSource = null;
+let currentBuffer = null;
+let isPlaying = false;
+let playbackOffset = 0;
+let playbackStartCtx = 0;
+const bufferCache = new Map();
+let progressTimer = null;
 const RANTS_LIST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rants';
 const RANT_POST_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant';
 const RANT_PIN_ENDPOINT = 'https://jamukot-dispatch.originragnarok05.workers.dev/rant/pin';
@@ -41,6 +53,128 @@ function fmtTime(s) {
   const m = Math.floor(s / 60);
   const sec = Math.floor(s % 60).toString().padStart(2, '0');
   return `${m}:${sec}`;
+}
+
+/* ---------- Audio (Web Audio + Opus) ---------- */
+async function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioCtx.createGain();
+  gainNode.gain.value = parseFloat($('#volume')?.value || '0.8');
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 128;
+  analyser.smoothingTimeConstant = 0.8;
+  analyser.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  // init opus decoder lazily (only needed for .opus files)
+  // (decoder will be created on first .opus load)
+  // wire up volume slider
+  const vol = $('#volume');
+  if (vol) vol.addEventListener('input', (e) => { if (gainNode) gainNode.gain.value = parseFloat(e.target.value); });
+}
+
+async function loadTrack(url) {
+  if (bufferCache.has(url)) return bufferCache.get(url);
+  // simple cache eviction: keep at most 50 decoded tracks in memory
+  if (bufferCache.size >= 50) {
+    const oldest = bufferCache.keys().next().value;
+    bufferCache.delete(oldest);
+  }
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const arrayBuffer = await res.arrayBuffer();
+  let buffer;
+  if (url.toLowerCase().endsWith('.opus')) {
+    if (!opusDecoder) {
+      const lib = window['ogg-opus-decoder'];
+      if (!lib || !lib.OggOpusDecoder) throw new Error('Opus decoder library not loaded');
+      opusDecoder = new lib.OggOpusDecoder();
+      await opusDecoder.ready;
+    }
+    const { channelData, samplesDecoded, sampleRate } = await opusDecoder.decode(new Uint8Array(arrayBuffer));
+    buffer = audioCtx.createBuffer(channelData.length, samplesDecoded, sampleRate);
+    for (let ch = 0; ch < channelData.length; ch++) {
+      buffer.copyToChannel(channelData[ch], ch);
+    }
+  } else {
+    // Native decode (MP3, etc.) via Web Audio
+    buffer = await audioCtx.decodeAudioData(arrayBuffer);
+  }
+  bufferCache.set(url, buffer);
+  return buffer;
+}
+
+function stopSource() {
+  if (currentSource) {
+    try { currentSource.onended = null; currentSource.stop(); } catch {}
+    try { currentSource.disconnect(); } catch {}
+    currentSource = null;
+  }
+}
+
+function playBuffer(buffer, offset = 0) {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  stopSource();
+  const source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.connect(analyser);
+  source.onended = () => { if (isPlaying) nextTrack(); };
+  const safeOffset = Math.min(Math.max(0, offset), Math.max(0, buffer.duration - 0.05));
+  source.start(0, safeOffset);
+  currentSource = source;
+  currentBuffer = buffer;
+  playbackOffset = safeOffset;
+  playbackStartCtx = audioCtx.currentTime;
+  isPlaying = true;
+  startProgressLoop();
+  startVisualizer();
+  const playBtn = $('#btn-play'); if (playBtn) playBtn.textContent = '⏸';
+}
+
+function pausePlayback() {
+  if (!isPlaying) return;
+  const elapsed = audioCtx.currentTime - playbackStartCtx;
+  playbackOffset += elapsed;
+  stopSource();
+  isPlaying = false;
+  stopProgressLoop();
+  stopVisualizer();
+  const v = vinylEl; if (v) v.style.scale = '1';
+  const playBtn = $('#btn-play'); if (playBtn) playBtn.textContent = '▶';
+  updateVinyl(false);
+}
+
+function seekTo(time) {
+  if (!currentBuffer) return;
+  const wasPlaying = isPlaying;
+  if (wasPlaying) {
+    stopSource();
+    playBuffer(currentBuffer, time);
+  } else {
+    playbackOffset = Math.min(Math.max(0, time), currentBuffer.duration);
+  }
+}
+
+function getCurrentTime() {
+  if (!isPlaying) return playbackOffset;
+  return Math.min(playbackOffset + (audioCtx.currentTime - playbackStartCtx), currentBuffer ? currentBuffer.duration : 0);
+}
+
+function startProgressLoop() {
+  stopProgressLoop();
+  progressTimer = setInterval(() => {
+    const cur = getCurrentTime();
+    const dur = currentBuffer ? currentBuffer.duration : 0;
+    const pct = dur ? (cur / dur) * 100 : 0;
+    if (curTimeEl) curTimeEl.textContent = fmtTime(cur);
+    if (progressFillEl) progressFillEl.style.width = pct + '%';
+    if (progressThumbEl) progressThumbEl.style.left = pct + '%';
+    syncLyrics(cur);
+  }, 250);
+}
+
+function stopProgressLoop() {
+  if (progressTimer) { clearInterval(progressTimer); progressTimer = null; }
 }
 
 /* ---------- Data ---------- */
@@ -108,28 +242,28 @@ function playById(id) {
   if (idx >= 0) playIndex(idx);
 }
 
-function playIndex(idx) {
+async function playIndex(idx) {
   if (idx < 0 || idx >= state.tracks.length) return;
   state.index = idx;
   const t = state.tracks[idx];
   const src = t.url || t.file;
-  audio.src = /^https?:\/\//.test(src) ? src : encodeURI(src);
-  if (!audioCtx) initVisualizer();
-  audio.load();
-  const playPromise = audio.play();
-  if (playPromise && typeof playPromise.catch === 'function') {
-    playPromise.catch((e) => {
-      console.warn('playback failed:', e && e.message, src);
-      const retry = () => { audio.play().catch(() => {}); audio.removeEventListener('canplay', retry); };
-      audio.addEventListener('canplay', retry, { once: true });
-      setTimeout(() => audio.removeEventListener('canplay', retry), 8000);
-    });
-  }
+  await initAudio();
+  initVisualizer();
   updateNowPlaying(t);
   updateVinyl(true);
   fetchCover(t);
   fetchLyrics(t);
   renderPlaylist();
+  try {
+    const buffer = await loadTrack(src);
+    currentBuffer = buffer;
+    playBuffer(buffer, 0);
+    const durTime = $('#dur-time'); if (durTime) durTime.textContent = fmtTime(buffer.duration);
+  } catch (e) {
+    console.error('Failed to load track:', e && e.message, src);
+    const np = $('#np-title'); if (np) np.textContent = 'Playback error: ' + (e && e.message ? e.message : 'unknown');
+    updateVinyl(false);
+  }
 }
 
 function updateNowPlaying(t) {
@@ -307,43 +441,9 @@ function syncLyrics(currentTime) {
 const curTimeEl = $('#cur-time');
 const progressFillEl = $('#progress-fill');
 const progressThumbEl = $('#progress-thumb');
-audio.addEventListener('timeupdate', () => {
-  const cur = audio.currentTime;
-  const dur = audio.duration || 0;
-  const pct = dur ? (cur / dur) * 100 : 0;
-  if (curTimeEl) curTimeEl.textContent = fmtTime(cur);
-  if (progressFillEl) progressFillEl.style.width = pct + '%';
-  if (progressThumbEl) progressThumbEl.style.left = pct + '%';
-  syncLyrics(cur);
-});
-const durTimeEl = $('#dur-time');
-audio.addEventListener('loadedmetadata', () => {
-  if (audio.duration && durTimeEl) durTimeEl.textContent = fmtTime(audio.duration);
-});
-audio.addEventListener('play', () => updateVinyl(true));
-audio.addEventListener('pause', () => {
-  updateVinyl(false);
-  stopVisualizer();
-  const v = vinylEl;
-  if (v) v.style.scale = '1';
-});
-audio.addEventListener('error', () => {
-  const err = audio.error;
-  console.error('Audio error:', err && err.code, err && err.message, 'src=', audio.currentSrc);
-  const np = $('#np-title');
-  if (np && err) np.textContent = 'Playback error (' + err.code + ') ' + (err.message || '');
-});
-audio.addEventListener('stalled', () => { console.warn('Audio stalled (buffering)'); });
-audio.addEventListener('waiting', () => { console.warn('Audio waiting for data'); });
-audio.addEventListener('ended', () => {
-  if (state.repeat === 2) { audio.currentTime = 0; if (!audioCtx) initVisualizer(); audio.play(); return; }
-  nextTrack();
-});
+// 'ended' is now handled by AudioBufferSourceNode.onended in playBuffer
 
 /* ---------- Audio visualizer (radio frequency wave) ---------- */
-let audioCtx = null;
-let analyser = null;
-let sourceNode = null;
 let vizCanvas = $('#visualizer');
 let vizCtx = vizCanvas ? vizCanvas.getContext('2d') : null;
 let vizRaf = null;
@@ -357,29 +457,14 @@ function resizeVisualizer() {
 }
 
 function initVisualizer() {
-  if (audioCtx) return;
-  try {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 128;
-    analyser.smoothingTimeConstant = 0.8;
-    sourceNode = audioCtx.createMediaElementSource(audio);
-    sourceNode.connect(analyser);
-    analyser.connect(audioCtx.destination);
-    resizeVisualizer();
-    window.addEventListener('resize', resizeVisualizer);
-  } catch (e) {
-    console.error('Visualizer init failed', e);
-    // Reset so audio falls back to direct playback; never block music
-    try { if (sourceNode) sourceNode.disconnect(); } catch {}
-    try { if (analyser) analyser.disconnect(); } catch {}
-    audioCtx = null; analyser = null; sourceNode = null;
-  }
+  if (!vizCanvas) return;
+  resizeVisualizer();
+  window.addEventListener('resize', resizeVisualizer);
 }
 
 function drawVisualizer() {
   if (!vizCtx || !analyser) return;
-  if (audio.paused) { vizRaf = null; return; }
+  if (!isPlaying) { vizRaf = null; return; }
   vizRaf = requestAnimationFrame(drawVisualizer);
   const bufLen = analyser.frequencyBinCount;
   const data = new Uint8Array(bufLen);
@@ -432,44 +517,44 @@ function drawVisualizer() {
 }
 
 function startVisualizer() {
-  if (vizRaf || !vizCtx || !analyser || audio.paused) return;
+  if (vizRaf || !vizCtx || !analyser || !isPlaying) return;
   vizRaf = requestAnimationFrame(drawVisualizer);
 }
 function stopVisualizer() {
   if (vizRaf) { cancelAnimationFrame(vizRaf); vizRaf = null; }
 }
-audio.addEventListener('play', () => {
-  updateVinyl(true);
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  startVisualizer();
-});
+// audio element no longer used for playback (Web Audio + Opus)
 
 /* Progress seek */
 const progressBar = $('#progress-bar');
 let seeking = false;
-if (progressBar) {
-  progressBar.addEventListener('mousedown', (e) => { seeking = true; seekTo(e); });
-}
-window.addEventListener('mousemove', (e) => { if (seeking) seekTo(e); });
-window.addEventListener('mouseup', () => { seeking = false; });
-function seekTo(e) {
+function seekFromEvent(e) {
   if (!progressBar) return;
   const rect = progressBar.getBoundingClientRect();
   const pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
-  if (audio.duration) audio.currentTime = pct * audio.duration;
+  const dur = currentBuffer ? currentBuffer.duration : 0;
+  if (dur) seekTo(pct * dur);
 }
+if (progressBar) {
+  progressBar.addEventListener('mousedown', (e) => { seeking = true; seekFromEvent(e); });
+  progressBar.addEventListener('touchstart', (e) => { seeking = true; seekFromEvent(e.touches[0]); }, { passive: true });
+}
+window.addEventListener('mousemove', (e) => { if (seeking) seekFromEvent(e); });
+window.addEventListener('touchmove', (e) => { if (seeking) seekFromEvent(e.touches[0]); }, { passive: true });
+window.addEventListener('mouseup', () => { seeking = false; });
+window.addEventListener('touchend', () => { seeking = false; });
 
 /* Controls */
 const playBtn = $('#btn-play');
 if (playBtn) {
-  playBtn.addEventListener('click', () => {
+  playBtn.addEventListener('click', async () => {
     if (state.index < 0 && state.tracks.length) { playIndex(0); return; }
-    if (audio.paused) { if (!audioCtx) initVisualizer(); audio.play(); } else audio.pause();
+    if (isPlaying) pausePlayback();
+    else if (currentBuffer) { await initAudio(); playBuffer(currentBuffer, playbackOffset); }
+    else if (state.tracks.length) { playIndex(state.index >= 0 ? state.index : 0); }
   });
   playBtn.textContent = '▶';
 }
-audio.addEventListener('play', () => { if (playBtn) playBtn.textContent = '⏸'; });
-audio.addEventListener('pause', () => { if (playBtn) playBtn.textContent = '▶'; });
 
 const nextBtn = $('#btn-next'); if (nextBtn) nextBtn.addEventListener('click', nextTrack);
 const prevBtn = $('#btn-prev'); if (prevBtn) prevBtn.addEventListener('click', prevTrack);
@@ -494,6 +579,15 @@ function prevTrack() {
   playIndex(prev);
 }
 
+// Volume (works before audio context exists)
+const volumeSlider = $('#volume');
+if (volumeSlider) {
+  volumeSlider.addEventListener('input', (e) => {
+    const v = parseFloat(e.target.value);
+    if (gainNode) gainNode.gain.value = v;
+  });
+}
+
 const shuffleBtn = $('#btn-shuffle');
 if (shuffleBtn) shuffleBtn.addEventListener('click', (e) => {
   state.shuffle = !state.shuffle;
@@ -507,8 +601,7 @@ if (repeatBtn) repeatBtn.addEventListener('click', (e) => {
 });
 
 const volSlider = $('#volume');
-if (volSlider) volSlider.addEventListener('input', (e) => { audio.volume = parseFloat(e.target.value); });
-audio.volume = 0.8;
+if (volSlider) volSlider.addEventListener('input', (e) => { const v = parseFloat(e.target.value); if (gainNode) gainNode.gain.value = v; });
 
 const offsetSlider = $('#lyric-offset');
 if (offsetSlider) {
@@ -517,7 +610,7 @@ if (offsetSlider) {
     const ov = $('#offset-val'); if (ov) ov.textContent = state.lyricOffset.toFixed(1) + 's';
     if (state.index >= 0) saveOffset(state.tracks[state.index].id, state.lyricOffset);
     state.lyricIndex = -1;
-    syncLyrics(audio.currentTime);
+    syncLyrics(getCurrentTime());
   });
 }
 

@@ -104,6 +104,44 @@ For each pending request, the script downloads with `yt-dlp`, compresses to 128 
 
 The Worker needs a `GITHUB_TOKEN` secret with **Contents: Read and write** on `sensesVoid/jamukot` (plus the existing workflow-dispatch scope). Commits that only touch `data/requests.json` do not trigger a Pages deploy.
 
+## Opus (self-hosted on GitHub Pages)
+
+Version 2 moves audio off Cloudflare R2 and hosts it directly on GitHub Pages as Opus files (~16 kbps). This removes the Cloudflare dependency for playback.
+
+**Encode all tracks (run once):**
+```powershell
+.\encode-opus.ps1
+```
+Downloads each track from R2, encodes to Opus with ffmpeg, saves to `audio/<id>.opus`, and rewrites `data/tracks.json` with relative paths. Takes ~30-60 min for 480 tracks.
+
+**Encode a batch (for testing):**
+```powershell
+.\encode-opus.ps1 -Limit 10
+```
+
+**Skip already-encoded tracks:**
+```powershell
+.\encode-opus.ps1 -SkipExisting
+```
+
+**Custom bitrate:**
+```powershell
+.\encode-opus.ps1 -Bitrate 12
+```
+
+After encoding, commit and push:
+```powershell
+git add audio/ data/tracks.json
+git commit -m "Migrate to Opus on GitHub Pages"
+git push
+```
+
+**Notes:**
+- The player auto-detects `.opus` vs `.mp3` URLs and decodes accordingly.
+- Opus decoder (`js/lib/ogg-opus-decoder.min.js`) is vendored — no CDN needed.
+- GitHub Pages has a 1 GB site limit; 480 tracks at 16 kbps ≈ 288 MB.
+- The rant wall and song requests still use Cloudflare Workers (allowed in strict environments).
+
 ## Notes
 
 - All scripts require `ffmpeg` and `node` on PATH (for yt-dlp).
