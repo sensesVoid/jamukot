@@ -84,9 +84,12 @@ async function loadTrack(url) {
     const oldest = bufferCache.keys().next().value;
     bufferCache.delete(oldest);
   }
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: 'no-cache' });
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const arrayBuffer = await res.arrayBuffer();
+  if (!arrayBuffer || arrayBuffer.byteLength === 0) {
+    throw new Error('Audio file is empty (' + url + ') — re-upload or re-deploy the track');
+  }
   let buffer;
   if (url.toLowerCase().endsWith('.opus')) {
     // Try native decodeAudioData first (Chrome/Firefox/Edge support Ogg Opus natively)

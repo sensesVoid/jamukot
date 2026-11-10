@@ -53,6 +53,17 @@ def encode(src, dst):
         except OSError:
             pass
         raise RuntimeError((r.stderr or "")[-500:])
+    # Guard: never replace a track with an empty or non-Ogg file.
+    valid = os.path.exists(tmp_dst) and os.path.getsize(tmp_dst) > 0
+    if valid:
+        with open(tmp_dst, "rb") as f:
+            valid = f.read(4) == b"OggS"
+    if not valid:
+        try:
+            os.remove(tmp_dst)
+        except OSError:
+            pass
+        raise RuntimeError("ffmpeg produced an invalid/empty output; kept existing file")
     os.replace(tmp_dst, dst)
 
 
@@ -134,7 +145,7 @@ def main():
                 pass
 
     # save updated tracks.json
-    with open(TRACKS, "w", encoding="utf-8") as f:
+    with open(TRACKS, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"\nDone. encoded={done} skipped={skipped} failed={failed}")
     print(f"Total saved: {total_saved/1e6:.1f} MB")
